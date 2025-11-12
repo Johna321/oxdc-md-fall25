@@ -1,0 +1,26 @@
+File: 1Wat+3/5vg3_mcpbpyC.frcmod
+Line: 118
+Pattern: mcpb
+
+============================================================
+
+Y7-M2-Y5-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y6-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y8-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y9-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y5-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y6-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y9-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Y5-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Y6-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+ 
+IMPR
+X -O2-CO-Y7        10.5          180.          2.
+ 
+NONB
+  M2          1.4670  0.0296034300       IOD set for Mn2+ ion from Li et al. JCTC, 2013, 9, 2733
+  Y5          1.8240  0.1700             OPLS
+  Y6          1.8240  0.1700             OPLS
+  Y7          1.6612  0.2100             OPLS

@@ -1,0 +1,26 @@
+File: BiOx+2/calc/5vg3_mcpbpy_pre.frcmod
+Line: 153
+Pattern: mcpb
+
+============================================================
+
+YES Y3-M1-Y4-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y3-M1-Y5-O2    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y3-M1-Y5-c     3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y3-M1-Y6-c     3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y4-M1-Y1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y4-M1-Y2-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y4-M1-Y5-c     3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y4-M1-Y6-c     3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y5-M1-Y1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y5-M1-Y2-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y5-M1-Y4-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y5-O2-CO-Y3    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y6-M1-Y1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y6-M1-Y2-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y6-M1-Y4-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES Y6-M1-Y5-c     3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES c -Y6-M1-Y5    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+YES ho-oh-c -Y6    1        2.3      180.0  -2.0         Junmei et al, 1999
+YES ho-oh-c -Y6    1        1.9        0.0   1.0         Junmei et al, 1999
+ 

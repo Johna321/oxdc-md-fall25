@@ -1,0 +1,26 @@
+File: empty+3/5vg3_mcpbpy.frcmod
+Line: 85
+Pattern: mcpb
+
+============================================================
+
+M1-Y2-CR-H5    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+M1-Y2-CV-H4    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+M1-Y4-CR-H5    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+M1-Y4-CV-H4    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+NA-CR-Y1-M1    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+NA-CR-Y2-M1    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+NA-CR-Y4-M1    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+O2-CO-Y3-M1    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y1-M1-Y2-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y1-M1-Y2-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y1-M1-Y3-CO    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y1-M1-Y4-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y1-M1-Y4-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y2-M1-Y1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y2-M1-Y3-CO    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y2-M1-Y4-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y2-M1-Y4-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y3-CO-2C-HC    1        0.0        0.0   2.0
+Y3-M1-Y1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y3-M1-Y2-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py

@@ -1,0 +1,3 @@
+Primary Topology: BiOx+2/5vg3_solv.prmtop
+Primary Coordinates: BiOx+2/5vg3_solv.inpcrd
+Reasoning: Found matching solvated pair: BiOx+2/5vg3_solv.prmtop + BiOx+2/5vg3_solv.inpcrd

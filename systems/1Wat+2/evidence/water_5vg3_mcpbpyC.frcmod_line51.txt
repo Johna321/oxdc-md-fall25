@@ -1,0 +1,26 @@
+File: 1Wat+2/5vg3_mcpbpyC.frcmod
+Line: 51
+Pattern: tip3p
+
+============================================================
+
+Y8-M2-Y9    37.80     109.74    Created by Seminario method using MCPB.py
+Y8-M2-Y10   53.31      70.28    Created by Seminario method using MCPB.py
+Y9-M2-Y10   33.46     175.34    Created by Seminario method using MCPB.py
+2C-CO-Y8    70.0      117.00
+CC-CV-Y6    70.0      120.00    AA his
+CC-CV-Y7    70.0      120.00    AA his
+CC-CV-Y9    70.0      120.00    AA his
+CR-Y6-CV    70.0      117.00    AA his
+CR-Y7-CV    70.0      117.00    AA his
+CR-Y9-CV    70.0      117.00    AA his
+HW-Y10-HW   100.      104.52    TIP3P water
+NA-CR-Y6    70.0      120.00    AA his
+NA-CR-Y7    70.0      120.00    AA his
+NA-CR-Y9    70.0      120.00    AA his
+O2-CO-Y8    80.0      126.00
+Y6-CR-H5    50.0      120.00    AA his
+Y6-CV-H4    50.0      120.00    AA his
+Y7-CR-H5    50.0      120.00    AA his
+Y7-CV-H4    50.0      120.00    AA his
+Y9-CR-H5    50.0      120.00    AA his

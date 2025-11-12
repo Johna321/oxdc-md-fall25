@@ -1,0 +1,51 @@
+{
+  "n_atoms": 63286,
+  "n_residues": 19474,
+  "n_bonds": 63366,
+  "n_angles": 11078,
+  "n_dihedrals": 27374,
+  "residue_histogram": {
+    "WAT": 19080,
+    "GLY": 28,
+    "VAL": 28,
+    "LEU": 28,
+    "LYS": 25,
+    "ASP": 24,
+    "ALA": 24,
+    "PRO": 23,
+    "SER": 22,
+    "ILE": 20,
+    "THR": 19,
+    "PHE": 19,
+    "GLU": 18,
+    "ASN": 17,
+    "ARG": 15,
+    "TYR": 14,
+    "GLH": 14,
+    "GLN": 11,
+    "MET": 9,
+    "HIP": 8
+  },
+  "total_charge_raw": 0.0,
+  "total_charge_nearest_int": 0,
+  "charge_fraction": 0.0,
+  "bonds_to_hydrogen": 60275,
+  "water_residue_names": [
+    "WAT"
+  ],
+  "water_model_guess": "TIP3P",
+  "n_waters": 19080,
+  "ion_counts": {
+    "Cl-": 8
+  },
+  "box_vectors": [
+    78.671984,
+    113.826842,
+    86.545476
+  ],
+  "box_angles": [
+    90.0,
+    90.0,
+    90.0
+  ]
+}

@@ -1,0 +1,74 @@
+
+CPPTRAJ: Trajectory Analysis. V4.25.6
+    ___  ___  ___  ___
+     | \/ | \/ | \/ | 
+    _|_/\_|_/\_|_/\_|_
+
+| Date/time: 04/17/25 11:39:01
+| Available memory: 611.506 GB
+
+	Reading '5vg3_solv.prmtop' as Amber Topology
+	Radius Set: modified Bondi radii (mbondi)
+Warning: Amber topology flag 'CMAP_COUNT' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_RESOLUTION' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_01' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_02' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_03' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_04' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_05' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_06' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_07' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_08' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_09' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_10' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_11' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_12' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_13' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_14' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_PARAMETER_15' is unrecognized and will be skipped.
+Warning: Amber topology flag 'CMAP_INDEX' is unrecognized and will be skipped.
+	Reading '5vg3_solv.inpcrd' as Amber Restart
+	Setting active reference for distance-based masks: '5vg3_solv.inpcrd'
+INPUT: Reading input from 'fixatord.in'
+  [fixatomorder outprefix fixed]
+Warning: Action specified before trajin/ensemble. Assuming trajin.
+    FIXATOMORDER: Will attempt to fix atom ordering when atom numbering
+                  in molecules is non-sequential.
+	Re-ordered topology will be output with prefix fixed
+  [trajout restart fixed.5vg3_solv.inpcrd]
+Warning: Format not specified and extension '' not recognized. Defaulting to Amber Trajectory.
+	Writing 'restart' as Amber Trajectory
+  [run]
+---------- RUN BEGIN -------------------------------------------------
+Warning: No input trajectories specified.
+TIME: Analyses took 0.0000 seconds.
+
+RUN TIMING:
+TIME:		Init               : 0.0000 s (  0.00%)
+TIME:		Trajectory Process : 0.0000 s (  0.00%)
+TIME:		Action Post        : 0.0000 s (  0.00%)
+TIME:		Analysis           : 0.0000 s (  2.50%)
+TIME:		Data File Write    : 0.0000 s (  2.50%)
+TIME:		Other              : 0.0000 s (  0.95%)
+TIME:	Run Total 0.0000 s
+---------- RUN END ---------------------------------------------------
+---------- RUN BEGIN -------------------------------------------------
+Warning: No input trajectories specified.
+TIME: Analyses took 0.0000 seconds.
+
+RUN TIMING:
+TIME:		Init               : 0.0000 s (  0.00%)
+TIME:		Trajectory Process : 0.0000 s (  0.00%)
+TIME:		Action Post        : 0.0000 s (  0.00%)
+TIME:		Analysis           : 0.0000 s (  0.00%)
+TIME:		Data File Write    : 0.0000 s (  0.00%)
+TIME:		Other              : 0.0000 s (  1.00%)
+TIME:	Run Total 0.0000 s
+---------- RUN END ---------------------------------------------------
+TIME: Total execution time: 0.2252 seconds.
+--------------------------------------------------------------------------------
+To cite CPPTRAJ use:
+Daniel R. Roe and Thomas E. Cheatham, III, "PTRAJ and CPPTRAJ: Software for
+  Processing and Analysis of Molecular Dynamics Trajectory Data". J. Chem.
+  Theory Comput., 2013, 9 (7), pp 3084-3095.
+

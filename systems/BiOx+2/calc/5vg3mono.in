@@ -1,0 +1,8 @@
+original_pdb 5vg3_final.pdb
+group_name 5vg3
+cut_off 2.8
+ion_ids 6033
+ion_mol2files MN.mol2
+naa_mol2files OX.mol2
+frcmod_files OX.frcmod
+large_opt 1

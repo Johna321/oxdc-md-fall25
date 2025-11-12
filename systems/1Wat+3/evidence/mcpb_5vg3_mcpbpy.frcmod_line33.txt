@@ -1,0 +1,26 @@
+File: 1Wat+3/5vg3_mcpbpy.frcmod
+Line: 33
+Pattern: mcpb
+
+============================================================
+
+Y5-HW  553.0    0.9572    ! TIP3P water
+ 
+ANGL
+CO-Y3-M1   108.18     128.83    Created by Seminario method using MCPB.py
+CR-Y1-M1    89.71     123.80    Created by Seminario method using MCPB.py
+CR-Y2-M1    92.02     123.81    Created by Seminario method using MCPB.py
+CR-Y4-M1    92.82     126.72    Created by Seminario method using MCPB.py
+M1-Y1-CV    96.77     129.26    Created by Seminario method using MCPB.py
+M1-Y2-CV    96.82     129.59    Created by Seminario method using MCPB.py
+M1-Y4-CV    94.36     126.35    Created by Seminario method using MCPB.py
+M1-Y5-HW    47.72     112.95    Created by Seminario method using MCPB.py
+Y1-M1-Y2    72.72      90.00    Created by Seminario method using MCPB.py
+Y1-M1-Y3    98.80     171.23    Created by Seminario method using MCPB.py
+Y1-M1-Y4    73.60      88.61    Created by Seminario method using MCPB.py
+Y1-M1-Y5    94.76      94.22    Created by Seminario method using MCPB.py
+Y2-M1-Y3    76.18      88.22    Created by Seminario method using MCPB.py
+Y2-M1-Y4    43.73     158.78    Created by Seminario method using MCPB.py
+Y2-M1-Y5    51.28     104.38    Created by Seminario method using MCPB.py
+Y3-M1-Y4    73.85      89.95    Created by Seminario method using MCPB.py
+Y3-M1-Y5   102.81      94.55    Created by Seminario method using MCPB.py

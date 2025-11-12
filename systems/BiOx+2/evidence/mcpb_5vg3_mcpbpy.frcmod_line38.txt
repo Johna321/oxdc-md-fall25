@@ -1,0 +1,26 @@
+File: BiOx+2/calc/5vg3_mcpbpy.frcmod
+Line: 38
+Pattern: mcpb
+
+============================================================
+
+ANGL
+CO-Y3-M1    94.06      87.64    Created by Seminario method using MCPB.py
+CR-Y1-M1    40.08      49.87    Created by Seminario method using MCPB.py
+CR-Y2-M1    40.19     123.28    Created by Seminario method using MCPB.py
+CR-Y4-M1    40.50     129.63    Created by Seminario method using MCPB.py
+M1-Y1-CV    42.53     114.53    Created by Seminario method using MCPB.py
+M1-Y2-CV    43.42     130.04    Created by Seminario method using MCPB.py
+M1-Y4-CV    42.85     123.56    Created by Seminario method using MCPB.py
+M1-Y5-c     50.88     122.43    Created by Seminario method using MCPB.py
+M1-Y6-c     51.62     109.32    Created by Seminario method using MCPB.py
+O2-Y5-M1     0.00      29.33    Created by Seminario method using MCPB.py
+Y1-M1-Y2    20.34      65.33    Created by Seminario method using MCPB.py
+Y1-M1-Y3    41.23     143.76    Created by Seminario method using MCPB.py
+Y1-M1-Y4    25.66      56.96    Created by Seminario method using MCPB.py
+Y1-M1-Y5    41.11      49.01    Created by Seminario method using MCPB.py
+Y1-M1-Y6    34.03     114.81    Created by Seminario method using MCPB.py
+Y2-M1-Y3    38.72      85.99    Created by Seminario method using MCPB.py
+Y2-M1-Y4    26.62      96.72    Created by Seminario method using MCPB.py
+Y2-M1-Y5    25.44      91.65    Created by Seminario method using MCPB.py
+Y2-M1-Y6    19.97      95.28    Created by Seminario method using MCPB.py

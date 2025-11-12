@@ -1,0 +1,9 @@
+Rough Density Estimate
+============================================================
+
+Box dimensions: 78.67 × 113.83 × 86.55 Å
+Total mass: 387499.20 amu
+Estimated density: 0.830 g/cm³
+
+Note: This is a rough estimate based on box vectors and atomic masses.
+It does not account for actual molecular packing or voids.

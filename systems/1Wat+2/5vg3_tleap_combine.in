@@ -1,0 +1,67 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff
+source leaprc.water.tip3p
+addAtomTypes {
+        { "M1"  "Mn" "sp3" }
+        { "M2"  "Mn" "sp3" }
+        { "Y1"  "N" "sp3" }
+        { "Y2"  "N" "sp3" }
+        { "Y3"  "O" "sp3" }
+        { "Y4"  "N" "sp3" }
+        { "Y5"  "N" "sp3" }
+        { "Y6"  "N" "sp3" }
+        { "Y7"  "O" "sp3" }
+        { "Y8"  "N" "sp3" }
+        { "Y9"  "O" "sp3" }
+}
+HD1 = loadmol2 HD1.mol2
+HD2 = loadmol2 HD2.mol2
+GU1 = loadmol2 GU1.mol2
+HD3 = loadmol2 HD3.mol2
+HD4 = loadmol2 HD4.mol2
+HD5 = loadmol2 HD5.mol2
+GU2 = loadmol2 GU2.mol2
+HD6 = loadmol2 HD6.mol2
+MN1 = loadmol2 MN1.mol2
+MN2 = loadmol2 MN2.mol2
+WTR = loadmol2 WTR.mol2
+WT1 = loadmol2 WT1.mol2
+loadamberparams frcmod.ions1lm_126_tip3p
+loadamberparams 5vg3_mcpbpy.frcmod
+loadamberparams 5vg3_mcpbpyC.frcmod
+loadamberparams WTR.frcmod
+mol = loadpdb 5vg3_mcpbpy.pdb
+bond mol.95.NE2 mol.383.MN
+bond mol.97.NE2 mol.383.MN
+bond mol.101.OE1 mol.383.MN
+bond mol.140.NE2 mol.383.MN
+bond mol.94.C mol.95.N
+bond mol.95.C mol.96.N
+bond mol.96.C mol.97.N
+bond mol.97.C mol.98.N
+bond mol.100.C mol.101.N
+bond mol.101.C mol.102.N
+bond mol.139.C mol.140.N
+bond mol.140.C mol.141.N
+bond mol.273.NE2 mol.384.MN
+bond mol.275.NE2 mol.384.MN
+bond mol.280.OE1 mol.384.MN
+bond mol.319.NE2 mol.384.MN
+bond mol.384.MN mol.385.O
+bond mol.272.C mol.273.N
+bond mol.273.C mol.274.N
+bond mol.274.C mol.275.N
+bond mol.275.C mol.276.N
+bond mol.279.C mol.280.N
+bond mol.280.C mol.281.N
+bond mol.318.C mol.319.N
+bond mol.319.C mol.320.N
+savepdb mol 5vg3_dry.pdb
+saveamberparm mol 5vg3_dry.top 5vg3_dry.mdcrd
+solvatebox mol TIP3PBOX 10.0
+addions mol Na+ 0
+addions mol Cl- 0
+savepdb mol 5vg3_solv.pdb
+saveamberparm mol 5vg3.prmtop 5vg3.inpcrd
+quit
+ 

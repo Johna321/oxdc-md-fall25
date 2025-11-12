@@ -1,0 +1,26 @@
+Heating from 0 to 300K over 50ps
+ &cntrl
+  imin   = 0,
+  ntx    = 1,
+  irest  = 0,
+
+  nstlim = 25000,      ! 50ps at 2fs timestep
+  dt     = 0.002,
+
+  ntpr   = 500,
+  ntwr   = 5000,
+  ntwx   = 5000,
+  ntxo   = 2,
+
+  cut    = 10.0,
+  ntb    = 1,
+  ntp    = 0,
+
+  ntt    = 3,
+  gamma_ln = 2.0,
+  temp0  = 300.0,
+
+ /
+
+ &wt TYPE='TEMP0', istep1=0, istep2=25000, value1=0.0, value2=300.0, /
+ &wt TYPE='END' /

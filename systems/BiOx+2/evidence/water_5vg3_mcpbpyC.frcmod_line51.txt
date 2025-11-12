@@ -1,0 +1,26 @@
+File: BiOx+2/5vg3_mcpbpyC.frcmod
+Line: 51
+Pattern: tip3p
+
+============================================================
+
+Y9-M2-Z1    37.80     109.74    Created by Seminario method using MCPB.py
+Y9-M2-Z2    53.31      70.28    Created by Seminario method using MCPB.py
+Z1-M2-Z2    33.46     175.34    Created by Seminario method using MCPB.py
+2C-CO-Y9    70.0      117.00
+CC-CV-Y7    70.0      120.00    AA his
+CC-CV-Y8    70.0      120.00    AA his
+CC-CV-Z1    70.0      120.00    AA his
+CR-Y7-CV    70.0      117.00    AA his
+CR-Y8-CV    70.0      117.00    AA his
+CR-Z1-CV    70.0      117.00    AA his
+HW-Z2-HW    100.      104.52    TIP3P water
+NA-CR-Y7    70.0      120.00    AA his
+NA-CR-Y8    70.0      120.00    AA his
+NA-CR-Z1    70.0      120.00    AA his
+O2-CO-Y9    80.0      126.00
+Y7-CR-H5    50.0      120.00    AA his
+Y7-CV-H4    50.0      120.00    AA his
+Y8-CR-H5    50.0      120.00    AA his
+Y8-CV-H4    50.0      120.00    AA his
+Z1-CR-H5    50.0      120.00    AA his

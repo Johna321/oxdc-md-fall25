@@ -1,0 +1,3 @@
+Primary Topology: 5vg3_solv.prmtop
+Primary Coordinates: 5vg3_solv.inpcrd
+Reasoning: Found matching solvated pair: 5vg3_solv.prmtop + 5vg3_solv.inpcrd

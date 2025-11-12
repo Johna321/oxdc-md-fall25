@@ -1,0 +1,4 @@
+fixatomorder outprefix fixed
+trajout restart fixed.5vg3_solv.inpcrd
+run
+quit

@@ -1,0 +1,45 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff
+source leaprc.water.tip3p
+addAtomTypes {
+        { "M1"  "Mn" "sp3" }
+        { "Y1"  "N" "sp3" }
+        { "Y2"  "N" "sp3" }
+        { "Y3"  "O" "sp3" }
+        { "Y4"  "N" "sp3" }
+        { "Y5"  "O" "sp3" }
+        { "Y6"  "O" "sp3" }
+}
+HD1 = loadmol2 HD1.mol2
+HD2 = loadmol2 HD2.mol2
+GU1 = loadmol2 GU1.mol2
+HD3 = loadmol2 HD3.mol2
+MN1 = loadmol2 MN1.mol2
+OX1 = loadmol2 OX1.mol2
+loadamberparams OX.frcmod
+loadamberparams frcmod.ions1lm_126_tip3p
+loadamberparams 5vg3_mcpbpy.frcmod
+mol = loadpdb 5vg3_mcpbpy.pdb
+bond mol.95.NE2 mol.383.MN
+bond mol.97.NE2 mol.383.MN
+bond mol.101.OE1 mol.383.MN
+bond mol.140.NE2 mol.383.MN
+bond mol.383.MN mol.385.OZ
+bond mol.383.MN mol.385.OX
+bond mol.94.C mol.95.N
+bond mol.95.C mol.96.N
+bond mol.96.C mol.97.N
+bond mol.97.C mol.98.N
+bond mol.100.C mol.101.N
+bond mol.101.C mol.102.N
+bond mol.139.C mol.140.N
+bond mol.140.C mol.141.N
+savepdb mol 5vg3_dry.pdb
+saveamberparm mol 5vg3_dry.prmtop 5vg3_dry.inpcrd
+solvatebox mol TIP3PBOX 10.0
+addions mol Na+ 0
+addions mol Cl- 0
+savepdb mol 5vg3_solv.pdb
+saveamberparm mol 5vg3_solv.prmtop 5vg3_solv.inpcrd
+quit
+ 

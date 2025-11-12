@@ -1,0 +1,7 @@
+system,atoms,charge,waters,ions,mn_count,mn_flags,eq1_strategy,mask_preview
+1Wat+2,63286,0.0,3,"Cl-,MN1,MN2",2,mn6030:;mn6031:,gpu-chunked,"'(!:WAT,WT1,WTR,Cl-,MN1,MN2,GU,HD,WT)&!@H='"
+1Wat+3,63284,0.0,2,"Cl-,MN1,MN2",2,mn6030:;mn6031:,gpu-chunked,"'(!:WAT,WTR,Cl-,MN1,MN2,GU,HD,WT)&!@H='"
+BiOx+2,63287,0.0,1,Cl-,2,mn6032:S;mn6033:P,cpu-bridge-then-gpu,"'(!:WAT,Cl-,GLU,GU,HD,HID,HIP,OX)&!@H='"
+Nterm_only,63287,0.0,1,Cl-,2,mn6032:S;mn6033:P,cpu-bridge-then-gpu,"'(!:WAT,Cl-,GLU,GU,HD,HID,HIP,OX)&!@H='"
+empty+2,63283,0.0,2,"Cl-,MN1,MN2",2,mn6030:P;mn6031:,cpu-bridge-then-gpu,"'(!:WAT,WTR,Cl-,MN1,MN2,GU,HD)&!@H='"
+empty+3,63281,0.0,2,"Cl-,MN1,MN2",2,mn6030:P;mn6031:,cpu-bridge-then-gpu,"'(!:WAT,WTR,Cl-,MN1,MN2,GU,HD)&!@H='"

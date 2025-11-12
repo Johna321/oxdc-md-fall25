@@ -1,0 +1,65 @@
+-I: Adding /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/prep to search path.
+-I: Adding /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/lib to search path.
+-I: Adding /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm to search path.
+-I: Adding /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd to search path.
+-s: Ignoring startup file: leaprc
+-f: Source 5vg3_tleap.in.
+
+Welcome to LEaP!
+Sourcing: ./5vg3_tleap.in
+----- Source: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd/leaprc.protein.ff19SB
+----- Source of /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd/leaprc.protein.ff19SB done
+Log file: ./leap.log
+Loading parameters: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm/parm19.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA + ff19SB
+Loading parameters: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm/frcmod.ff19SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff19SB AA-specific backbone CMAPs for protein 07/25/2019
+Loading library: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/lib/amino19.lib
+Loading library: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/lib/aminoct12.lib
+Loading library: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/lib/aminont12.lib
+----- Source: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd/leaprc.gaff
+----- Source of /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd/leaprc.gaff done
+Log file: ./leap.log
+Loading parameters: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm/gaff.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 1.81, May 2017)
+----- Source: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd/leaprc.water.opc
+----- Source of /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/cmd/leaprc.water.opc done
+Loading library: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/lib/atomic_ions.lib
+Loading library: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/lib/solvents.lib
+Loading parameters: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm/frcmod.opc
+Reading force field modification type file (frcmod)
+Reading title:
+Parameters for OPC water (JPCL, 2014, 5 (21), pp 3863–3871) 
+Loading parameters: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm/frcmod.ionsjc_tip4pew
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP4P/EW water from Joung & Cheatham JPCB (2008)
+Loading parameters: /apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/dat/leap/parm/frcmod.ions234lm_126_tip4pew
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP4P/EW water model (12-6 normal usage set)
+Loading Mol2 file: ./HD1.mol2
+Reading MOLECULE named HD1
+Loading Mol2 file: ./HD2.mol2
+Reading MOLECULE named HD2
+Loading Mol2 file: ./GU1.mol2
+Reading MOLECULE named GU1
+Loading Mol2 file: ./HD3.mol2
+Reading MOLECULE named HD3
+Loading Mol2 file: ./MN1.mol2
+Reading MOLECULE named MN1
+Loading Mol2 file: ./OX1.mol2
+Reading MOLECULE named OX1
+Loading parameters: ./OX.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+
+/apps/cuda/10.0.130/gcc/7.3.0/amber/20omp/bin/teLeap: Fatal Error!
+Could not open file frcmod.ionslm_126_opc: not found
+
+Exiting LEaP: Errors = 1; Warnings = 0; Notes = 0.

@@ -1,0 +1,16 @@
+Minimization with DFT restraints
+ &cntrl
+  imin   = 1,
+  ntmin  = 1,
+  maxcyc = 10000,
+  ncyc   = 2500,
+
+  ntpr   = 100,
+  ntwr   = 1000,
+
+  cut    = 10.0,
+  ntb    = 1,
+  ntp    = 0,
+ /
+ &wt TYPE='END', /
+LISTOUT=POUT

@@ -1,0 +1,14 @@
+*.prmtop filter=lfs diff=lfs merge=lfs -text
+*.parm7 filter=lfs diff=lfs merge=lfs -text
+*.top filter=lfs diff=lfs merge=lfs -text
+*.inpcrd filter=lfs diff=lfs merge=lfs -text
+*.rst7 filter=lfs diff=lfs merge=lfs -text
+*.rst filter=lfs diff=lfs merge=lfs -text
+*.frcmod filter=lfs diff=lfs merge=lfs -text
+*.lib filter=lfs diff=lfs merge=lfs -text
+*.mol2 filter=lfs diff=lfs merge=lfs -text
+*.pdb filter=lfs diff=lfs merge=lfs -text
+*.rwf filter=lfs diff=lfs merge=lfs -text
+*.chk filter=lfs diff=lfs merge=lfs -text
+*.fchk filter=lfs diff=lfs merge=lfs -text
+*.nc filter=lfs diff=lfs merge=lfs -text

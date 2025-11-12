@@ -1,0 +1,26 @@
+File: 1Wat+2/5vg3_mcpb.frcmod
+Line: 43
+Pattern: tip3p
+
+============================================================
+
+CR-Y6   488.0  1.335   JCC,7,(1986),230; HIS
+CR-Y7   488.0  1.335   JCC,7,(1986),230; HIS
+CR-Y9   488.0  1.335   JCC,7,(1986),230; HIS
+Y1-CV   410.0  1.394   JCC,7,(1986),230; HIS
+Y2-CV   410.0  1.394   JCC,7,(1986),230; HIS
+Y4-CV   410.0  1.394   JCC,7,(1986),230; HIS
+Y6-CV   410.0  1.394   JCC,7,(1986),230; HIS
+Y7-CV   410.0  1.394   JCC,7,(1986),230; HIS
+Y9-CV   410.0  1.394   JCC,7,(1986),230; HIS
+Y5-HW   553.0  0.9572   TIP3P water
+Y10-HW  553.0  0.9572   TIP3P water
+
+ANGL
+[all M1 angles here...]
+[all M2 angles here...]
+(+ duplicates collapsed)
+
+DIHE
+[all M1 dihedrals here...]
+[all M2 dihedrals here...]

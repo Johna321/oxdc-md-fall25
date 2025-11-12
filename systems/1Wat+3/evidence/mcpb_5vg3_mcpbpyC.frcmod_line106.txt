@@ -1,0 +1,26 @@
+File: 1Wat+3/5vg3_mcpbpyC.frcmod
+Line: 106
+Pattern: mcpb
+
+============================================================
+
+Y5-M2-Y6-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y5-M2-Y6-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y5-M2-Y7-CO    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y5-M2-Y8-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y5-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y5-M2-Y9-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y6-M2-Y5-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y6-M2-Y7-CO    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y6-M2-Y8-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y6-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y6-M2-Y9-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-CO-2C-HC    1        0.0        0.0   2.0
+Y7-M2-Y5-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y6-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y8-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y9-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y5-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y6-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y9-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py

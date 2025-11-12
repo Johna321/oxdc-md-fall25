@@ -1,0 +1,13 @@
+Run semi-empirical minimization
+ &qmmm
+    qm_theory='AM1', grms_tol=0.0005,
+ scfconv=1.d-10, ndiis_attempts=700,   qmcharge=-1,
+ /
+   6    CZ        0.2560        3.1490       79.2380 
+   6    CX        0.4120        3.4870       80.7320 
+   8    OZ        0.0750        3.6620       78.3660 
+   8    OY        0.3060        2.3500       78.8470 
+   8    OX        0.3310        4.2600       81.1100 
+   8    OV        0.5120        2.9230       81.6900 
+   1    H7        0.5380        3.0950       82.7290 
+

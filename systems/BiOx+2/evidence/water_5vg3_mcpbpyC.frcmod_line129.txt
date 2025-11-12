@@ -1,0 +1,18 @@
+File: BiOx+2/5vg3_mcpbpyC.frcmod
+Line: 129
+Pattern: tip3p
+
+============================================================
+
+ 
+IMPR
+X -O2-CO-Y9        10.5          180.          2.
+ 
+NONB
+  M2          1.4670  0.0296034300       IOD set for Mn2+ ion from Li et al. JCTC, 2013, 9, 2733
+  Y7          1.8240  0.1700             OPLS
+  Y8          1.8240  0.1700             OPLS
+  Y9          1.6612  0.2100             OPLS
+  Z1          1.8240  0.1700             OPLS
+  Z2          1.7683  0.1520             TIP3P water model
+ 

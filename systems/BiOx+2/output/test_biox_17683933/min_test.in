@@ -1,0 +1,22 @@
+Minimal test - 1000 steps with DFT restraints
+ &cntrl
+  imin   = 1,           ! Minimization
+  ntmin  = 1,           ! SD then CG
+  maxcyc = 1000,        ! Only 1000 steps for test
+  ncyc   = 500,         ! 500 SD, 500 CG
+
+  ntpr   = 10,          ! Print every 10 steps
+  ntwr   = 100,         ! Write restart every 100 steps
+
+  cut    = 10.0,        ! 10 Å cutoff
+  ntb    = 1,           ! Periodic boundaries
+  ntp    = 0,           ! No pressure scaling
+
+  ! Restraints on metal centers
+  ntr    = 1,
+  restraint_wt = 200.0,
+  restraintmask = '@MN1,MN2,NE2,OE1',
+ /
+ &wt TYPE='END', /
+DISANG=closed_empty+2/restraints/restraints_minimize_fixed.dat
+DUMPAVE=restraint_energy_test.dat

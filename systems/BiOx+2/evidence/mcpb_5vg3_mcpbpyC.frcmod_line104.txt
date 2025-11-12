@@ -1,0 +1,26 @@
+File: BiOx+2/5vg3_mcpbpyC.frcmod
+Line: 104
+Pattern: mcpb
+
+============================================================
+
+NA-CR-Z1-M2    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+O2-CO-Y9-M2    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y8-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Y9-CO    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Z1-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Z1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y7-M2-Z2-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y7-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Y9-CO    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Z1-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Z1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y8-M2-Z2-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-CO-2C-HC    1        0.0        0.0   2.0
+Y9-M2-Y7-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Y8-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Z1-CR    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Z1-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Y9-M2-Z2-HW    3       0.00       0.00   3.0    Treat as zero by MCPB.py
+Z1-M2-Y7-CV    3       0.00       0.00   3.0    Treat as zero by MCPB.py

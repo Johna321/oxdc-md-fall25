@@ -1,0 +1,26 @@
+File: 1Wat+3/5vg3_mcpbpyC.frcmod
+Line: 14
+Pattern: mcpb
+
+============================================================
+
+Y5 14.01         0.530               sp2 N in 5 memb.ring w/LP (HIS,ADE,GUA)
+Y6 14.01         0.530               sp2 N in 5 memb.ring w/LP (HIS,ADE,GUA)
+Y7 16.00         0.434               carboxyl and phosphate group oxygen
+Y8 14.01         0.530               sp2 N in 5 memb.ring w/LP (HIS,ADE,GUA)
+Y9 16.00         0.000               oxygen in TIP3P water
+ 
+BOND
+M2-Y9    9.2    2.4209      Created by Seminario method using MCPB.py
+Y5-M2   42.6    2.2064      Created by Seminario method using MCPB.py
+Y6-M2   39.6    2.2133      Created by Seminario method using MCPB.py
+Y7-M2   15.4    2.2503      Created by Seminario method using MCPB.py
+Y8-M2   35.0    2.2350      Created by Seminario method using MCPB.py
+CO-Y7  656.0    1.2500
+CR-Y5  488.0    1.335       JCC,7,(1986),230; HIS
+CR-Y6  488.0    1.335       JCC,7,(1986),230; HIS
+CR-Y8  488.0    1.335       JCC,7,(1986),230; HIS
+Y5-CV  410.0    1.394       JCC,7,(1986),230; HIS
+Y6-CV  410.0    1.394       JCC,7,(1986),230; HIS
+Y8-CV  410.0    1.394       JCC,7,(1986),230; HIS
+Y9-HW  553.0    0.9572    ! TIP3P water

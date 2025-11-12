@@ -1,0 +1,26 @@
+File: Nterm_only/BiOx+2/5vg3_mcpbpy.frcmod
+Line: 48
+Pattern: mcpb
+
+============================================================
+
+Y1-M1-Y2    31.00      86.76    Created by Seminario method using MCPB.py
+Y1-M1-Y3    28.11     179.41    Created by Seminario method using MCPB.py
+Y1-M1-Y4    27.38      86.72    Created by Seminario method using MCPB.py
+Y1-M1-Y5    26.94      80.83    Created by Seminario method using MCPB.py
+Y1-M1-Y6    27.85      93.60    Created by Seminario method using MCPB.py
+Y2-M1-Y3    26.64      92.65    Created by Seminario method using MCPB.py
+Y2-M1-Y4    28.34     105.86    Created by Seminario method using MCPB.py
+Y2-M1-Y5    43.36     153.83    Created by Seminario method using MCPB.py
+Y2-M1-Y6    37.67      84.70    Created by Seminario method using MCPB.py
+Y3-M1-Y4    31.83      93.38    Created by Seminario method using MCPB.py
+Y3-M1-Y5    26.75      99.74    Created by Seminario method using MCPB.py
+Y3-M1-Y6    31.61      86.41    Created by Seminario method using MCPB.py
+Y4-M1-Y5    39.65      96.38    Created by Seminario method using MCPB.py
+Y4-M1-Y6    33.37     169.43    Created by Seminario method using MCPB.py
+Y6-M1-Y5    52.37      73.27    Created by Seminario method using MCPB.py
+2C-CO-Y3    70.0      117.00
+CC-CV-Y1    70.0      120.00    AA his
+CC-CV-Y2    70.0      120.00    AA his
+CC-CV-Y4    70.0      120.00    AA his
+CR-Y1-CV    70.0      117.00    AA his

@@ -1,0 +1,26 @@
+File: empty+2/5vg3_mcpbpy.frcmod
+Line: 35
+Pattern: mcpb
+
+============================================================
+
+CR-Y2-M1    43.71     118.67    Created by Seminario method using MCPB.py
+CR-Y4-M1    39.14     131.82    Created by Seminario method using MCPB.py
+M1-Y1-CV    49.21     133.13    Created by Seminario method using MCPB.py
+M1-Y2-CV    45.51     135.23    Created by Seminario method using MCPB.py
+M1-Y4-CV    41.60     121.87    Created by Seminario method using MCPB.py
+Y1-M1-Y2    24.92     102.50    Created by Seminario method using MCPB.py
+Y1-M1-Y3    35.64     118.62    Created by Seminario method using MCPB.py
+Y1-M1-Y4    26.67     119.04    Created by Seminario method using MCPB.py
+Y2-M1-Y3    38.85      90.43    Created by Seminario method using MCPB.py
+Y2-M1-Y4    21.70     102.08    Created by Seminario method using MCPB.py
+Y3-M1-Y4    31.90     115.98    Created by Seminario method using MCPB.py
+2C-CO-Y3    70.0      117.00
+CC-CV-Y1    70.0      120.00    AA his
+CC-CV-Y2    70.0      120.00    AA his
+CC-CV-Y4    70.0      120.00    AA his
+CR-Y1-CV    70.0      117.00    AA his
+CR-Y2-CV    70.0      117.00    AA his
+CR-Y4-CV    70.0      117.00    AA his
+NA-CR-Y1    70.0      120.00    AA his
+NA-CR-Y2    70.0      120.00    AA his

@@ -1,0 +1,26 @@
+File: 1Wat+2/5vg3.frcmod
+Line: 59
+Pattern: mcpb
+
+============================================================
+
+M1-Y1-CV    38.43     132.46    Created by Seminario method using MCPB.py
+M1-Y2-CV    41.48     132.79    Created by Seminario method using MCPB.py
+M1-Y4-CV    56.32     122.37    Created by Seminario method using MCPB.py
+M1-Y5-HW    42.34     109.75    Created by Seminario method using MCPB.py
+Y1-M1-Y2    26.30      93.81    Created by Seminario method using MCPB.py
+Y1-M1-Y3    31.23     175.07    Created by Seminario method using MCPB.py
+Y1-M1-Y4    19.15      91.66    Created by Seminario method using MCPB.py
+Y1-M1-Y5    34.83      87.87    Created by Seminario method using MCPB.py
+Y2-M1-Y3    34.95      87.00    Created by Seminario method using MCPB.py
+Y2-M1-Y4    28.82     129.08    Created by Seminario method using MCPB.py
+Y2-M1-Y5    38.81     125.59    Created by Seminario method using MCPB.py
+Y3-M1-Y4    27.37      91.60    Created by Seminario method using MCPB.py
+Y3-M1-Y5    66.02      87.70    Created by Seminario method using MCPB.py
+Y4-M1-Y5    41.36     105.16    Created by Seminario method using MCPB.py
+2C-CO-Y3    70.0      117.00
+CC-CV-Y1    70.0      120.00    AA his
+CC-CV-Y2    70.0      120.00    AA his
+CC-CV-Y4    70.0      120.00    AA his
+CR-Y1-CV    70.0      117.00    AA his
+CR-Y2-CV    70.0      117.00    AA his
