@@ -14,7 +14,6 @@
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=john.aitken@ufl.edu
 
-set -euo pipefail
 module purge
 module load cuda/12.8.1
 module load gcc/14.2.0
@@ -25,6 +24,5 @@ PRMTOP=5vg3_solv.prmtop
 START=eq2.cpu.rst7
 
 pmemd.cuda -O -i mdin_templates/prod_mc_gpu_2fs.in \
-           -p "$PRMTOP" -c "$START" \
-           -o prod.out -r prod.rst7 -x prod.nc -inf prod.mdinfo
-
+  -p "$PRMTOP" -c "$START" \
+  -o prod.out -r prod.rst7 -x prod.nc -inf prod.mdinfo
