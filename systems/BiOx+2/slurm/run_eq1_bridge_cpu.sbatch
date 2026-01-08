@@ -5,8 +5,7 @@
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=john.aitken@ufl.edu
 #SBATCH --nodes=1
-#SBATCH --ntasks=16
-#SBATCH --cpus-per-task=1
+#SBATCH --ntasks=1
 #SBATCH --mem=4gb
 #SBATCH --time=08:00:00
 #SBATCH --partition=hpg-turin
@@ -16,7 +15,7 @@
 echo "== eq1 bridge cpu->gpu =="
 module purge; module load gcc/14.2.0; module load openmpi/5.0.7; module load amber/25
 PRMTOP="./5vg3_solv.prmtop"
-INPCRD="./5vg3_solv.inpcrd"
+INPCRD="./5vg3.inpcrd"
 set -euo pipefail
 mpirun -np 16 pmemd.MPI -O -p "$PRMTOP" -c "$INPCRD" -i mdin_templates/eq1a.mdin -o eq1_cpu.out -x eq1_cpu.nc -r eq1_cpu.rst7 -inf eq1_cpu.mdinfo
 module purge; module load cuda/12.8.1; module load gcc/14.2.0; module load openmpi/5.0.7; module load amber/25

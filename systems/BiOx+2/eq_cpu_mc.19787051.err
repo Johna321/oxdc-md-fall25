@@ -1,0 +1,6 @@
+
+Amber/25 is provided by courtesy of Prof. Adrian Roitberg and we encourge all
+users to register at Amber site for free to enhance the visiblity of Amber. 
+slurmstepd: error: *** STEP 19787051.0 ON c0709a-s10 CANCELLED AT 2025-12-01T04:08:33 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 19787051 ON c0709a-s10 CANCELLED AT 2025-12-01T04:08:33 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.

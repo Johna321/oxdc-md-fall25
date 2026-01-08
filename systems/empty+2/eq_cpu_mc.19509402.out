@@ -1,0 +1,8 @@
+cwd: /home/john.aitken/oxdc-md-fall25/systems/empty+2
+AMBERHOME=/apps/gcc/14.2.0/openmpi/5.0.7/amber/25
+/apps/gcc/14.2.0/openmpi/5.0.7/amber/25/bin/pmemd
+=== running heat_nvt_1fs.in with -c 5vg3.inpcrd
+
+=== running eq1_mc_cpu_1fs.in with -c heat.cpu.rst7
+
+stage eq1_mc_cpu_1fs.in produced no eq1.cpu.rst7

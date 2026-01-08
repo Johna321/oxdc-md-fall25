@@ -16,7 +16,7 @@
 
 echo "== eq1 chunked gpu =="
 module purge; module load cuda/12.8.1; module load gcc/14.2.0; module load openmpi/5.0.7; module load amber/25
-PRMTOP="./5vg3.prmtop"
+PRMTOP="./5vg3_solv.prmtop"
 INPCRD="./5vg3.inpcrd"
 set -euo pipefail
 # heat if missing

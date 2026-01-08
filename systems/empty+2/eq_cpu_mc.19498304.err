@@ -1,0 +1,12 @@
+
+Amber/25 is provided by courtesy of Prof. Adrian Roitberg and we encourge all
+users to register at Amber site for free to enhance the visiblity of Amber. 
+
+  Unit  115 Error on OPEN: mdin_templates/heat_nvt_1fs.in                                                                                                                                                                                                                                  
+STOP PMEMD Terminated Abnormally!
+
+  Unit  115 Error on OPEN: mdin_templates/eq1_mc_cpu_1fs.in                                                                                                                                                                                                                                
+STOP PMEMD Terminated Abnormally!
+
+  Unit  115 Error on OPEN: mdin_templates/eq2_mc_cpu_1fs.in                                                                                                                                                                                                                                
+STOP PMEMD Terminated Abnormally!

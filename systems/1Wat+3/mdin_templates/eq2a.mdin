@@ -6,5 +6,5 @@
   cut=10.0, iwrap=1,
   ntpr=500, ntwx=500, ntwr=100000, ntxo=2,
   ntr=1, restraint_wt=0.5,
-  restraintmask='(!:WAT,WTR,Cl-,MN1,MN2,GU,HD,WT)&!@H='
+  restraintmask='(!:WAT,WT1,WTR,Cl-,MN1,MN2,GU,HD,WT)&!@H='
 /

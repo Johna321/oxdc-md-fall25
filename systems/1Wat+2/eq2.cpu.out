@@ -1,0 +1,52 @@
+
+          -------------------------------------------------------
+          Amber 24 PMEMD                              2024
+          -------------------------------------------------------
+
+| PMEMD implementation of SANDER, Release 24
+
+|  Compiled date/time: Thu Apr  3 17:55:38 2025
+| Run on 11/28/2025 at 16:52:44
+
+|   Executable path: pmemd
+| Working directory: /home/john.aitken/oxdc-md-fall25/systems/1Wat+2
+|          Hostname: c0712a-s21
+
+  [-O]verwriting output
+
+File Assignments:
+|   MDIN: mdin_templates/eq2_mc_cpu_1fs.in                                      
+|  MDOUT: eq2.cpu.out                                                           
+| INPCRD: eq1.cpu.rst7                                                          
+|   PARM: 5vg3_solv.prmtop                                                      
+| RESTRT: eq2.cpu.rst7                                                          
+|   REFC: refc                                                                  
+|  MDVEL: mdvel                                                                 
+|   MDEN: mden                                                                  
+|  MDCRD: eq2.cpu.nc                                                            
+| MDINFO: eq2.cpu.mdinfo                                                        
+|  MDFRC: mdfrc                                                                 
+
+
+ Here is the input file:
+
+EQ2 NPT MC (1 fs) reduced restraints                                           
+&cntrl                                                                         
+  imin=0, irest=1, ntx=5,                                                      
+  nstlim=250000, dt=0.001,                                                     
+  ntc=2, ntf=2,                                                                
+  ntb=2, ntp=1, barostat=2, pres0=1.0,                                         
+  ntt=3, gamma_ln=2.0,                                                         
+  ntr=1, restraint_wt=0.5,                                                     
+  restraintmask='(!:WAT,Na+,Cl-)&!@H=',                                        
+  ntpr=1000, ntwx=1000, ntwr=5000, ioutfm=1, iwrap=1                           
+/                                                                              
+                                                                               
+
+
+Note: ig = -1. Setting random seed to   168853 based on wallclock time in 
+      microseconds.
+| irandom = 1, using AMBER's internal random number generator (default).
+ 
+
+  Unit    9 Error on OPEN: eq1.cpu.rst7                                                                                                                                                                                                                                                    

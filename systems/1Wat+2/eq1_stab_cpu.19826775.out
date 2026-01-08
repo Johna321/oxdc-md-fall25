@@ -1,0 +1,3 @@
+cwd: /home/john.aitken/oxdc-md-fall25/systems/1Wat+2
+=== eq1a: eq1a_mc_cpu_1fs.in  -c heat.cpu.rst7  -ref heat.cpu.rst7
+stage eq1a produced no eq1a.cpu.rst7

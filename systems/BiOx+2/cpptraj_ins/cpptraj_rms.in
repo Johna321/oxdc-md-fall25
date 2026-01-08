@@ -1,0 +1,7 @@
+parm 5vg3_solv.prmtop
+trajin eq1.cpu.nc
+autoimage
+rms first @CA out figs/eq1_rmsd_ca.dat
+atomicfluct @CA byres out figs/eq1_rmsf_ca.dat
+run
+

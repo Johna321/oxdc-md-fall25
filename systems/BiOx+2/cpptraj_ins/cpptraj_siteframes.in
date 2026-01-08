@@ -1,0 +1,15 @@
+parm 5vg3_solv.prmtop
+trajin eq1.cpu.nc 1 last 10
+autoimage
+
+center :383,384 mass origin
+image origin center
+rms first @CA
+
+# keep protein heavy atoms + metals; drop bulk solvent/ions for clarity
+strip :WAT,Na+,Cl-
+strip @H=
+
+trajout figs/site_frames.pdb pdb multi
+run
+

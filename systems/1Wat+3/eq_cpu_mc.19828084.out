@@ -1,0 +1,10 @@
+cwd: /home/john.aitken/oxdc-md-fall25/systems/1Wat+3
+AMBERHOME=/apps/gcc/14.2.0/openmpi/5.0.7/amber/25
+/apps/gcc/14.2.0/openmpi/5.0.7/amber/25/bin/pmemd
+skip heat: heat.cpu.rst7 exists
+=== running eq1a_mc_cpu_1fs.in with -c heat.cpu.rst7
+>>> detected ntr=1 in eq1a_mc_cpu_1fs.in → using -ref heat.cpu.rst7
+
+=== running eq1b_mc_cpu_1fs.in with -c eq1a.cpu.rst7
+>>> detected ntr=1 in eq1b_mc_cpu_1fs.in → using -ref eq1a.cpu.rst7
+

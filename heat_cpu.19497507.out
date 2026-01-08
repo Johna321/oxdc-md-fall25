@@ -1,0 +1,37 @@
+AMBERHOME=/apps/gcc/14.2.0/openmpi/5.0.7/amber/25
+fatal: sander not found
+total 12156
+lrwxrwxrwx 1 perera apps      59 Sep 21 18:48 amber.conda -> /apps/gcc/14.2.0/openmpi/5.0.7/amber/25/miniconda/bin/conda
+lrwxrwxrwx 1 perera apps      61 Sep 21 18:48 amber.ipython -> /apps/gcc/14.2.0/openmpi/5.0.7/amber/25/miniconda/bin/ipython
+lrwxrwxrwx 1 perera apps      61 Sep 21 18:48 amber.jupyter -> /apps/gcc/14.2.0/openmpi/5.0.7/amber/25/miniconda/bin/jupyter
+lrwxrwxrwx 1 perera apps      60 Sep 21 18:48 amber.python -> /apps/gcc/14.2.0/openmpi/5.0.7/amber/25/miniconda/bin/python
+-rwxrwxr-x 1 perera apps   23006 Sep 21 18:49 bar_pbsa.py
+-rwxrwxr-x 1 perera apps   12642 Sep 21 18:49 ceinutil.py
+-rwxrwxr-x 1 perera apps    8448 Sep 21 18:49 charmmlipid2amber.py
+-rwxrwxr-x 1 perera apps   12538 Sep 21 18:49 cpeinutil.py
+-rwxrwxr-x 1 perera apps   15083 Sep 21 18:49 cpinutil.py
+-rwxr-xr-x 1 perera apps   27248 Sep 21 18:37 elsize
+-rwxrwxr-x 1 perera apps   68286 Sep 21 18:49 finddgref.py
+-rwxrwxr-x 1 perera apps   11912 Sep 21 18:49 fitpkaeo.py
+-rwxrwxr-x 1 perera apps   13015 Sep 21 18:49 fixremdcouts.py
+-rwxrwxr-x 1 perera apps   20947 Sep 21 18:49 genremdinputs.py
+-rwxr-xr-x 1 perera apps   40728 Sep 21 18:37 gwh
+-rwxrwxr-x 1 perera apps    2789 Sep 21 18:49 mdout_analyzer.py
+-rwxr-xr-x 1 perera apps    8134 Sep 21 18:49 nc-config
+-rwxr-xr-x 1 perera apps   48472 Sep 21 18:36 nccopy
+-rwxr-xr-x 1 perera apps   91376 Sep 21 18:36 ncdump
+-rwxr-xr-x 1 perera apps  250232 Sep 21 18:36 ncgen
+-rwxr-xr-x 1 perera apps  105800 Sep 21 18:36 ncgen3
+-rwxr-xr-x 1 perera apps    3449 Sep 21 18:49 nf-config
+lrwxrwxrwx 1 perera apps      61 Sep 21 18:48 pdb2pqr -> /apps/gcc/14.2.0/openmpi/5.0.7/amber/25/miniconda/bin/pdb2pqr
+-rwxr-xr-x 1 perera apps 3286312 Sep 21 18:38 pmemd
+-rwxr-xr-x 1 perera apps 3389872 Sep 21 18:40 pmemd.decomp
+-rwxr-xr-x 1 perera apps 4296648 Sep 21 18:42 pmemd.MPI
+lrwxrwxrwx 1 perera apps      61 Sep 21 18:48 propka3 -> /apps/gcc/14.2.0/openmpi/5.0.7/amber/25/miniconda/bin/propka3
+-rwxrwxr-x 1 perera apps    2997 Sep 21 18:49 pyresp_gen.py
+-rwxrwxr-x 1 perera apps   86296 Sep 21 18:49 py_resp.py
+-rwxr-xr-x 1 perera apps   90936 Sep 21 18:37 resp
+-rwxr-xr-x 1 perera apps    1771 Sep 21 18:49 sgldinfo.sh
+-rwxr-xr-x 1 perera apps    2375 Sep 21 18:49 sgldwt.sh
+-rwxrwxr-x 1 perera apps   21948 Sep 21 18:49 softcore_setup.py
+-rwxr-xr-x 1 perera apps  309696 Sep 21 18:37 tinker_to_amber

@@ -16,7 +16,7 @@
 
 echo "== eq2 (berendsen) -> mttk =="
 module purge; module load cuda/12.8.1; module load gcc/14.2.0; module load openmpi/5.0.7; module load amber/25
-PRMTOP="./5vg3.prmtop"
+PRMTOP="./5vg3_solv.prmtop"
 set -euo pipefail
 pmemd.cuda -O -p "$PRMTOP" -c eq1d.rst7 -i mdin_templates/eq2a.mdin      -o eq2a.out -x eq2a.nc -r eq2a.rst7 -inf eq2a.mdinfo
 grep -qE '\*{3,}' eq2a.out && { echo "overflow in eq2a"; exit 43; } || true

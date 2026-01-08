@@ -1,0 +1,4 @@
+cwd: /home/john.aitken/oxdc-md-fall25/systems/empty+2
+AMBERHOME=/apps/gcc/14.2.0/openmpi/5.0.7/amber/25
+/apps/gcc/14.2.0/openmpi/5.0.7/amber/25/bin/pmemd
+missing 5vg3_solv.prmtop
