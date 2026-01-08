@@ -1,0 +1,87 @@
+# Principal Component Analysis (PCA) Preparation
+# Focus on lid dynamics (residues 160-166) and overall protein motion
+#
+# PCA identifies dominant conformational motions
+# Useful for: identifying open/closed transitions, comparing systems
+#
+# Usage: cpptraj -p <prmtop> -i pca_prep.in
+
+parm ../systems/BiOx+2/5vg3_solv.prmtop
+
+# Load all production segments for complete sampling
+trajin ../systems/BiOx+2/prod_seg001.nc
+# trajin ../systems/BiOx+2/prod_seg002.nc
+# ... add more segments as available
+
+# Strip waters and ions for PCA
+strip :WAT,Cl-,Na+
+
+# RMS fit to first frame (CA atoms)
+rms first @CA
+
+# ============================================================
+# FULL PROTEIN PCA (CA atoms only)
+# ============================================================
+
+# Calculate covariance matrix
+matrix covar name FULL_COV @CA out full_covar.dat
+
+# Diagonalize to get eigenvectors/eigenvalues
+diagmatrix FULL_COV name FULL_EVEC out full_evecs.dat vecs 20
+
+# Project trajectory onto principal components
+projection FULL_PROJ modes FULL_EVEC @CA out full_proj.dat beg 1 end 10
+
+# ============================================================
+# LID-FOCUSED PCA (residues 160-166)
+# Captures lid open/closed motion specifically
+# ============================================================
+
+# Covariance matrix for lid only
+matrix covar name LID_COV :160-166@CA out lid_covar.dat
+
+# Diagonalize
+diagmatrix LID_COV name LID_EVEC out lid_evecs.dat vecs 10
+
+# Project onto lid PCs
+projection LID_PROJ modes LID_EVEC :160-166@CA out lid_proj.dat beg 1 end 5
+
+# ============================================================
+# ACTIVE SITE PCA
+# Include lid + Mn-coordinating residues
+# ============================================================
+
+# Define active site mask (adjust residue numbers as needed!)
+# Lid (160-166) + His coordinating Mn + Glu + nearby residues
+# From mn_bonds.csv: His95, His97, His140, Glu101
+
+matrix covar name AS_COV :95,97,101,140,160-166@CA out activesite_covar.dat
+
+diagmatrix AS_COV name AS_EVEC out activesite_evecs.dat vecs 10
+
+projection AS_PROJ modes AS_EVEC :95,97,101,140,160-166@CA out activesite_proj.dat beg 1 end 5
+
+run
+
+# ============================================================
+# Post-Processing Notes:
+#
+# 1. Eigenvalues indicate variance captured by each PC
+#    - PC1 typically captures largest motion
+#    - First 3-5 PCs usually capture >80% of variance
+#
+# 2. Projections show trajectory along each PC
+#    - Bimodal distribution suggests conformational switch
+#    - Gaussian distribution suggests single basin
+#
+# 3. To visualize PC motions:
+#    cpptraj -p <prmtop> -i <<EOF
+#    readdata full_evecs.dat name EVEC
+#    createcrd CRD :*@CA
+#    runanalysis modes name EVEC trajout pc1_motion.pdb pcmin -100 pcmax 100
+#    EOF
+#
+# 4. Compare PCA across systems:
+#    - Same PC1 direction = similar dominant motion
+#    - Different PC1 = different conformational landscape
+# ============================================================

@@ -1,0 +1,88 @@
+# Tryptophan Pair (W96/W274) Analysis
+# These residues form a π-stacked bridge for electron hole hopping
+#
+# From literature:
+#   - Inter-subunit Mn-Mn distance: 21.5 Å (via W96/W274)
+#   - Mn → indole ring distance: ~8.4 Å
+#   - Two hops of ~8.5 Å each
+#
+# IMPORTANT: Verify W96 and W274 residue numbers in your topology!
+# May need adjustment for chain/residue renumbering.
+#
+# Usage: cpptraj -p <prmtop> -i trp_pair.in
+
+parm ../systems/BiOx+2/5vg3_solv.prmtop
+
+trajin ../systems/BiOx+2/prod_seg001.nc
+
+# ============================================================
+# Tryptophan Geometry
+# Indole ring atoms: CG, CD1, CD2, NE1, CE2, CE3, CZ2, CZ3, CH2
+# ============================================================
+
+# W96 center of mass (indole ring)
+# Adjust residue number if needed!
+center W96_com :96@CG,CD1,CD2,NE1,CE2,CE3,CZ2,CZ3,CH2 mass
+
+# W274 center of mass
+center W274_com :274@CG,CD1,CD2,NE1,CE2,CE3,CZ2,CZ3,CH2 mass
+
+# ============================================================
+# Inter-ring Distance
+# ============================================================
+
+# Distance between indole ring centers
+# This monitors π-stacking geometry
+distance TRP_stack :96@CG :274@CG out trp_stack_distance.dat
+
+# More precise: center-of-mass distance
+distance TRP_com :96@CG,CD1,CD2,NE1,CE2,CE3,CZ2,CZ3,CH2 :274@CG,CD1,CD2,NE1,CE2,CE3,CZ2,CZ3,CH2 out trp_com_distance.dat
+
+# ============================================================
+# Mn to Tryptophan Distances
+# ============================================================
+
+# Mn1 (Site 1) to W96
+distance Mn1_W96 @6032 :96@CG out mn_trp_distances.dat
+distance Mn1_W274 @6032 :274@CG out mn_trp_distances.dat
+
+# Mn2 (Site 2) to tryptophans
+distance Mn2_W96 @6033 :96@CG out mn_trp_distances.dat
+distance Mn2_W274 @6033 :274@CG out mn_trp_distances.dat
+
+# ============================================================
+# Ring Orientation (Parallel vs Perpendicular)
+# ============================================================
+
+# Dihedral across rings to monitor relative orientation
+# Parallel stacking should show ~0° or ~180°
+# Perpendicular (T-shaped) would be ~90°
+
+# Using CG-CD1 vector from each ring
+dihedral TRP_orient :96@CD2 :96@CG :274@CG :274@CD2 out trp_orientation.dat
+
+# ============================================================
+# Chi angles (side chain rotamers)
+# ============================================================
+
+# Chi1: N-CA-CB-CG
+dihedral W96_chi1 :96@N :96@CA :96@CB :96@CG out trp_chi.dat
+dihedral W274_chi1 :274@N :274@CA :274@CB :274@CG out trp_chi.dat
+
+# Chi2: CA-CB-CG-CD1
+dihedral W96_chi2 :96@CA :96@CB :96@CG :96@CD1 out trp_chi.dat
+dihedral W274_chi2 :274@CA :274@CB :274@CG :274@CD1 out trp_chi.dat
+
+run
+
+# ============================================================
+# Expected Values (from crystal structure):
+#   - W-W center distance: 3.5-4.5 Å (π-stacking)
+#   - Mn-W distances: ~8.4 Å each
+#   - Orientation: parallel (~0° or 180°)
+#
+# Deviations from these values may indicate:
+#   - Disrupted electron transfer pathway
+#   - Subunit interface perturbation
+#   - Need for longer equilibration
+# ============================================================

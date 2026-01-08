@@ -1,0 +1,42 @@
+# RMSD and RMSF Analysis for OxDC Production Trajectories
+# Usage: cpptraj -p <prmtop> -i rmsd_rmsf.in
+#
+# Variables to set before running:
+#   PRMTOP = topology file
+#   TRAJIN = trajectory file(s)
+#   PREFIX = output prefix
+
+# Load topology (adjust path as needed)
+parm ../systems/BiOx+2/5vg3_solv.prmtop [biox2]
+
+# Load trajectory (adjust for actual production files)
+trajin ../systems/BiOx+2/prod_seg001.nc
+
+# Image and center
+autoimage
+center :1-382 mass origin
+
+# Use first frame as reference for RMSD
+reference ../systems/BiOx+2/5vg3_solv.inpcrd [ref]
+
+# Overall backbone RMSD
+rms RMSD_bb @CA,C,N reference out rmsd_backbone.dat
+
+# Overall CA RMSD
+rms RMSD_ca @CA reference out rmsd_ca.dat
+
+# Per-residue RMSD (for identifying flexible regions)
+rms2d RMSD_2d @CA out rmsd_2d.dat
+
+# RMSF per residue (CA atoms)
+rmsf RMSF_ca @CA out rmsf_ca.dat byres
+
+# RMSF per atom (for detailed analysis)
+rmsf RMSF_all @CA,C,N,O out rmsf_backbone_atoms.dat
+
+# B-factor output
+atomicfluct BFACTORS @CA out bfactors.dat byres bfactor
+
+run
+
+# Analysis complete

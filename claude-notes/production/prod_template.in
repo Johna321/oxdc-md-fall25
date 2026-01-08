@@ -1,0 +1,42 @@
+OxDC Production MD - 10 ns segment (NPT, GPU)
+ &cntrl
+  ! Run control
+  imin=0,                      ! MD (not minimization)
+  irest=1,                     ! Restart from previous
+  ntx=5,                       ! Read coords and velocities
+
+  ! Timestep and duration
+  dt=0.002,                    ! 2 fs timestep
+  nstlim=5000000,              ! 5M steps = 10 ns
+
+  ! SHAKE
+  ntc=2,                       ! SHAKE bonds to H
+  ntf=2,                       ! Omit H-bond forces
+
+  ! Nonbonded
+  cut=10.0,                    ! 10 Å cutoff
+
+  ! Temperature (Langevin)
+  ntt=3,                       ! Langevin thermostat
+  gamma_ln=1.0,                ! Collision frequency (ps^-1)
+  temp0=300.0,                 ! Target temperature
+  ig=-1,                       ! Random seed from clock
+
+  ! Pressure (Monte Carlo barostat)
+  ntb=2,                       ! Constant pressure periodic BC
+  ntp=1,                       ! Isotropic pressure scaling
+  barostat=2,                  ! MC barostat (GPU compatible)
+  pres0=1.0,                   ! Target pressure (bar)
+  taup=2.0,                    ! Pressure relaxation time
+
+  ! Output
+  ntpr=5000,                   ! Energy output every 10 ps
+  ntwx=5000,                   ! Trajectory output every 10 ps
+  ntwr=500000,                 ! Restart every 1 ns
+  ntxo=2,                      ! NetCDF restart format
+  ioutfm=1,                    ! NetCDF trajectory format
+  iwrap=1,                     ! Wrap coordinates
+
+  ! No restraints
+  ntr=0,
+ /

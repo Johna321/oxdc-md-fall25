@@ -1,0 +1,66 @@
+# Mn Coordination Geometry Analysis for BiOx+2
+# Monitor Mn-ligand distances throughout production
+#
+# Atom indices from mn_bonds.csv:
+#   Mn1 (6032) - N-terminal site (catalytic)
+#   Mn2 (6033) - C-terminal site (structural/electron donor)
+#
+# Usage: cpptraj -p <prmtop> -i mn_coordination.in
+
+parm ../systems/BiOx+2/5vg3_solv.prmtop
+
+# Load production trajectory (adjust as needed)
+trajin ../systems/BiOx+2/prod_seg001.nc
+
+# ============================================================
+# Site 1 (N-terminal, catalytic) - Mn atom 6032
+# ============================================================
+
+# Mn-His distances (3 histidines)
+distance Mn1_His95_NE2 @6032 @1519 out mn1_his_distances.dat
+distance Mn1_His97_NE2 @6032 @1560 out mn1_his_distances.dat
+distance Mn1_His140_NE2 @6032 @2230 out mn1_his_distances.dat
+
+# Mn-Glu distance
+distance Mn1_Glu101_OE1 @6032 @1623 out mn1_glu_distance.dat
+
+# Mn-Oxalate distances (bidentate binding)
+distance Mn1_Ox_OZ @6032 @6036 out mn1_oxalate.dat
+distance Mn1_Ox_OX @6032 @6038 out mn1_oxalate.dat
+
+# ============================================================
+# Site 2 (C-terminal, structural) - Mn atom 6033
+# From mn_contacts.csv:
+#   4279:NE2-HID (His), 4320:NE2-HIP (His)
+#   4397:OE1-GLU, 4991:NE2-HIP (His)
+# ============================================================
+
+distance Mn2_His_4279 @6033 @4279 out mn2_ligand_distances.dat
+distance Mn2_His_4320 @6033 @4320 out mn2_ligand_distances.dat
+distance Mn2_Glu_4397 @6033 @4397 out mn2_ligand_distances.dat
+distance Mn2_His_4991 @6033 @4991 out mn2_ligand_distances.dat
+
+# ============================================================
+# Coordination Number Analysis
+# Count atoms within 2.5 Å of each Mn
+# ============================================================
+
+# Approximate coordination number using radial distribution
+radial Mn1_rdf @6032 :* 0.1 5.0 out mn1_rdf.dat
+radial Mn2_rdf @6033 :* 0.1 5.0 out mn2_rdf.dat
+
+# ============================================================
+# Mn-Mn Distances
+# ============================================================
+
+# Intra-subunit (should be ~26 Å)
+distance Mn_Mn_intra @6032 @6033 out mn_mn_distance.dat
+
+run
+
+# Post-processing notes:
+# 1. Expected Mn-N(His) distances: 2.1-2.3 Å
+# 2. Expected Mn-O(Glu) distances: 2.0-2.2 Å
+# 3. Expected Mn-O(Ox) distances: 2.0-2.4 Å (bidentate)
+# 4. Alert if any distance > 3.0 Å (dissociation)
+# 5. Alert if any distance < 1.8 Å (clash)

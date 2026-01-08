@@ -1,0 +1,113 @@
+# Flexible Lid (Loop 160-166) Dynamics Analysis
+#
+# IMPORTANT: Residue numbering needs to be verified against your topology!
+# The lid residues in literature are 160-166 (PDB 5VG3 numbering).
+# Adjust :LID_START-LID_END based on your actual residue numbers.
+#
+# Key residues from literature:
+#   Ser161 - H-bond in closed conformation
+#   Glu162 - Proton donor, approaches Mn when closed
+#   Ser164 - H-bond in open conformation
+#   Thr165 - Conformational flexibility
+#
+# Usage: cpptraj -p <prmtop> -i lid_dynamics.in
+
+parm ../systems/BiOx+2/5vg3_solv.prmtop
+
+trajin ../systems/BiOx+2/prod_seg001.nc
+
+# ============================================================
+# ADJUST THESE RESIDUE NUMBERS BASED ON YOUR TOPOLOGY
+# Run: cpptraj -p <prmtop> -c <coords> and use 'resinfo' to check
+# ============================================================
+
+# Define lid mask (adjust residue numbers!)
+# Assuming offset: if PDB residue 160 = topology residue 160
+# May need adjustment based on chain breaks, missing residues, etc.
+
+# Lid RMSD (vs first frame)
+reference ../systems/BiOx+2/5vg3_solv.inpcrd [ref]
+rms LID_RMSD :160-166@CA reference out lid_rmsd.dat
+
+# Lid RMSF
+rmsf LID_RMSF :160-166@CA out lid_rmsf.dat byres
+
+# ============================================================
+# Glu162 - Mn Distance (Key Catalytic Interaction)
+# ============================================================
+
+# Glu162 carboxylate center of mass to Mn distance
+# This monitors whether the lid is in open (far) or closed (near) state
+# Note: Need to identify correct atom indices for Glu162
+
+# If Glu162 has atoms @CD, @OE1, @OE2, monitor CD-Mn distance
+# Adjust residue number as needed!
+distance Glu162_Mn @6032 :162@CD out glu162_mn_distance.dat
+
+# OE1 and OE2 separately
+distance Glu162_OE1_Mn @6032 :162@OE1 out glu162_oe_mn.dat
+distance Glu162_OE2_Mn @6032 :162@OE2 out glu162_oe_mn.dat
+
+# ============================================================
+# Lid Dihedral Angles (Backbone Conformations)
+# ============================================================
+
+# Phi/Psi angles for lid residues
+multidihedral PHI_LID phi resrange 160-166 out lid_phi.dat
+multidihedral PSI_LID psi resrange 160-166 out lid_psi.dat
+
+# ============================================================
+# Lid H-bond Analysis
+# ============================================================
+
+# Ser161 H-bonds (closed conformation stabilizer)
+hbond SER161_hb :161 out ser161_hbonds.dat avgout ser161_hbond_avg.dat
+
+# Ser164 H-bonds (open conformation stabilizer)
+hbond SER164_hb :164 out ser164_hbonds.dat avgout ser164_hbond_avg.dat
+
+# All lid H-bonds
+hbond LID_hb :160-166 out lid_all_hbonds.dat avgout lid_hbond_avg.dat
+
+# Inter-subunit H-bonds (D297, H299 to lid)
+# These stabilize open conformation - need to identify correct residues
+hbond INTERSUBUNIT :297,299 :160-166 out intersubunit_hbonds.dat
+
+# ============================================================
+# Lid Secondary Structure
+# ============================================================
+
+# Track 3_10 helix formation (characteristic of closed state)
+secstruct LID_SS :160-166 out lid_secstruct.dat sumout lid_ss_summary.dat
+
+# ============================================================
+# Lid Solvent Accessibility
+# ============================================================
+
+# Surface area of lid residues
+surf LID_SASA :160-166 out lid_sasa.dat
+
+# Active site solvent accessibility
+# Monitor water access to Mn site when lid is open
+watershell Mn_water @6032 out mn_watershell.dat lower 3.5 upper 5.0
+
+run
+
+# ============================================================
+# Expected Behaviors:
+#
+# OPEN conformation:
+#   - Glu162-Mn distance > 5 Å
+#   - Higher SASA
+#   - More waters near Mn
+#   - No 3_10 helix in lid
+#
+# CLOSED conformation:
+#   - Glu162-Mn distance < 3 Å
+#   - Lower SASA
+#   - Fewer waters near Mn
+#   - 3_10 helix may form
+#
+# Your thesis question: Do Mn oxidation state and ligand
+# affect the open/closed equilibrium?
+# ============================================================
