@@ -1,0 +1,4 @@
+printBonds :MN1
+printAngles :MN1
+printDihedrals :MN1
+printDetails :MN1

@@ -1,0 +1,4 @@
+fixatomorder outprefix fixed
+trajout restart fixed.1Y79_solv.inpcrd
+run
+quit

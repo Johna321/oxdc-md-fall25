@@ -77,9 +77,9 @@ Create a config file at `~/.mcp-hipergator.json`:
   "user": "john.aitken",
   "port": 2222,
   "identityFile": "~/.ssh/id_ed25519_hpg",
-  "projectBase": "/blue/roitberg/john.aitken",
-  "defaultAccount": "roitberg",
-  "defaultQos": "roitberg"
+  "projectBase": "/blue/ax/john.aitken",
+  "defaultAccount": "ax",
+  "defaultQos": "ax"
 }
 ```
 
