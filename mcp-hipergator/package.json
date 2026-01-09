@@ -1,0 +1,40 @@
+{
+  "name": "mcp-hipergator",
+  "version": "1.0.0",
+  "description": "MCP server for HiPerGator HPC access with SLURM job management",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-hipergator": "./dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "vitest",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "hipergator",
+    "hpc",
+    "slurm",
+    "ssh",
+    "claude"
+  ],
+  "author": "John Aitken",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
