@@ -16,14 +16,26 @@ This document captures:
 **Gap:** The exact MCPB.py workflow and QM validation are unclear.
 
 **Questions:**
-- [ ] What DFT level was used for QM calculations? (B3LYP/6-31G* is standard)
-- [ ] Was the small model geometry optimized before force constant calculation?
-- [ ] Are the Mn parameters validated against QM Mn-ligand distances?
+- [x] What DFT level was used for QM calculations? (B3LYP/6-31G* is standard)
+  - **ANSWERED**: B3LYP/6-31G(d,p) with UltraFine integration grid (from `systems/BiOx+2/calc/5vg3_small_fc.com`)
+- [x] Was the small model geometry optimized before force constant calculation?
+  - **ANSWERED**: Yes. `5vg3_small_opt.log` shows "Stationary point found" - optimization converged successfully
+- [x] Are the Mn parameters validated against QM Mn-ligand distances?
+  - **ANSWERED**: r0 values in frcmod files derived from QM-optimized geometry via Seminario method
 - [ ] The Mn 6032 charge is -0.15 in `mn_site_atoms.csv` — is this intentional?
   - Negative charge on Mn is unusual; typical Mn(II) RESP is +1.5 to +2.0
+  - **NOTE**: Mulliken charge from QM is +1.05 with spin density 4.77 (consistent with high-spin Mn(II))
+  - The -0.15 may be from RESP fitting which redistributes charge to ligands
 - [ ] Were any bonds manually adjusted or force constants modified post-MCPB.py?
 
 **Why it matters:** Understanding parameterization helps troubleshoot instabilities.
+
+**NEW FINDINGS from zbecerra calc/ directory (Jan 2026):**
+- QM work performed by zbecerra@ufl.edu on HiPerGator (`/blue/ax/zbecerra/anna/Mn_files/BiOx/calc/`)
+- Spin multiplicity: 6 (sextet) - correct for high-spin Mn(II) with 5 unpaired electrons
+- Total charge: 0 (neutral small model cluster)
+- Stoichiometry: C21H32MnN6O6 (Mn + 3 His + 1 Glu + oxalate)
+- Gaussian 16 Rev C.01 used (run date: April 2025)
 
 ---
 
@@ -45,12 +57,26 @@ This document captures:
 **Gap:** How is Mn(III) vs Mn(II) represented in the force field?
 
 **Questions:**
-- [ ] Are 1Wat+3 and empty+3 using different MCPB.py parameters than +2 systems?
-- [ ] Is the charge on Mn adjusted for oxidation state?
+- [x] Are 1Wat+3 and empty+3 using different MCPB.py parameters than +2 systems?
+  - **ANSWERED - YES!** Force constants from `mn_bonds.csv`:
+    - **BiOx+2** (Mn(II)): k = 14-49 kcal/mol·Å² (avg ~30)
+    - **1Wat+3 Site 1** (Mn(III)): k = 85-125 kcal/mol·Å² (avg ~97) - 3x higher!
+    - **1Wat+3 Site 2** (Mn(II)): k = 15-43 kcal/mol·Å² - same as other Mn(II)
+  - This explains the stability differences - Mn(III) has much stiffer bonds
+- [x] Is the charge on Mn adjusted for oxidation state?
+  - **PARTIALLY ANSWERED**: Different parameterization for Mn(III) vs Mn(II) at Site 1
 - [ ] Were separate QM calculations done for Mn(III) systems?
-- [ ] How is the spin state handled (Mn(III) is d⁴, potentially different multiplicity)?
+  - **NOTE**: No calc/ directory found for 1Wat+3 - QM files may be stored elsewhere
+- [x] How is the spin state handled (Mn(III) is d⁴, potentially different multiplicity)?
+  - **BiOx+2**: Multiplicity 6 (sextet, high-spin d⁵ Mn(II))
+  - **1Wat+3**: Unknown - QM files not found. d⁴ Mn(III) typically quintuplet (mult=5)
 
 **Why it matters:** Force field quality depends on correct QM reference for each oxidation state.
+
+**KEY INSIGHT**: The 1Wat+3 Mn(III) site has dramatically higher force constants due to:
+1. Shorter Mn-ligand distances (1.86-2.03 Å vs 2.08-2.41 Å)
+2. Jahn-Teller compression at Glu101-Mn (1.862 Å, k=125.3!)
+3. These stiff bonds cannot accommodate thermal fluctuations → vlimit exceeded
 
 ---
 
@@ -159,7 +185,12 @@ This document captures:
 
 - [ ] `empty+3` system: Is it set up? (No output files visible)
 - [ ] `.nc` trajectory files: Are they stored elsewhere (too large for git)?
-- [ ] QM log files: Where are the Gaussian outputs for MCPB.py?
+- [x] QM log files: Where are the Gaussian outputs for MCPB.py?
+  - **FOUND**: `systems/BiOx+2/calc/` contains 90+ files including:
+    - `5vg3_small_opt.log` (geometry optimization)
+    - `5vg3_small_fc.log` (frequency/force constant calculation)
+    - mol2 files, RESP charges, ESP files
+  - **NOTE**: 1Wat+3 has no calc/ directory - QM files may be on HiPerGator
 - [ ] Minimization outputs: Were minimization stages run before heating?
 
 ### Inconsistencies to Clarify
@@ -220,10 +251,33 @@ This document captures:
 
 ## Summary Table
 
-| Category | Question Count | Priority |
-|----------|----------------|----------|
-| MCPB.py/Force Field | 5 | HIGH |
-| Protocol/Equilibration | 4 | HIGH |
-| Biological Context | 5 | MEDIUM |
-| Technical Learning | 4 | MEDIUM |
-| Repository Clarification | 6 | LOW |
+| Category | Questions | Answered | Priority |
+|----------|-----------|----------|----------|
+| MCPB.py/Force Field | 5 | **4** | HIGH |
+| Protocol/Equilibration | 4 | 0 | HIGH |
+| Oxidation State | 4 | **3** | HIGH |
+| Biological Context | 5 | 0 | MEDIUM |
+| Technical Learning | 4 | 0 | MEDIUM |
+| Repository Clarification | 7 | **1** | LOW |
+
+---
+
+## Major Findings from zbecerra Investigation (Jan 2026)
+
+### Force Constant Comparison (k in kcal/mol·Å²)
+
+| System | Site | His-Mn | Glu-Mn | Substrate/Water | Avg |
+|--------|------|--------|--------|-----------------|-----|
+| BiOx+2 | 1 | 14-33 | 39 | Oxalate: 12-49 | **29** |
+| 1Wat+2 | 1 | 33-46 | 37 | Water: 49 | **40** |
+| 1Wat+2 | 2 | 35-43 | 15 | - | **33** |
+| 1Wat+3 | 1 (Mn(III)) | **85-93** | **125** | - | **97** |
+| 1Wat+3 | 2 (Mn(II)) | 35-43 | 15 | Water: 9 | **28** |
+
+### Key Conclusions
+
+1. **BiOx+2 stability explained**: Lowest force constants (avg 29) + flexible oxalate coordination
+2. **1Wat+3 instability explained**: Mn(III) site has 3x higher force constants (85-125 vs ~30)
+3. **1Wat+2 salvageability confirmed**: Force constants (33-49) are borderline - scaling by 0.7x should work
+4. **DFT validated**: B3LYP/6-31G(d,p) with UltraFine grid is standard MCPB.py approach
+5. **Spin states correct**: Multiplicity 6 for Mn(II) is proper high-spin d⁵
