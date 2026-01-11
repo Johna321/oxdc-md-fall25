@@ -10,24 +10,27 @@
 
 ## Executive Summary
 
-### KEY FINDING: The active site lid remains FULLY OPEN throughout the entire 10 ns simulation.
+### KEY FINDING: The simulation maintains the 5VG3-like "closed-backbone / Glu162-out" state.
 
 | Metric | Value | Assessment |
 |--------|-------|------------|
 | Backbone RMSD | 1.98 ± 0.24 Å | Stable |
 | Mn1 Coordination | All ligands intact | Excellent |
 | Oxalate Binding | Asymmetric bidentate | Persistent |
-| **Glu162-Mn Distance** | **11.5 ± 0.5 Å** | **FULLY OPEN** |
-| Lid Open Fraction | **100%** | No transitions |
+| **Glu162-Mn Distance** | **11.5 ± 0.5 Å** | **5VG3-like (Glu162-out)** |
+| Glu162-in Fraction | **0%** | No catalytic pose sampled |
 | Simulation Converged | Yes | Block averages agree |
 
 ### Scientific Significance
 
-This result suggests that in the Mn(II) oxidation state with bidentate oxalate bound, the enzyme adopts a stable open conformation. Glu162, the catalytically essential proton donor, is positioned ~12 Å from the Mn center—too far for direct proton transfer. This implies:
+This result shows that in the Mn(II) oxidation state with bidentate oxalate bound, the enzyme maintains the same conformation as the starting structure (5VG3). Glu162, the catalytically essential proton donor, remains displaced from the Mn center (~11.5 Å) rather than adopting the "Glu162-in" pose (~4.6-5.1 Å) required for proton transfer.
 
-1. **Lid closure may be rate-limiting** or coupled to subsequent catalytic steps
-2. **Mn oxidation state may modulate lid dynamics** (comparison with Mn(III) needed)
-3. **The open state may represent a "resting" conformation** awaiting activation
+**Importantly:** This is NOT the "open-loop" state (1J58, ~15-16 Å). The lid backbone appears to remain closed; only the Glu162 sidechain is displaced. This is consistent with bidentate oxalate sterically preventing the Glu162-in pose.
+
+Key implications:
+1. **Bidentate oxalate may block Glu162-in** — steric clash prevents catalytic positioning
+2. **Glu162-in may require oxalate rearrangement** — monodentate transition could enable closure
+3. **Backbone conformation needs verification** — RMSD to 1J58 vs 1UW8 would confirm loop state
 
 ---
 
@@ -111,8 +114,8 @@ This asymmetric bidentate mode is consistent with:
 
 The persistent bidentate binding suggests:
 - **Ground state stability:** Oxalate remains firmly bound in reactive conformation
+- **Steric constraint on Glu162:** Bidentate oxalate may clash with Glu162-in pose (Zhu et al. 2016)
 - **No monodentate intermediate observed:** The proposed O₂ binding step (requiring one open coordination site) was not sampled in 10 ns
-- **Extended simulations needed:** Bidentate → monodentate transition may occur on longer timescales
 
 ---
 
@@ -126,23 +129,25 @@ The persistent bidentate binding suggests:
 | OE1-Mn1 Mean | 11.73 ± 0.73 Å |
 | OE2-Mn1 Mean | 12.28 ± 0.63 Å |
 
-### 4.2 Lid State Distribution
+### 4.2 Glu162 Sidechain State Distribution
 
-| State | Distance Range | Fraction |
-|-------|----------------|----------|
-| Closed | < 4 Å | **0.0%** |
-| Intermediate | 4-8 Å | **0.0%** |
-| Open | > 8 Å | **100.0%** |
+Using the three-state model from literature:
+
+| State | Distance Range | Fraction | Notes |
+|-------|----------------|----------|-------|
+| Glu162-in (1UW8-like) | < 6 Å | **0.0%** | Catalytic pose |
+| Glu162-out (5VG3-like) | 8-14 Å | **100.0%** | Our state |
+| Open-loop (1J58-like) | > 14 Å | **0.0%** | Channel open |
 
 ### 4.3 Transition Analysis
 
-- **Transitions across 8 Å threshold:** 0
+- **Transitions toward Glu162-in:** 0
 - **Distribution:** Unimodal (Gaussian, p = 0.94)
 - **Block consistency:** 11.34-11.72 Å across all blocks
 
-**THE LID NEVER CLOSES during the 10 ns simulation.**
+**Glu162 never adopts the catalytically active "in" pose during 10 ns.**
 
-### 4.4 Literature Context (Corrected Three-State Model)
+### 4.4 Literature Context (Three-State Model)
 
 From crystallographic studies, OxDC exhibits **three distinct lid states**:
 
@@ -162,14 +167,14 @@ From crystallographic studies, OxDC exhibits **three distinct lid states**:
 Glu162 is essential for catalysis:
 - E162A mutation **eliminates decarboxylase activity** (Saylor et al., 2008)
 - Glu162 serves as **proton donor** in proposed PCET mechanism
-- Proton transfer requires Glu162-Mn distance **< 4 Å**
+- Proton transfer requires Glu162 close to Mn-bound water (~2.7-2.8 Å contact)
 
 **At 11.5 Å, direct proton transfer is impossible.**
 
-This suggests either:
-1. **Lid closure is a subsequent step** triggered by factors not present (e.g., O₂ binding, redox change)
-2. **Mn(II) favors the open state** — comparison with Mn(III) system needed
-3. **10 ns is insufficient** to capture lid closure (μs timescale motion)
+This suggests:
+1. **Bidentate oxalate sterically blocks Glu162-in** — consistent with Zhu et al. 2016 analysis
+2. **Glu162-in may require substrate rearrangement** — monodentate binding could create space
+3. **Backbone analysis needed** — verify loop is truly "closed" vs "open"
 
 ---
 
@@ -194,7 +199,7 @@ This suggests either:
 
 ### 5.3 Lid Rigidity
 
-**Surprisingly, the lid (160-166) shows LOWER flexibility than the global average.**
+**The lid (160-166) shows LOWER flexibility than the global average.**
 
 | Lid Residue | RMSF (Å) |
 |-------------|----------|
@@ -206,7 +211,7 @@ This suggests either:
 | 165 (Thr) | 0.59 |
 | 166 (Phe) | 0.77 |
 
-**Interpretation:** The open lid conformation is **stabilized**, not fluctuating. This suggests the open state is a genuine energy minimum, not a transient fluctuation.
+**Interpretation:** The Glu162-out conformation is **stabilized**, not fluctuating. This is consistent with the starting 5VG3 structure being maintained as a stable energy minimum.
 
 ---
 
@@ -232,30 +237,31 @@ The moderate correlation between lid RMSD and Glu162-Mn distance indicates that 
 
 ✓ **Oxalate binding is asymmetric bidentate**
 - Consistent with ENDOR spectroscopy
-- Mechanistically relevant
+- May sterically block Glu162-in pose
 
-✓ **Lid remains open in Mn(II) state**
-- 100% open throughout 10 ns
-- Glu162 cannot transfer proton from this position
+✓ **Glu162 remains in "out" position throughout**
+- Maintains 5VG3-like conformation
+- Never approaches catalytic Glu162-in pose
 
 ### 7.2 What We Cannot Conclude
 
-✗ **Whether lid closure is possible**
+✗ **Whether backbone is truly "closed" vs "open"**
+- Need RMSD to 1J58 (open) vs 1UW8 (closed) reference
+- Glu162-Mn distance alone doesn't distinguish backbone state
+
+✗ **Whether Glu162-in is accessible**
 - 10 ns may be too short
-- Need extended (100+ ns) or enhanced sampling
+- Bidentate oxalate may prevent it entirely
 
 ✗ **Whether Mn oxidation state controls lid**
 - Need comparative analysis with Mn(III) system
-
-✗ **Mechanistic pathway**
-- Cannot determine catalytic cycle without observing transitions
 
 ### 7.3 Limitations
 
 1. **Timescale:** 10 ns is ~100× shorter than typical loop transition times (μs)
 2. **Single trajectory:** Statistical power limited without replicas
 3. **No enhanced sampling:** Standard MD may not overcome energy barriers
-4. **Classical mechanics:** No quantum effects on electron transfer
+4. **Missing backbone analysis:** Need RMSD to reference structures
 
 ---
 
@@ -263,25 +269,25 @@ The moderate correlation between lid RMSD and Glu162-Mn distance indicates that 
 
 ### 8.1 Immediate Priorities
 
-1. **Analyze 1Wat+3 (Mn(III)) system** — Does oxidation state affect lid?
-2. **Extend simulation to 100+ ns** — Sample longer timescales
-3. **Run replica simulations** — Statistical power for comparisons
+1. **Backbone conformation analysis** — RMSD of lid residues to 1J58 vs 1UW8
+2. **Analyze 1Wat+3 (Mn(III)) system** — Does oxidation state affect lid?
+3. **Monitor oxalate binding dynamics** — Does it ever go monodentate?
 
-### 8.2 Advanced Methods (if time permits)
+### 8.2 Follow-up Analyses (See Appendix B)
+
+| Analysis | Purpose | Key Metric |
+|----------|---------|------------|
+| Lid backbone RMSD | Distinguish open-loop vs closed-backbone | RMSD to 1J58/1UW8 |
+| Glu162-water distance | Check for H-bond to Mn-water | Glu162-OE to WAT |
+| Oxalate binding dynamics | Detect bidentate→monodentate | OZ/OX distances |
+
+### 8.3 Advanced Methods (if time permits)
 
 | Method | Purpose | Expected Insight |
 |--------|---------|------------------|
-| Metadynamics | Enhanced sampling | Lid free energy landscape |
-| Steered MD | Force-induced closure | Estimate closure barrier |
+| Metadynamics | Enhanced sampling | Glu162-in free energy barrier |
+| Steered MD | Force-induced Glu162-in | Estimate closure barrier |
 | QM/MM | Electronic structure | Electron transfer pathway |
-
-### 8.3 Required Simulation Time
-
-| Analysis | Current | Minimum | Ideal |
-|----------|---------|---------|-------|
-| RMSF convergence | 10 ns | 100 ns | 200 ns |
-| Lid transitions | 0 observed | 100 ns | 500 ns × 3 |
-| Statistical comparison | N/A | 300 ns | 1 μs |
 
 ---
 
@@ -289,14 +295,14 @@ The moderate correlation between lid RMSD and Glu162-Mn distance indicates that 
 
 ### One-Paragraph Summary
 
-The 10 ns production simulation of BiOx+2 (OxDC with bidentate oxalate and Mn(II)) reveals a stable, well-equilibrated system with intact Mn1 coordination and persistent asymmetric bidentate oxalate binding. The most significant finding is that the active site lid remains **fully open** throughout the simulation (Glu162-Mn = 11.5 ± 0.5 Å), with zero lid closure events observed. The lid shows lower-than-average flexibility (RMSF 0.71 Å vs. 1.03 Å global), suggesting the open conformation is a stabilized state rather than a transient fluctuation. This result implies that lid closure, required for proton transfer by Glu162, may be (1) triggered by factors not present in this simulation (e.g., O₂ binding, Mn oxidation), (2) occurs on timescales longer than 10 ns, or (3) is disfavored in the Mn(II) oxidation state. Comparison with the Mn(III) system (1Wat+3) is essential to determine whether oxidation state modulates lid dynamics.
+The 10 ns production simulation of BiOx+2 (OxDC with bidentate oxalate and Mn(II)) reveals a stable, well-equilibrated system with intact Mn1 coordination and persistent asymmetric bidentate oxalate binding. The most significant finding is that the Glu162 sidechain remains in the **5VG3-like "Glu162-out" position** throughout the simulation (Glu162-Mn = 11.5 ± 0.5 Å), never adopting the catalytically active "Glu162-in" pose (~4.6-5.1 Å) required for proton transfer. This is distinct from the "open-loop" state (1J58, ~15-16 Å) — the lid backbone appears to remain closed, but the Glu162 sidechain is displaced. The lid shows lower-than-average flexibility (RMSF 0.71 Å vs. 1.03 Å global), indicating the Glu162-out conformation is a stabilized state. The persistent bidentate oxalate binding may sterically prevent Glu162 from adopting the catalytic pose, consistent with Zhu et al.'s structural analysis. Follow-up analysis should verify the backbone conformation (RMSD to 1J58 vs 1UW8) and compare with the Mn(III) system (1Wat+3).
 
 ### Key Figures for Thesis
 
 1. `prod_rmsd.png` — Structural stability
 2. `prod_mn1_coordination.png` — Force field validation
-3. `prod_lid_dynamics.png` — **KEY FIGURE** — Lid remains open
-4. `prod_oxalate_binding.png` — Bidentate binding
+3. `prod_lid_dynamics.png` — **KEY FIGURE** — Glu162 remains in "out" position
+4. `prod_oxalate_binding.png` — Bidentate binding (potential steric constraint)
 5. `prod_rmsf.png` — Flexibility profile
 
 ---
@@ -313,9 +319,11 @@ The 10 ns production simulation of BiOx+2 (OxDC with bidentate oxalate and Mn(II
 
 5. Dudev T & Lim C (2003) Effect of Carboxylate-Binding Mode on Metal Binding/Selectivity. *Acc Chem Res* 36:42-51.
 
+6. Zhu W et al. (2016) Substrate Binding Mode and Molecular Basis of a Specificity Switch. *Biochemistry* 55:2163-73.
+
 ---
 
-## Appendix: Generated Files
+## Appendix A: Generated Files
 
 ```
 systems/BiOx+2/
@@ -335,6 +343,12 @@ systems/BiOx+2/
 
 ---
 
+## Appendix B: Follow-up Analysis Specification
+
+See `BACKBONE_CONFORMATION_ANALYSIS.md` for detailed analysis protocol.
+
+---
+
 *Report generated: January 2026*
-*Analysis Status: COMPLETE for 10 ns production*
-*Next Steps: Compare with 1Wat+3; extend simulation; run replicas*
+*Analysis Status: COMPLETE for 10 ns production (Glu162 sidechain analysis)*
+*Next Steps: Backbone conformation analysis; Compare with 1Wat+3; extend simulation*

@@ -1,0 +1,66 @@
+# Backbone Conformation Analysis for BiOx+2
+# Purpose: Distinguish open-loop vs closed-backbone states
+# Run: cpptraj -i backbone_analysis.in
+
+parm ../5vg3_solv.prmtop
+trajin ../prod.nc
+
+# Reference for RMSD (first frame = 5VG3-like)
+reference ../prod.nc 1 [ref_frame1]
+
+# ============================================================
+# Analysis 1: Lid backbone RMSD to first frame
+# ============================================================
+# This tells us if the backbone moves away from starting conformation
+rms lid_bb_rmsd :160-166@CA,C,N,O ref [ref_frame1] out ../analysis_results/lid_backbone_rmsd.dat
+
+# ============================================================
+# Analysis 2: Backbone proxy - Glu162 CA to Mn1
+# ============================================================
+# CA position reports on backbone, independent of sidechain rotamer
+# Closed-backbone: ~8-10 Å
+# Open-loop: ~11-13 Å
+distance glu162_ca_mn1 :162@CA :383@MN out ../analysis_results/glu162_ca_mn1.dat
+
+# Also track other lid CA positions for context
+distance phe160_ca_mn1 :160@CA :383@MN out ../analysis_results/phe160_ca_mn1.dat
+distance ser161_ca_mn1 :161@CA :383@MN out ../analysis_results/ser161_ca_mn1.dat
+distance asn163_ca_mn1 :163@CA :383@MN out ../analysis_results/asn163_ca_mn1.dat
+distance ser164_ca_mn1 :164@CA :383@MN out ../analysis_results/ser164_ca_mn1.dat
+
+# For comparison: Sidechain distance (already computed, but verify)
+distance glu162_cd_mn1 :162@CD :383@MN out ../analysis_results/glu162_cd_mn1_check.dat
+
+# ============================================================
+# Analysis 3: Glu162 to nearest water
+# ============================================================
+# In Glu162-in state, Glu162-OE contacts Mn-bound water (~2.7-2.8 Å)
+# Use 'closest' to find minimum distance to any water oxygen
+closest 1 :162@OE1,OE2 :WAT@O closestout ../analysis_results/glu162_closest_water.dat
+
+# ============================================================
+# Analysis 4: Active site hydration
+# ============================================================
+# Count waters near Mn1 - more in open-loop state
+watershell :383@MN out ../analysis_results/mn1_watershell.dat lower 0.0 upper 3.5
+watershell :383@MN out ../analysis_results/mn1_water_5A.dat lower 0.0 upper 5.0
+
+# ============================================================
+# Analysis 5: Lid residue distances (all CA atoms)
+# ============================================================
+# Create a matrix of lid CA distances to track concerted motion
+distance lid_160_166 :160@CA :166@CA out ../analysis_results/lid_span.dat
+
+# ============================================================
+# Analysis 6: Oxalate binding mode (verify bidentate persistence)
+# ============================================================
+# Already have these but recalculate for consistency
+distance ox_oz_mn1 :OX1@OZ :383@MN out ../analysis_results/ox_oz_mn1_check.dat
+distance ox_ox_mn1 :OX1@OX :383@MN out ../analysis_results/ox_ox_mn1_check.dat
+distance ox_oy_mn1 :OX1@OY :383@MN out ../analysis_results/ox_oy_mn1_check.dat
+
+run
+
+# Summary statistics
+# runanalysis diagmatrix
+
