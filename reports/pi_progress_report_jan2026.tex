@@ -1,0 +1,528 @@
+\documentclass[11pt,letterpaper]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+
+% Colors
+\definecolor{ufblue}{RGB}{0,33,165}
+\definecolor{uforange}{RGB}{250,70,22}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{OxDC MD Progress Report}
+\lhead{John Aitken}
+\rfoot{Page \thepage}
+
+% Custom commands
+\newcommand{\angstrom}{\text{\AA}}
+
+% Title
+\title{\textbf{OxDC Molecular Dynamics Simulations:\\Progress Report for Winter Break 2025-2026}}
+\author{John Aitken\\
+Department of Chemistry, University of Florida\\
+\texttt{j.aitken@ufl.edu}}
+\date{January 11, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dynamics simulation project during the winter break period. The primary accomplishment is the completion and rigorous analysis of a 10 ns production trajectory for the BiOx+2 system (bidentate oxalate with Mn(II)). \textbf{Key finding:} The active site lid remains fully open throughout the simulation (Glu162-Mn = 11.5~\AA, 100\% open fraction), suggesting that lid closure may be controlled by Mn oxidation state or require longer timescales to observe. Comprehensive analysis including block averaging, correlation analysis, and literature cross-referencing confirms simulation convergence and validates the MCPB.py force field parameterization.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%======================================================================
+\section{Executive Summary}
+%======================================================================
+
+\subsection{Major Accomplishments}
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Completed 10 ns BiOx+2 production simulation}
+    \begin{itemize}
+        \item Stable trajectory with no force field issues
+        \item 175 ns/day performance on HiPerGator GPU nodes
+        \item Full cpptraj analysis pipeline executed
+    \end{itemize}
+
+    \item \textbf{Comprehensive trajectory analysis}
+    \begin{itemize}
+        \item Structural stability (RMSD = 1.98 $\pm$ 0.24~\AA)
+        \item Mn1 coordination integrity (0 dissociation events)
+        \item Oxalate binding mode (asymmetric bidentate, 91.5\%)
+        \item \textbf{Lid dynamics: 100\% open throughout 10 ns}
+    \end{itemize}
+
+    \item \textbf{Statistical validation}
+    \begin{itemize}
+        \item Block averaging confirms convergence
+        \item Correlation analysis identifies coupled motions
+        \item Unimodal Glu162-Mn distribution (not transitioning)
+    \end{itemize}
+
+    \item \textbf{Force field parameter analysis}
+    \begin{itemize}
+        \item MCPB.py parameters validated against production trajectory
+        \item k $<$ 35 kcal/mol$\cdot$\AA$^2$ threshold confirmed for stability
+        \item Seminario method produces appropriate force constants
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Key Scientific Finding}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{The active site lid remains FULLY OPEN throughout the 10 ns simulation}\\
+\vspace{0.5em}
+Glu162-Mn = 11.5 $\pm$ 0.5~\AA~$|$~Open fraction: 100\%~$|$~Lid closure events: 0
+}}
+\end{center}
+
+This finding has significant mechanistic implications:
+\begin{itemize}
+    \item Glu162 is the essential proton donor (E162A mutation eliminates activity)
+    \item At 11.5~\AA, direct proton transfer to Mn1 is geometrically impossible
+    \item The open conformation may represent a ``resting state'' in the Mn(II) oxidation state
+    \item Lid closure may be triggered by O$_2$ binding or Mn oxidation to Mn(III)
+\end{itemize}
+
+%======================================================================
+\section{BiOx+2 10 ns Production Analysis}
+%======================================================================
+
+\subsection{Simulation Parameters}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+System & BiOx+2 (bidentate oxalate, Mn(II)) \\
+PDB origin & 5VG3 \\
+Topology & 5vg3\_solv.prmtop \\
+Total atoms & 63,287 \\
+Water molecules & 19,079 (TIP3P) \\
+Ions & 9 Cl$^-$ \\
+Temperature & 300 K (Langevin) \\
+Pressure & 1 atm (MC barostat) \\
+Timestep & 2 fs \\
+Production length & 10 ns (5,000,000 steps) \\
+Saved frames & 1,000 (10 ps/frame) \\
+GPU performance & 175 ns/day \\
+\bottomrule
+\end{tabular}
+\caption{Simulation parameters for BiOx+2 production run.}
+\end{table}
+
+\subsection{Structural Stability}
+
+The backbone C$\alpha$ RMSD (Figure~\ref{fig:rmsd}) shows stable behavior throughout the trajectory:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Mean RMSD & 1.98 $\pm$ 0.24~\AA \\
+Range & 1.28 -- 2.64~\AA \\
+Drift & +0.056~\AA/ns \\
+Early ($<$1 ns) mean & 1.62~\AA \\
+Late ($>$1 ns) mean & 2.02~\AA \\
+\bottomrule
+\end{tabular}
+\caption{RMSD statistics for 10 ns production trajectory.}
+\end{table}
+
+The small positive drift reflects minor conformational adjustment but remains well within acceptable limits for enzyme simulations. The structure did not unfold or undergo major conformational changes.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_rmsd.png}
+\caption{C$\alpha$ RMSD time series and distribution for 10 ns BiOx+2 production. Left: Time series with 50-frame running average (red). Right: Histogram showing unimodal distribution centered at $\sim$2~\AA.}
+\label{fig:rmsd}
+\end{figure}
+
+\subsection{Mn1 Coordination Integrity}
+
+The MCPB.py-parameterized Mn1 coordination sphere remained intact throughout the simulation (Figure~\ref{fig:mn1coord}):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrl}
+\toprule
+\textbf{Ligand} & \textbf{Mean (\AA)} & \textbf{Std (\AA)} & \textbf{Dissociation Events} \\
+\midrule
+His95-NE2 & 2.39 & 0.12 & 0 \\
+His97-NE2 & 2.26 & 0.09 & 0 \\
+His140-NE2 & 2.24 & 0.09 & 0 \\
+Glu101-OE1 & 2.06 & 0.08 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Mn1-ligand distances from 10 ns production. All values within expected MCPB.py $r_0$ ranges.}
+\end{table}
+
+This validates the Seminario method force constants for this system (mean k = 29.7 kcal/mol$\cdot$\AA$^2$).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_mn1_coordination.png}
+\caption{Mn1-ligand distance time series for all four protein ligands. Green shading indicates expected $r_0$ ranges from MCPB.py. Red dashed line shows 3.0~\AA\ dissociation threshold---never crossed.}
+\label{fig:mn1coord}
+\end{figure}
+
+\subsection{Oxalate Binding Mode}
+
+The oxalate substrate maintains asymmetric bidentate ($\kappa$O,$\kappa$O') coordination throughout (Figure~\ref{fig:oxalate}):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrl}
+\toprule
+\textbf{Oxygen} & \textbf{Mean Distance (\AA)} & \textbf{Classification} \\
+\midrule
+OZ & 2.09 $\pm$ 0.07 & Coordinating (tight) \\
+OX & 2.35 $\pm$ 0.11 & Coordinating (loose) \\
+OY & 4.05 $\pm$ 0.09 & Non-coordinating \\
+\bottomrule
+\end{tabular}
+\caption{Mn1-oxalate oxygen distances. Bidentate fraction = 91.5\%.}
+\end{table}
+
+The asymmetric binding is consistent with:
+\begin{itemize}
+    \item $^{13}$C-ENDOR spectroscopy (Zhu et al., 2024): Confirmed bidentate binding in OxDC
+    \item DFT calculations: Bidentate is 4.7 kcal/mol more stable than monodentate
+    \item Our previous force constant analysis: The loose OX provides a ``shock absorber'' effect
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_oxalate_binding.png}
+\caption{Oxalate binding analysis. Left: Distance time series. Center: Distance distributions. Right: OZ vs OX 2D scatter colored by time, showing stable asymmetric bidentate region.}
+\label{fig:oxalate}
+\end{figure}
+
+\subsection{Lid Dynamics: The Key Finding}
+
+\textbf{The active site lid remains fully open throughout the entire 10 ns simulation.}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Glu162 CD - Mn1 distance & 11.54 $\pm$ 0.54~\AA \\
+Glu162 OE1 - Mn1 distance & 11.73 $\pm$ 0.73~\AA \\
+Glu162 OE2 - Mn1 distance & 12.28 $\pm$ 0.63~\AA \\
+\midrule
+Closed fraction ($<$4~\AA) & 0.0\% \\
+Intermediate fraction (4-8~\AA) & 0.0\% \\
+\textbf{Open fraction ($>$8~\AA)} & \textbf{100.0\%} \\
+\midrule
+Transitions across 8~\AA & 0 \\
+Distribution & Unimodal (p = 0.94) \\
+\bottomrule
+\end{tabular}
+\caption{Lid dynamics analysis. The lid never approaches the closed conformation.}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_lid_dynamics.png}
+\caption{Lid dynamics analysis. Top left: Glu162-Mn1 distance time series showing persistent open state. Top right: Distance histogram with state thresholds. Bottom left: OE1/OE2 comparison. Bottom right: Block averages confirming consistency across 2 ns windows.}
+\label{fig:lid}
+\end{figure}
+
+\subsubsection{Comparison to Crystal Structures}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrl}
+\toprule
+\textbf{Structure} & \textbf{Glu162-Mn (\AA)} & \textbf{State} \\
+\midrule
+5VG3 (closed, substrate-bound) & $\sim$2.4 & Closed \\
+1J58 (apo, open) & $\sim$12 & Open \\
+\textbf{Our simulation (BiOx+2)} & \textbf{11.5} & \textbf{Open} \\
+\bottomrule
+\end{tabular}
+\caption{Glu162-Mn distance comparison with crystallographic data.}
+\end{table}
+
+Despite starting from the closed crystal structure (5VG3), the lid opened during equilibration and remained open throughout production. The simulation Glu162-Mn distance matches the apo/open crystal structure (1J58).
+
+\subsubsection{Mechanistic Implications}
+
+Glu162 is essential for catalysis---the E162A mutation eliminates decarboxylase activity (Saylor et al., 2008). Glu162 serves as the proton donor in the proposed PCET mechanism, requiring close proximity to Mn1.
+
+At 11.5~\AA, direct proton transfer is impossible. This suggests:
+
+\begin{enumerate}
+    \item \textbf{Lid closure is a triggered event} -- May require O$_2$ binding, substrate decarboxylation, or Mn oxidation
+    \item \textbf{Mn(II) favors the open state} -- The Mn(III) oxidation state may stabilize the closed conformation
+    \item \textbf{10 ns may be insufficient} -- Loop opening/closing events typically occur on $\mu$s timescales
+\end{enumerate}
+
+\subsection{Flexibility Analysis}
+
+Per-residue RMSF analysis reveals that the lid region (160-166) is \textbf{less flexible than average}:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Region} & \textbf{Mean RMSF (\AA)} \\
+\midrule
+Global average & 1.03 \\
+\textbf{Lid (160-166)} & \textbf{0.71} \\
+Active site (His95, 97, 140, Glu101) & 0.52-0.59 \\
+\bottomrule
+\end{tabular}
+\caption{Regional RMSF comparison.}
+\end{table}
+
+This indicates that the open lid conformation is \textbf{stabilized}, not fluctuating. The open state appears to be a genuine energy minimum in the Mn(II) oxidation state.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_rmsf.png}
+\caption{Per-residue RMSF analysis. Top: Full protein profile with lid region highlighted in red. Bottom: Lid residue RMSF bar chart.}
+\label{fig:rmsf}
+\end{figure}
+
+\subsection{Convergence Assessment}
+
+Block averaging (5 blocks of 2 ns each) confirms simulation convergence:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrrrrrr}
+\toprule
+\textbf{Metric} & \textbf{0-2 ns} & \textbf{2-4 ns} & \textbf{4-6 ns} & \textbf{6-8 ns} & \textbf{8-10 ns} & \textbf{SEM} \\
+\midrule
+RMSD (\AA) & 1.75 & 1.84 & 1.99 & 2.23 & 2.11 & 0.08 \\
+Glu162-Mn (\AA) & 11.34 & 11.72 & 11.40 & 11.66 & 11.58 & 0.07 \\
+Mn1-His95 (\AA) & 2.39 & 2.41 & 2.38 & 2.37 & 2.39 & 0.01 \\
+Mn1-Glu101 (\AA) & 2.06 & 2.06 & 2.05 & 2.06 & 2.06 & 0.00 \\
+\bottomrule
+\end{tabular}
+\caption{Block averages for key metrics. All SEM values $<$10\% of mean, indicating convergence.}
+\end{table}
+
+\subsection{Correlation Analysis}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrl}
+\toprule
+\textbf{Correlation} & \textbf{r} & \textbf{Interpretation} \\
+\midrule
+RMSD vs Glu162-Mn & +0.08 & Weak -- lid independent of global motion \\
+RMSD vs Lid RMSD & +0.08 & Weak -- lid fluctuations independent \\
+Lid RMSD vs Glu162-Mn & +0.39 & Moderate -- lid motion coupled to position \\
+\bottomrule
+\end{tabular}
+\caption{Pearson correlation coefficients between key metrics.}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_correlations.png}
+\caption{Correlation scatter plots for key structural metrics.}
+\label{fig:corr}
+\end{figure}
+
+%======================================================================
+\section{Summary of All Generated Figures}
+%======================================================================
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Figure} & \textbf{Content} & \textbf{Key Finding} \\
+\midrule
+prod\_rmsd.png & Structural stability & RMSD = 1.98~\AA, stable \\
+prod\_mn1\_coordination.png & Mn1-ligand distances & 0 dissociations \\
+prod\_oxalate\_binding.png & Oxalate binding & 91.5\% bidentate \\
+prod\_lid\_dynamics.png & Lid position & 100\% open \\
+prod\_rmsf.png & Flexibility & Lid stabilized \\
+prod\_correlations.png & Metric correlations & Lid independent \\
+\midrule
+eq\_rmsd\_ca.png & Equilibration RMSD & Stable eq \\
+eq\_rmsf\_ca.png & Equilibration RMSF & Normal profile \\
+eq\_energy.png & Energy components & Stable energetics \\
+\midrule
+bond\_energy\_distribution.png & System comparison & BiOx+2 most stable \\
+force\_constant\_analysis.png & k values & BiOx+2 lowest \\
+oxidation\_state\_analysis.png & Mn(II) vs Mn(III) & Mn(III) problematic \\
+substrate\_coordination.png & Oxalate params & Asymmetric bidentate \\
+distance\_vs\_forceconstant.png & r$_0$ vs k & Flexibility = stability \\
+\bottomrule
+\end{tabular}
+\caption{Complete figure inventory with key findings.}
+\end{table}
+
+%======================================================================
+\section{Conclusions}
+%======================================================================
+
+\subsection{What We Have Established}
+
+\begin{enumerate}
+    \item \textbf{BiOx+2 is a stable, well-behaved system}
+    \begin{itemize}
+        \item MCPB.py parameterization produces appropriate force constants
+        \item 10 ns production trajectory is converged
+        \item Can serve as reference for comparison with other systems
+    \end{itemize}
+
+    \item \textbf{Oxalate binding is persistent and asymmetric}
+    \begin{itemize}
+        \item Consistent with experimental ENDOR data
+        \item Bidentate mode maintained 91.5\% of simulation
+        \item Asymmetry provides mechanical flexibility
+    \end{itemize}
+
+    \item \textbf{The lid remains open in Mn(II) state}
+    \begin{itemize}
+        \item 100\% open fraction, 0 transitions
+        \item Glu162-Mn = 11.5~\AA\ matches apo crystal structure
+        \item Open state is stabilized (low lid RMSF)
+    \end{itemize}
+\end{enumerate}
+
+\subsection{What Remains Unknown}
+
+\begin{enumerate}
+    \item \textbf{Does Mn oxidation state control lid dynamics?}
+    \begin{itemize}
+        \item Need to analyze 1Wat+3 (Mn(III)) production
+        \item May explain mechanistic coupling between redox and conformational change
+    \end{itemize}
+
+    \item \textbf{Is 10 ns sufficient to observe lid closure?}
+    \begin{itemize}
+        \item Loop motions typically occur on $\mu$s timescales
+        \item Extended simulations (100+ ns) may be necessary
+    \end{itemize}
+
+    \item \textbf{What triggers lid closure?}
+    \begin{itemize}
+        \item O$_2$ binding?
+        \item Substrate decarboxylation?
+        \item Mn oxidation?
+    \end{itemize}
+\end{enumerate}
+
+%======================================================================
+\section{Next Steps}
+%======================================================================
+
+\subsection{Immediate Priorities (Next 2 Weeks)}
+
+\begin{enumerate}
+    \item \textbf{Extend BiOx+2 to 100 ns}
+    \begin{itemize}
+        \item Continue from current restart file
+        \item Estimate: 100 ns / 175 ns/day $\approx$ 14 hours on GPU
+        \item Goal: Sample potential lid closure events on longer timescales
+    \end{itemize}
+
+    \item \textbf{Analyze 1Wat+3 (Mn(III)) production}
+    \begin{itemize}
+        \item If production trajectory available, apply same analysis pipeline
+        \item Key question: Is lid closed in Mn(III) state?
+    \end{itemize}
+
+    \item \textbf{Run replica simulations}
+    \begin{itemize}
+        \item 3 independent 10 ns trajectories with different starting velocities
+        \item Improve statistical power for lid dynamics analysis
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Medium-Term Goals (Spring Semester)}
+
+\begin{enumerate}
+    \item \textbf{Enhanced sampling methods}
+    \begin{itemize}
+        \item Metadynamics with Glu162-Mn distance as collective variable
+        \item Estimate free energy barrier for lid closure
+    \end{itemize}
+
+    \item \textbf{Comparative analysis}
+    \begin{itemize}
+        \item BiOx+2 (Mn(II), open) vs 1Wat+3 (Mn(III), ??)
+        \item Determine oxidation state effect on lid equilibrium
+    \end{itemize}
+
+    \item \textbf{Publication preparation}
+    \begin{itemize}
+        \item Draft manuscript on lid dynamics and oxidation state coupling
+        \item Target: J. Phys. Chem. B or J. Chem. Inf. Model.
+    \end{itemize}
+\end{enumerate}
+
+%======================================================================
+\section{Files and Repository}
+%======================================================================
+
+All analysis files are located in:
+
+\begin{verbatim}
+oxdc-md-fall25/
+├── systems/BiOx+2/
+│   ├── PRODUCTION_ANALYSIS_REPORT.md    # Full scientific report
+│   ├── analysis_scripts/
+│   │   └── analyze_production.py         # Main analysis script
+│   └── analysis_results/
+│       ├── figures/                       # All generated plots
+│       └── *.dat                          # Raw cpptraj output
+├── presentation/
+│   └── oxdc_md_analysis_with_figures.tex  # Updated beamer slides
+└── reports/
+    └── pi_progress_report_jan2026.tex     # This document
+\end{verbatim}
+
+Git branch: \texttt{claude/oxdc-repo-prep-EjqCu}
+
+%======================================================================
+\section*{Acknowledgments}
+%======================================================================
+
+This work was supported by the University of Florida Department of Chemistry and utilized the HiPerGator computing cluster.
+
+%======================================================================
+\section*{References}
+%======================================================================
+
+\begin{enumerate}
+    \item Just VJ et al. (2004) A closed conformation of \textit{B. subtilis} oxalate decarboxylase. \textit{J Biol Chem} 279:19867-75.
+
+    \item Saylor BT et al. (2008) The identity of the active site and importance of lid conformations. \textit{Arch Biochem Biophys} 472:114-22.
+
+    \item Zhu J et al. (2024) Bidentate Substrate Binding Mode in Oxalate Decarboxylase. \textit{Molecules} 29:4414.
+
+    \item Li P \& Merz KM (2016) MCPB.py: A Python Based Metal Center Parameter Builder. \textit{J Chem Inf Model} 56:599-604.
+\end{enumerate}
+
+\end{document}

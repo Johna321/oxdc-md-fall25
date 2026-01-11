@@ -29,7 +29,7 @@
 \subtitle{Understanding Simulation Stability Through Coordination Chemistry}
 \author[J. Aitken]{John Aitken}
 \institute[UF]{Department of Chemistry\\University of Florida}
-\date{Fall 2025}
+\date{January 2026}
 
 \begin{document}
 
@@ -527,6 +527,258 @@ BiOx+2 = normal; 1Wat+3 = Mn(III) outlier
 \end{frame}
 
 %--------------------------------------------------------------
+\section{BiOx+2 Production Analysis (10 ns)}
+%--------------------------------------------------------------
+
+\begin{frame}{BiOx+2 10 ns Production: Overview}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+\textbf{Simulation Details:}
+\begin{itemize}
+    \item 10 ns production (1000 frames)
+    \item 175 ns/day on GPU
+    \item Stable throughout
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Key Metrics:}
+\begin{table}
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+RMSD & $1.98 \pm 0.24$ \angstrom \\
+Mn1 dissociations & 0 \\
+Bidentate fraction & 91.5\% \\
+\textbf{Lid open} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\begin{column}{0.55\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{../systems/BiOx+2/analysis_results/figures/prod_rmsd.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+%--------------------------------------------------------------
+\begin{frame}{KEY FINDING: Lid Remains Fully Open}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+\textbf{Glu162-Mn1 Distance:}
+\begin{itemize}
+    \item Mean: \textbf{11.5 $\pm$ 0.5 \angstrom}
+    \item Open fraction: \textbf{100\%}
+    \item Closed fraction: 0\%
+    \item Transitions: 0
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{State Thresholds:}
+\begin{itemize}
+    \item Closed: $<$ 4 \angstrom
+    \item Intermediate: 4-8 \angstrom
+    \item Open: $>$ 8 \angstrom
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Crystal structures:}
+\begin{itemize}
+    \item 5VG3 (closed): $\sim$2.4 \angstrom
+    \item 1J58 (apo/open): $\sim$12 \angstrom
+\end{itemize}
+\end{column}
+\begin{column}{0.55\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../systems/BiOx+2/analysis_results/figures/prod_lid_dynamics.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+%--------------------------------------------------------------
+\begin{frame}{Mechanistic Implications of Open Lid}
+\begin{block}{The Problem}
+Glu162 is the essential proton donor (E162A = no activity). At 11.5 \angstrom, direct proton transfer to Mn is \textbf{impossible}.
+\end{block}
+
+\vspace{0.5em}
+\textbf{Three Possible Explanations:}
+
+\begin{enumerate}
+    \item \textbf{Lid closure is a triggered event}
+    \begin{itemize}
+        \item May require O$_2$ binding or Mn oxidation
+        \item Not spontaneous in Mn(II) state
+    \end{itemize}
+
+    \item \textbf{Mn(II) favors the open conformation}
+    \begin{itemize}
+        \item Comparison with Mn(III) needed
+        \item Oxidation state may control lid dynamics
+    \end{itemize}
+
+    \item \textbf{10 ns is too short}
+    \begin{itemize}
+        \item Loop motions often occur on $\mu$s timescales
+        \item Extended simulations (100+ ns) needed
+    \end{itemize}
+\end{enumerate}
+
+\begin{alertblock}{Critical Next Step}
+Compare with 1Wat+3 (Mn(III)) to determine if oxidation state modulates lid position.
+\end{alertblock}
+\end{frame}
+
+%--------------------------------------------------------------
+\begin{frame}{Mn1 Coordination Remains Intact}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\textbf{Ligand Distances:}
+\begin{table}
+\centering
+\small
+\begin{tabular}{lr}
+\toprule
+\textbf{Ligand} & \textbf{Mean (\angstrom)} \\
+\midrule
+His95 & $2.39 \pm 0.12$ \\
+His97 & $2.26 \pm 0.09$ \\
+His140 & $2.24 \pm 0.09$ \\
+Glu101 & $2.06 \pm 0.08$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.5em}
+\textbf{Force Field Validation:}
+\begin{itemize}
+    \item Zero dissociation events
+    \item All within expected $r_0$
+    \item MCPB.py parameters stable
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../systems/BiOx+2/analysis_results/figures/prod_mn1_coordination.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+%--------------------------------------------------------------
+\begin{frame}{Oxalate Binding: Asymmetric Bidentate}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\textbf{Mn1-Oxalate Distances:}
+\begin{table}
+\centering
+\small
+\begin{tabular}{lrl}
+\toprule
+\textbf{O} & \textbf{Mean} & \textbf{Status} \\
+\midrule
+OZ & 2.09 \angstrom & Tight \\
+OX & 2.35 \angstrom & Loose \\
+OY & 4.05 \angstrom & Non-coord \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.5em}
+\textbf{Binding Mode:}
+\begin{itemize}
+    \item \textbf{Asymmetric $\kappa$O,$\kappa$O'}
+    \item 91.5\% bidentate throughout
+    \item Consistent with ENDOR data
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{``Shock Absorber'' Effect:}
+\begin{itemize}
+    \item Loose OX accommodates motion
+    \item Explains BiOx+2 stability
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../systems/BiOx+2/analysis_results/figures/prod_oxalate_binding.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+%--------------------------------------------------------------
+\begin{frame}{Flexibility Profile \& Convergence}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\textbf{Key RMSF Values:}
+\begin{itemize}
+    \item Global: 1.03 \angstrom
+    \item Lid (160-166): \textbf{0.71 \angstrom}
+    \item Active site: 0.52-0.59 \angstrom
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Interpretation:}
+
+The lid is \textbf{less flexible} than average $\rightarrow$ the open state is \textbf{stabilized}, not fluctuating.
+
+\vspace{0.5em}
+\textbf{Block Averaging:}
+\begin{itemize}
+    \item 5 blocks of 2 ns each
+    \item All metrics converged
+    \item SEM $<$ 10\% of mean
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{../systems/BiOx+2/analysis_results/figures/prod_rmsf.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+%--------------------------------------------------------------
+\begin{frame}{BiOx+2 Production: Summary}
+\begin{center}
+\Large
+\textbf{The lid remains FULLY OPEN throughout 10 ns}
+
+\vspace{0.5em}
+\normalsize
+(Glu162-Mn = 11.5 \angstrom, 100\% open, 0 transitions)
+\end{center}
+
+\vspace{1em}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{What we learned:}
+\begin{itemize}
+    \item[$\checkmark$] MCPB.py parameters stable
+    \item[$\checkmark$] Oxalate binding persistent
+    \item[$\checkmark$] Simulation well-converged
+    \item[$\checkmark$] Open lid is stabilized state
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{What we still need:}
+\begin{itemize}
+    \item Compare Mn(III) lid dynamics
+    \item Extend to 100+ ns
+    \item Run replica simulations
+    \item Investigate lid closure triggers
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{alertblock}{Key Scientific Question}
+Does Mn oxidation state (II vs III) control lid conformation?
+\end{alertblock}
+\end{frame}
+
+%--------------------------------------------------------------
 \section{Conclusions}
 %--------------------------------------------------------------
 
@@ -654,6 +906,9 @@ $k_{avg} > 60$\\
 \begin{center}
 \small
 11 analysis projects $\cdot$ 15 visualizations $\cdot$ Interactive web demo
+
+\vspace{0.5em}
+\textbf{NEW:} 10 ns BiOx+2 production confirms lid remains \textbf{OPEN} (100\%)
 \end{center}
 \end{frame}
 
