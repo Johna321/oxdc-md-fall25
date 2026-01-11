@@ -1,0 +1,13 @@
+#Acceptor                DonorH           Donor   Frames         Frac      AvgDist       AvgAng
+SER_161@O             SER_164@H       SER_164@N      435       0.4350       2.8836     153.7857
+GLH_162@O           THR_165@HG1     THR_165@OG1      243       0.2430       2.8378     158.5931
+ASN_163@O             THR_165@H       THR_165@N      180       0.1800       2.8776     148.2113
+SER_161@OG            ASN_163@H       ASN_163@N       96       0.0960       2.9208     161.0755
+SER_161@OG           SER_164@HG      SER_164@OG       34       0.0340       2.8036     162.6106
+SER_161@OG         ASN_163@HD21     ASN_163@ND2       22       0.0220       2.9089     151.1437
+THR_165@O           THR_165@HG1     THR_165@OG1       19       0.0190       2.8225     142.1076
+SER_164@OG            SER_161@H       SER_161@N        8       0.0080       2.8722     144.9464
+SER_161@OG            SER_164@H       SER_164@N        6       0.0060       2.8789     158.4170
+SER_164@O            SER_164@HG      SER_164@OG        5       0.0050       2.6906     141.1918
+SER_164@OG           SER_161@HG      SER_161@OG        4       0.0040       2.8449     155.0744
+ASN_163@O          ASN_163@HD21     ASN_163@ND2        3       0.0030       2.8173     147.8209

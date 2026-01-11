@@ -1,0 +1,146 @@
+# Full Production Analysis for BiOx+2
+# 10 ns production trajectory (prod.nc, 1000 frames)
+#
+# VERIFIED Atom indices (cpptraj 1-indexed):
+#   Mn1 (N-terminal, catalytic, MCPB.py): atom 6033, residue MN1 (383), charge -0.15
+#   Mn2 (C-terminal, Mn2+ ion): atom 6034, residue MN (384), charge +2.0
+#   Oxalate: residue OX1 (385), atoms 6035-6041
+#     OZ: 6037, OY: 6038, OX: 6039
+#
+# Mn1 coordination from mn_bonds.csv (add +1 for cpptraj):
+#   His95 NE2 @1520, His97 NE2 @1561, His140 NE2 @2231
+#   Glu101 OE1 @1624
+#   Oxalate: OZ @6037, OY @6038
+#
+# Usage: cpptraj -p 5vg3_solv.prmtop -i full_analysis.in
+
+parm 5vg3_solv.prmtop
+
+# Load production trajectory
+trajin prod.nc
+
+# Image and center on protein
+autoimage
+center :1-385 mass origin
+
+# Reference for RMSD calculations  
+reference 5vg3_solv.inpcrd [ref]
+
+# ============================================================
+# 1. OVERALL STRUCTURAL STABILITY (RMSD/RMSF)
+# ============================================================
+
+# Backbone RMSD vs initial structure
+rms RMSD_bb @CA,C,N reference out analysis_results/rmsd_backbone.dat
+
+# CA-only RMSD 
+rms RMSD_ca @CA reference out analysis_results/rmsd_ca.dat
+
+# Per-residue RMSF (flexibility)
+rmsf RMSF_ca @CA out analysis_results/rmsf_ca.dat byres
+
+# B-factors
+atomicfluct BFACTORS @CA out analysis_results/bfactors.dat byres bfactor
+
+# ============================================================
+# 2. MN1 COORDINATION GEOMETRY (Catalytic Site)
+# ============================================================
+
+# Mn1-His distances (3 histidines: 95, 97, 140)
+distance Mn1_His95 @6033 :95@NE2 out analysis_results/mn1_coordination.dat
+distance Mn1_His97 @6033 :97@NE2 out analysis_results/mn1_coordination.dat
+distance Mn1_His140 @6033 :140@NE2 out analysis_results/mn1_coordination.dat
+
+# Mn1-Glu101 distance
+distance Mn1_Glu101 @6033 :101@OE1 out analysis_results/mn1_coordination.dat
+
+# Mn1-Oxalate distances (bidentate binding)
+distance Mn1_Ox_OZ @6033 @6037 out analysis_results/mn1_oxalate.dat
+distance Mn1_Ox_OY @6033 @6038 out analysis_results/mn1_oxalate.dat
+distance Mn1_Ox_OX @6033 @6039 out analysis_results/mn1_oxalate.dat
+
+# ============================================================
+# 2b. MN2 (Structural Mn2+ ion)
+# ============================================================
+
+# Mn2 is a simple Mn2+ - check distance to nearby His273
+distance Mn2_His273 @6034 :273@NE2 out analysis_results/mn2_coordination.dat
+distance Mn2_Glu280 @6034 :280@OE1 out analysis_results/mn2_coordination.dat
+
+# Mn-Mn distance (inter-site)
+distance Mn_Mn @6033 @6034 out analysis_results/mn_mn_distance.dat
+
+# ============================================================
+# 3. LID DYNAMICS (residues 160-166)
+# ============================================================
+
+# Lid RMSD vs reference
+rms LID_RMSD :160-166@CA reference out analysis_results/lid_rmsd.dat
+
+# Lid RMSF
+rmsf LID_RMSF :160-166@CA out analysis_results/lid_rmsf.dat byres
+
+# Key: Glu162 (GLH) to Mn1 distance - monitors open/closed state
+distance Glu162_CD_Mn1 @6033 :162@CD out analysis_results/glu162_mn_distance.dat
+distance Glu162_OE1_Mn1 @6033 :162@OE1 out analysis_results/glu162_mn_distance.dat
+distance Glu162_OE2_Mn1 @6033 :162@OE2 out analysis_results/glu162_mn_distance.dat
+
+# Lid backbone dihedrals
+multidihedral PHI_LID phi resrange 160-166 out analysis_results/lid_phi.dat
+multidihedral PSI_LID psi resrange 160-166 out analysis_results/lid_psi.dat
+
+# Lid H-bonds
+hbond LID_hb :160-166 out analysis_results/lid_hbonds.dat avgout analysis_results/lid_hbond_avg.dat
+
+# Lid secondary structure (3_10 helix in closed state)
+secstruct LID_SS :160-166 out analysis_results/lid_secstruct.dat sumout analysis_results/lid_ss_summary.dat
+
+# Lid solvent accessibility
+surf LID_SASA :160-166 out analysis_results/lid_sasa.dat
+
+# Water shell around Mn1 (active site accessibility)
+watershell Mn1_water @6033 out analysis_results/mn1_watershell.dat lower 3.5 upper 5.0
+
+# ============================================================
+# 4. TRYPTOPHAN PAIR (W96/W274) - Electron Transfer Pathway
+# ============================================================
+
+# Inter-ring distance (pi-stacking)
+distance TRP_stack :96@CG :274@CG out analysis_results/trp_stack.dat
+
+# Mn to Trp distances (electron hop pathway)
+distance Mn1_W96 @6033 :96@CG out analysis_results/mn_trp.dat
+distance Mn1_W274 @6033 :274@CG out analysis_results/mn_trp.dat
+distance Mn2_W96 @6034 :96@CG out analysis_results/mn_trp.dat
+distance Mn2_W274 @6034 :274@CG out analysis_results/mn_trp.dat
+
+# Ring orientation (parallel = ~0 or 180 deg)
+dihedral TRP_orient :96@CD2 :96@CG :274@CG :274@CD2 out analysis_results/trp_orient.dat
+
+# Chi angles (side chain rotamers)
+dihedral W96_chi1 :96@N :96@CA :96@CB :96@CG out analysis_results/trp_chi.dat
+dihedral W274_chi1 :274@N :274@CA :274@CB :274@CG out analysis_results/trp_chi.dat
+
+# ============================================================
+# 5. RADIUS OF GYRATION (protein compactness)
+# ============================================================
+
+radgyr RoG :1-385@CA out analysis_results/radgyr.dat
+
+# ============================================================
+# 6. OVERALL HYDROGEN BONDS
+# ============================================================
+
+hbond ALL_hb :1-385 out analysis_results/protein_hbonds.dat avgout analysis_results/hbond_avg.dat
+
+run
+
+# ============================================================
+# Expected values:
+#   Mn1-His: 2.1-2.4 A
+#   Mn1-Glu: 1.9-2.2 A  
+#   Mn1-Ox: 2.0-2.5 A
+#   Glu162-Mn1: <4 A (closed) or >6 A (open)
+#   W96-W274: 3.5-4.5 A (pi-stacked)
+# ============================================================
+

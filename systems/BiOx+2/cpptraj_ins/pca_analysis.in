@@ -1,0 +1,52 @@
+# PCA Analysis for BiOx+2
+# Principal Component Analysis to identify dominant motions
+#
+# Usage: cpptraj -p 5vg3_solv.prmtop -i pca_analysis.in
+
+parm 5vg3_solv.prmtop
+
+# Load production trajectory
+trajin prod.nc
+
+# Strip waters and ions
+strip :WAT,Cl-,Na+
+
+# RMS fit to average structure
+rms first @CA
+
+# ============================================================
+# FULL PROTEIN PCA (CA atoms)
+# ============================================================
+
+# Covariance matrix
+matrix covar name FULL_COV @CA out analysis_results/full_covar.dat
+
+# Diagonalize - get top 20 eigenvectors
+diagmatrix FULL_COV name FULL_EVEC out analysis_results/full_evecs.dat vecs 20
+
+# Project trajectory onto first 10 PCs
+projection FULL_PROJ modes FULL_EVEC @CA out analysis_results/full_proj.dat beg 1 end 10
+
+# ============================================================
+# LID-FOCUSED PCA (residues 160-166)
+# ============================================================
+
+matrix covar name LID_COV :160-166@CA out analysis_results/lid_covar.dat
+
+diagmatrix LID_COV name LID_EVEC out analysis_results/lid_evecs.dat vecs 10
+
+projection LID_PROJ modes LID_EVEC :160-166@CA out analysis_results/lid_proj.dat beg 1 end 5
+
+# ============================================================
+# ACTIVE SITE PCA
+# Lid (160-166) + Mn-coordinating residues (95, 97, 101, 140)
+# ============================================================
+
+matrix covar name AS_COV :95,97,101,140,160-166@CA out analysis_results/activesite_covar.dat
+
+diagmatrix AS_COV name AS_EVEC out analysis_results/activesite_evecs.dat vecs 10
+
+projection AS_PROJ modes AS_EVEC :95,97,101,140,160-166@CA out analysis_results/activesite_proj.dat beg 1 end 5
+
+run
+

@@ -7,3 +7,16 @@ __pycache__/
 *.xtc
 *.trr
 fort.*
+
+# MCP server build artifacts
+mcp-hipergator/dist/
+mcp-hipergator/node_modules/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.synctex.gz
