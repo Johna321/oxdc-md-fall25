@@ -37,17 +37,15 @@ const DEFAULT_CONFIG: Config = {
   identityFile: join(homedir(), ".ssh", "id_ed25519_hpg"),
   controlPath: join(homedir(), ".ssh", "sockets", "hpg-%r@%h:%p"),
 
-  projectBase: "/blue/roitberg/john.aitken",
-  scratchBase: "/red/roitberg/john.aitken",
-  orangeBase: "/orange/roitberg/john.aitken",
+  projectBase: "/blue/ax/john.aitken",
 
   connectionTimeout: 30000,
   commandTimeout: 60000,
   longCommandTimeout: 600000,
 
   defaultPartition: "hpg-default",
-  defaultAccount: "roitberg",
-  defaultQos: "roitberg",
+  defaultAccount: "ax",
+  defaultQos: "ax",
 };
 
 export function loadConfig(): Config {

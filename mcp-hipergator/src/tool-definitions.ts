@@ -242,7 +242,7 @@ export const toolDefinitions: Tool[] = [
       properties: {
         systemPath: {
           type: "string",
-          description: "Path to the MD system directory (e.g., /blue/roitberg/.../systems/BiOx+2)",
+          description: "Path to the MD system directory (e.g., /blue/ax/.../systems/BiOx+2)",
         },
       },
       required: ["systemPath"],

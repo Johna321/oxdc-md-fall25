@@ -23,7 +23,7 @@ ssh <gatorlink>@hpg.rc.ufl.edu
 
 ### Step 1.2: Navigate to BiOx+2 System
 ```bash
-cd /blue/roitberg/john.aitken/oxdc-md-fall25/systems/BiOx+2
+cd /blue/ax/john.aitken/oxdc-md-fall25/systems/BiOx+2
 ```
 
 ### Step 1.3: Verify Current State
@@ -114,7 +114,7 @@ cat ../eq2.cpu.mdinfo
 ### Step 2.1: SSH and Navigate
 ```bash
 ssh <gatorlink>@hpg.rc.ufl.edu
-cd /blue/roitberg/john.aitken/oxdc-md-fall25/systems/BiOx+2
+cd /blue/ax/john.aitken/oxdc-md-fall25/systems/BiOx+2
 ```
 
 ### Step 2.2: Confirm eq2 Completed
@@ -198,7 +198,7 @@ tail -20 rmsd_quick.dat
 ### Step 3.1: SSH and Navigate
 ```bash
 ssh <gatorlink>@hpg.rc.ufl.edu
-cd /blue/roitberg/john.aitken/oxdc-md-fall25/systems/BiOx+2
+cd /blue/ax/john.aitken/oxdc-md-fall25/systems/BiOx+2
 ```
 
 ### Step 3.2: Load Modules
@@ -280,13 +280,13 @@ done
 ### Step 3.8: Copy Results to Local Machine
 ```bash
 # On local machine:
-scp -r <gatorlink>@hpg.rc.ufl.edu:/blue/roitberg/john.aitken/oxdc-md-fall25/systems/BiOx+2/analysis_output ./
+scp -r <gatorlink>@hpg.rc.ufl.edu:/home/john.aitken/oxdc-md-fall25/systems/BiOx+2/analysis_output ./
 ```
 
 ### Step 3.9: Backup Trajectory
 ```bash
 # On HiPerGator - copy to orange storage if available
-cp prod.nc /orange/roitberg/john.aitken/oxdc_backups/BiOx+2_prod_10ns.nc 2>/dev/null || echo "Orange not available"
+cp prod.nc /orange/ax/john.aitken/oxdc_backups/BiOx+2_prod_10ns.nc 2>/dev/null || echo "Orange not available"
 ```
 
 ---

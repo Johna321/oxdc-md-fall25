@@ -78,13 +78,13 @@ From [PMC2275070](https://pmc.ncbi.nlm.nih.gov/articles/PMC2275070/):
 
 ### What We Observed
 
-| Metric | Our Value | Literature Interpretation |
-|--------|-----------|---------------------------|
-| Glu162 CD - Mn1 | 11.5 ± 0.5 Å | **OPEN** conformation |
-| Glu162 OE1 - Mn1 | 11.7 ± 0.7 Å | **OPEN** conformation |
-| Glu162 OE2 - Mn1 | 12.3 ± 0.6 Å | **OPEN** conformation |
-| Open fraction | 100% | Persistent open state |
-| Transitions to closed | 0 | No lid closure events |
+| Metric                | Our Value    | Literature Interpretation |
+| --------------------- | ------------ | ------------------------- |
+| Glu162 CD - Mn1       | 11.5 ± 0.5 Å | **OPEN** conformation     |
+| Glu162 OE1 - Mn1      | 11.7 ± 0.7 Å | **OPEN** conformation     |
+| Glu162 OE2 - Mn1      | 12.3 ± 0.6 Å | **OPEN** conformation     |
+| Open fraction         | 100%         | Persistent open state     |
+| Transitions to closed | 0            | No lid closure events     |
 
 ### Expected for "Closed" Conformation
 

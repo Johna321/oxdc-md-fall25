@@ -242,7 +242,7 @@ function validatePath(path: string, allowedBase: string): boolean {
 }
 
 // Only allow operations within project directory
-const PROJECT_BASE = '/blue/roitberg/john.aitken/oxdc-md-fall25';
+const PROJECT_BASE = '/blue/ax/john.aitken/oxdc-md-fall25';
 if (!validatePath(targetPath, PROJECT_BASE)) {
   throw new Error('Path traversal detected');
 }

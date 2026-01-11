@@ -32,7 +32,7 @@ oxdc-md-fall25/
 ssh john.aitken@hpg.rc.ufl.edu
 
 # 2. Navigate to BiOx+2
-cd /blue/roitberg/john.aitken/oxdc-md-fall25/systems/BiOx+2
+cd /home/john.aitken/oxdc-md-fall25/systems/BiOx+2
 
 # 3. Submit equilibration (if not complete)
 cd slurm && sbatch run_eq_cpu_mc.sbatch
@@ -237,8 +237,7 @@ UNSTABLE ZONE:   k_avg > 60               (1Wat+3)
 ## Author and Context
 
 **Research conducted**: Fall 2025 - Winter 2026
-**PI**: Roitberg Lab, University of Florida
-**Related work**: Alex Angerhofer Lab (EPR studies of OxDC)
+**PI**: Angerhofer Lab, University of Florida
 
 ---
 

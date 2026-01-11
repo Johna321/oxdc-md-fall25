@@ -86,7 +86,7 @@ Create a config file at `~/.mcp-hipergator.json`:
 Or use environment variables:
 ```bash
 export HPG_USER="john.aitken"
-export HPG_PROJECT_BASE="/blue/roitberg/john.aitken"
+export HPG_PROJECT_BASE="/blue/ax/john.aitken"
 ```
 
 ## Adding to Claude Code
