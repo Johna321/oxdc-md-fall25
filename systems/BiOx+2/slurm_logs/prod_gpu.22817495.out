@@ -1,0 +1,12 @@
+cwd: /home/john.aitken/oxdc-md-fall25/systems/BiOx+2
+Started: Sat Jan 10 12:28:26 AM EST 2026
+GPU: 0
+AMBERHOME=/apps/cuda/12.8.1/gcc/14.2.0/openmpi/5.0.7/amber/25_l4
+Input restart: eq2.cpu.rst7 (3038744 bytes)
+=== Production MD on GPU (10 ns) ===
+
+
+=== Verifying output ===
+SUCCESS: Production complete!
+  prod.rst7: 3038744 bytes
+  prod.nc: 725M

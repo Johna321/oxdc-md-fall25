@@ -1,0 +1,526 @@
+============================================================
+BiOx+2 Production Trajectory Analysis
+Started: Sat Jan 10 07:10:17 PM EST 2026
+Host: c0706a-s8.ufhpc
+============================================================
+
+=== Environment ===
+AMBERHOME: 
+/apps/ambertools/23/bin/cpptraj
+
+=== Checking input files ===
+-rw-r--r-- 1 john.aitken ax  12M Nov 28 17:18 5vg3_solv.prmtop
+-rw-r--r-- 1 john.aitken ax 725M Jan 10 01:50 prod.nc
+-rw-r--r-- 1 john.aitken ax 2.9M Jan 10 01:50 prod.rst7
+
+=== Running Full Analysis (RMSD, RMSF, Mn coord, lid, Trp) ===
+
+CPPTRAJ: Trajectory Analysis. V6.18.1 (AmberTools)
+    ___  ___  ___  ___
+     | \/ | \/ | \/ | 
+    _|_/\_|_/\_|_/\_|_
+
+| Date/time: 01/10/26 19:10:19
+| Available memory: 637.061 GB
+
+	Reading '5vg3_solv.prmtop' as Amber Topology
+	Radius Set: modified Bondi radii (mbondi)
+Warning: 1 molecules have non-contiguous segments of atoms.
+	       1        2 segments: 1-6033 (6033)  6035-6041 (7) 
+Warning: The 'fixatomorder' command can be used to reorder the topology and any
+Warning:  associated coordinates.
+INPUT: Reading input from 'cpptraj_ins/full_analysis.in'
+  [parm 5vg3_solv.prmtop]
+Warning: Topology '5vg3_solv.prmtop' already present.
+Warning:   To load the same topology file multiple times use tags,
+Warning:   e.g. `parm <file> [tag]`.
+  [trajin prod.nc]
+	Reading 'prod.nc' as Amber NetCDF
+  [autoimage]
+    AUTOIMAGE: To box center based on center of mass, anchor is first molecule.
+  [center :1-385 mass origin]
+    CENTER: Centering coordinates using center of mass of atoms in mask (:1-385) to
+	coordinate origin.
+  [reference 5vg3_solv.inpcrd [ref]]
+	Reading '5vg3_solv.inpcrd' as Amber Restart
+	Setting active reference for distance-based masks: '5vg3_solv.inpcrd'
+  [rms RMSD_bb @CA,C,N reference out analysis_results/rmsd_backbone.dat]
+    RMSD: (@CA,C,N), reference is "default_name" (@CA,C,N).
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+  [rms RMSD_ca @CA reference out analysis_results/rmsd_ca.dat]
+    RMSD: (@CA), reference is "default_name" (@CA).
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+  [rmsf RMSF_ca @CA out analysis_results/rmsf_ca.dat byres]
+    ATOMICFLUCT: calculating atomic positional fluctuations over residues.
+	Output to file analysis_results/rmsf_ca.dat
+	Atom mask: [@CA]
+	Start: 1  Stop: Final frame
+	Data will be saved to set named RMSF_ca
+  [atomicfluct BFACTORS @CA out analysis_results/bfactors.dat byres bfactor]
+    ATOMICFLUCT: calculating B factors over residues.
+	Output to file analysis_results/bfactors.dat
+	Atom mask: [@CA]
+	Start: 1  Stop: Final frame
+	Data will be saved to set named BFACTORS
+  [distance Mn1_His95 @6033 :95@NE2 out analysis_results/mn1_coordination.dat]
+    DISTANCE: @6033 to :95@NE2, center of mass.
+  [distance Mn1_His97 @6033 :97@NE2 out analysis_results/mn1_coordination.dat]
+    DISTANCE: @6033 to :97@NE2, center of mass.
+  [distance Mn1_His140 @6033 :140@NE2 out analysis_results/mn1_coordination.dat]
+    DISTANCE: @6033 to :140@NE2, center of mass.
+  [distance Mn1_Glu101 @6033 :101@OE1 out analysis_results/mn1_coordination.dat]
+    DISTANCE: @6033 to :101@OE1, center of mass.
+  [distance Mn1_Ox_OZ @6033 @6037 out analysis_results/mn1_oxalate.dat]
+    DISTANCE: @6033 to @6037, center of mass.
+  [distance Mn1_Ox_OY @6033 @6038 out analysis_results/mn1_oxalate.dat]
+    DISTANCE: @6033 to @6038, center of mass.
+  [distance Mn1_Ox_OX @6033 @6039 out analysis_results/mn1_oxalate.dat]
+    DISTANCE: @6033 to @6039, center of mass.
+  [distance Mn2_His273 @6034 :273@NE2 out analysis_results/mn2_coordination.dat]
+    DISTANCE: @6034 to :273@NE2, center of mass.
+  [distance Mn2_Glu280 @6034 :280@OE1 out analysis_results/mn2_coordination.dat]
+    DISTANCE: @6034 to :280@OE1, center of mass.
+  [distance Mn_Mn @6033 @6034 out analysis_results/mn_mn_distance.dat]
+    DISTANCE: @6033 to @6034, center of mass.
+  [rms LID_RMSD :160-166@CA reference out analysis_results/lid_rmsd.dat]
+    RMSD: (:160-166@CA), reference is "default_name" (:160-166@CA).
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+  [rmsf LID_RMSF :160-166@CA out analysis_results/lid_rmsf.dat byres]
+    ATOMICFLUCT: calculating atomic positional fluctuations over residues.
+	Output to file analysis_results/lid_rmsf.dat
+	Atom mask: [:160-166@CA]
+	Start: 1  Stop: Final frame
+	Data will be saved to set named LID_RMSF
+  [distance Glu162_CD_Mn1 @6033 :162@CD out analysis_results/glu162_mn_distance.dat]
+    DISTANCE: @6033 to :162@CD, center of mass.
+  [distance Glu162_OE1_Mn1 @6033 :162@OE1 out analysis_results/glu162_mn_distance.dat]
+    DISTANCE: @6033 to :162@OE1, center of mass.
+  [distance Glu162_OE2_Mn1 @6033 :162@OE2 out analysis_results/glu162_mn_distance.dat]
+    DISTANCE: @6033 to :162@OE2, center of mass.
+  [multidihedral PHI_LID phi resrange 160-166 out analysis_results/lid_phi.dat]
+    MULTIDIHEDRAL: Calculating phi dihedrals for residues in range 160-166
+	DataSet name: PHI_LID
+	Output to lid_phi.dat
+	Output range is -180 to 180 degrees.
+  [multidihedral PSI_LID psi resrange 160-166 out analysis_results/lid_psi.dat]
+    MULTIDIHEDRAL: Calculating psi dihedrals for residues in range 160-166
+	DataSet name: PSI_LID
+	Output to lid_psi.dat
+	Output range is -180 to 180 degrees.
+  [hbond LID_hb :160-166 out analysis_results/lid_hbonds.dat avgout analysis_results/lid_hbond_avg.dat]
+  HBOND: Searching for Hbond donors/acceptors in region specified by :160-166
+	Distance cutoff = 3.000, Angle Cutoff = 135.000
+	Writing # Hbond v time results to analysis_results/lid_hbonds.dat
+	Writing Hbond avgs to analysis_results/lid_hbond_avg.dat
+  [secstruct LID_SS :160-166 out analysis_results/lid_secstruct.dat sumout analysis_results/lid_ss_summary.dat]
+    SECSTRUCT: Calculating secondary structure using mask [:160-166]
+	Dumping results to analysis_results/lid_secstruct.dat
+	Sum results to analysis_results/lid_ss_summary.dat
+	SS data for each residue will be stored as integers.
+		0 = None
+		1 = Extended
+		2 = Bridge
+		3 = 3-10
+		4 = Alpha
+		5 = Pi
+		6 = Turn
+		7 = Bend
+	Backbone Atom Names: N=[N]  H=[H]  C=[C]  O=[O]  CA=[CA]
+	Disulfide sulfur atom name: SG
+# Citation: Kabsch, W.; Sander, C.; "Dictionary of Protein Secondary Structure:
+#           Pattern Recognition of Hydrogen-Bonded and Geometrical Features."
+#           Biopolymers (1983), V.22, pp.2577-2637.
+  [surf LID_SASA :160-166 out analysis_results/lid_sasa.dat]
+    SURF: Calculating LCPO surface area for atoms in mask ':160-166'
+	Solute will be all molecules not marked as solvent with size > 1 atom.
+	van der Waals offset is 1.4 Ang.
+	Cutoff for determining whether atoms have neighbors is 2.5 Ang.
+	Output to 'analysis_results/lid_sasa.dat'
+#Citation: Weiser, J.; Shenkin, P. S.; Still, W. C.; "Approximate atomic
+#          surfaces from linear combinations of pairwise overlaps (LCPO)."
+#          J. Comp. Chem. (1999), V.20, pp.217-230.
+  [watershell Mn1_water @6033 out analysis_results/mn1_watershell.dat lower 3.5 upper 5.0]
+    WATERSHELL: Output to analysis_results/mn1_watershell.dat
+	The first shell will contain solvent < 3.500 angstroms from
+	  the solute; the second shell < 5.000 angstroms...
+	Solute atoms will be specified by [@6033]
+	# solvent molecules in 'lower' shell stored in set 'Mn1_water[lower]'
+	# solvent molecules in 'upper' shell stored in set 'Mn1_water[upper]'
+  [distance TRP_stack :96@CG :274@CG out analysis_results/trp_stack.dat]
+    DISTANCE: :96@CG to :274@CG, center of mass.
+  [distance Mn1_W96 @6033 :96@CG out analysis_results/mn_trp.dat]
+    DISTANCE: @6033 to :96@CG, center of mass.
+  [distance Mn1_W274 @6033 :274@CG out analysis_results/mn_trp.dat]
+    DISTANCE: @6033 to :274@CG, center of mass.
+  [distance Mn2_W96 @6034 :96@CG out analysis_results/mn_trp.dat]
+    DISTANCE: @6034 to :96@CG, center of mass.
+  [distance Mn2_W274 @6034 :274@CG out analysis_results/mn_trp.dat]
+    DISTANCE: @6034 to :274@CG, center of mass.
+  [dihedral TRP_orient :96@CD2 :96@CG :274@CG :274@CD2 out analysis_results/trp_orient.dat]
+    DIHEDRAL: [:96@CD2]-[:96@CG]-[:274@CG]-[:274@CD2]
+              Output range is -180 to 180 degrees.
+  [dihedral W96_chi1 :96@N :96@CA :96@CB :96@CG out analysis_results/trp_chi.dat]
+    DIHEDRAL: [:96@N]-[:96@CA]-[:96@CB]-[:96@CG]
+              Output range is -180 to 180 degrees.
+  [dihedral W274_chi1 :274@N :274@CA :274@CB :274@CG out analysis_results/trp_chi.dat]
+    DIHEDRAL: [:274@N]-[:274@CA]-[:274@CB]-[:274@CG]
+              Output range is -180 to 180 degrees.
+  [radgyr RoG :1-385@CA out analysis_results/radgyr.dat]
+    RADGYR: Calculating for atoms in mask :1-385@CA.
+  [hbond ALL_hb :1-385 out analysis_results/protein_hbonds.dat avgout analysis_results/hbond_avg.dat]
+  HBOND: Searching for Hbond donors/acceptors in region specified by :1-385
+	Distance cutoff = 3.000, Angle Cutoff = 135.000
+	Writing # Hbond v time results to analysis_results/protein_hbonds.dat
+	Writing Hbond avgs to analysis_results/hbond_avg.dat
+  [run]
+---------- RUN BEGIN -------------------------------------------------
+
+PARAMETER FILES (1 total):
+ 0: 5vg3_solv.prmtop, 63287 atoms, 19473 res, box: Orthorhombic, 19090 mol, 19079 solvent
+
+INPUT TRAJECTORIES (1 total):
+ 0: 'prod.nc' is a NetCDF (NetCDF3) AMBER trajectory with coordinates, time, box, Parm 5vg3_solv.prmtop (Orthorhombic box) (reading 1000 of 1000)
+  Coordinate processing will occur on 1000 frames.
+
+REFERENCE FRAMES (1 total):
+    0: [ref]:1
+	Active reference frame for distance-based masks is 'default_name'
+
+BEGIN TRAJECTORY PROCESSING:
+.....................................................
+ACTION SETUP FOR PARM '5vg3_solv.prmtop' (37 actions):
+  0: [autoimage]
+	Using first molecule as anchor.
+	19089 molecules are mobile.
+  1: [center :1-385 mass origin]
+	Mask [:1-385] corresponds to 6041 atoms.
+  2: [rms RMSD_bb @CA,C,N reference out analysis_results/rmsd_backbone.dat]
+	Target mask: [@CA,C,N](1146)
+	Reference topology: 5vg3_solv.prmtop
+	Reference mask: [@CA,C,N](1146)
+  3: [rms RMSD_ca @CA reference out analysis_results/rmsd_ca.dat]
+	Target mask: [@CA](382)
+	Reference topology: 5vg3_solv.prmtop
+	Reference mask: [@CA](382)
+  4: [rmsf RMSF_ca @CA out analysis_results/rmsf_ca.dat byres]
+	Mask [@CA] corresponds to 382 atoms.
+  5: [atomicfluct BFACTORS @CA out analysis_results/bfactors.dat byres bfactor]
+	Mask [@CA] corresponds to 382 atoms.
+  6: [distance Mn1_His95 @6033 :95@NE2 out analysis_results/mn1_coordination.dat]
+	@6033 (1 atoms) to :95@NE2 (1 atoms), imaged.
+  7: [distance Mn1_His97 @6033 :97@NE2 out analysis_results/mn1_coordination.dat]
+	@6033 (1 atoms) to :97@NE2 (1 atoms), imaged.
+  8: [distance Mn1_His140 @6033 :140@NE2 out analysis_results/mn1_coordination.dat]
+	@6033 (1 atoms) to :140@NE2 (1 atoms), imaged.
+  9: [distance Mn1_Glu101 @6033 :101@OE1 out analysis_results/mn1_coordination.dat]
+	@6033 (1 atoms) to :101@OE1 (1 atoms), imaged.
+  10: [distance Mn1_Ox_OZ @6033 @6037 out analysis_results/mn1_oxalate.dat]
+	@6033 (1 atoms) to @6037 (1 atoms), imaged.
+  11: [distance Mn1_Ox_OY @6033 @6038 out analysis_results/mn1_oxalate.dat]
+	@6033 (1 atoms) to @6038 (1 atoms), imaged.
+  12: [distance Mn1_Ox_OX @6033 @6039 out analysis_results/mn1_oxalate.dat]
+	@6033 (1 atoms) to @6039 (1 atoms), imaged.
+  13: [distance Mn2_His273 @6034 :273@NE2 out analysis_results/mn2_coordination.dat]
+	@6034 (1 atoms) to :273@NE2 (1 atoms), imaged.
+  14: [distance Mn2_Glu280 @6034 :280@OE1 out analysis_results/mn2_coordination.dat]
+	@6034 (1 atoms) to :280@OE1 (1 atoms), imaged.
+  15: [distance Mn_Mn @6033 @6034 out analysis_results/mn_mn_distance.dat]
+	@6033 (1 atoms) to @6034 (1 atoms), imaged.
+  16: [rms LID_RMSD :160-166@CA reference out analysis_results/lid_rmsd.dat]
+	Target mask: [:160-166@CA](7)
+	Reference topology: 5vg3_solv.prmtop
+	Reference mask: [:160-166@CA](7)
+  17: [rmsf LID_RMSF :160-166@CA out analysis_results/lid_rmsf.dat byres]
+	Mask [:160-166@CA] corresponds to 7 atoms.
+  18: [distance Glu162_CD_Mn1 @6033 :162@CD out analysis_results/glu162_mn_distance.dat]
+	@6033 (1 atoms) to :162@CD (1 atoms), imaged.
+  19: [distance Glu162_OE1_Mn1 @6033 :162@OE1 out analysis_results/glu162_mn_distance.dat]
+	@6033 (1 atoms) to :162@OE1 (1 atoms), imaged.
+  20: [distance Glu162_OE2_Mn1 @6033 :162@OE2 out analysis_results/glu162_mn_distance.dat]
+	@6033 (1 atoms) to :162@OE2 (1 atoms), imaged.
+  21: [multidihedral PHI_LID phi resrange 160-166 out analysis_results/lid_phi.dat]
+	ResRange=[160-166] phi, 7 dihedrals.
+	1 [phi:160]: SER@C PHE@N PHE@CA PHE@C
+	2 [phi:161]: PHE@C SER@N SER@CA SER@C
+	3 [phi:162]: SER@C GLH@N GLH@CA GLH@C
+	4 [phi:163]: GLH@C ASN@N ASN@CA ASN@C
+	5 [phi:164]: ASN@C SER@N SER@CA SER@C
+	6 [phi:165]: SER@C THR@N THR@CA THR@C
+	7 [phi:166]: THR@C PHE@N PHE@CA PHE@C
+  22: [multidihedral PSI_LID psi resrange 160-166 out analysis_results/lid_psi.dat]
+	ResRange=[160-166] psi, 7 dihedrals.
+	1 [psi:160]: PHE@N PHE@CA PHE@C SER@N
+	2 [psi:161]: SER@N SER@CA SER@C GLH@N
+	3 [psi:162]: GLH@N GLH@CA GLH@C ASN@N
+	4 [psi:163]: ASN@N ASN@CA ASN@C SER@N
+	5 [psi:164]: SER@N SER@CA SER@C THR@N
+	6 [psi:165]: THR@N THR@CA THR@C PHE@N
+	7 [psi:166]: PHE@N PHE@CA PHE@C GLN@N
+  23: [hbond LID_hb :160-166 out analysis_results/lid_hbonds.dat avgout analysis_results/lid_hbond_avg.dat]
+	Acceptor-only atoms: 9
+	Donor/acceptor sites: 12
+	Donor-only sites: 0
+	13 solute hydrogens.
+	Estimated max potential memory usage: 20.844 kB
+  24: [secstruct LID_SS :160-166 out analysis_results/lid_secstruct.dat sumout analysis_results/lid_ss_summary.dat]
+	Setting up for 384 solute residues.
+	7 of 384 solute residues selected.
+  25: [surf LID_SASA :160-166 out analysis_results/lid_sasa.dat]
+	Mask [:160-166] corresponds to 106 atoms.
+	Considering only non-solvent molecules with size > 1 as solute.
+	6040 solute atoms. Calculating LCPO surface area for 106 atoms.
+Warning: Using carbon SA parms for unknown atom 6033 type M1
+	3064 atoms with neighbors.
+	Calculating SA for 58 atoms with neighbors.
+	Contribution from atoms with no neighbors is 0
+  26: [watershell Mn1_water @6033 out analysis_results/mn1_watershell.dat lower 3.5 upper 5.0]
+	Mask [@6033] corresponds to 1 atoms.
+	Selecting all solvent atoms (57237 total)
+	Imaging is on.
+  27: [distance TRP_stack :96@CG :274@CG out analysis_results/trp_stack.dat]
+	:96@CG (1 atoms) to :274@CG (1 atoms), imaged.
+  28: [distance Mn1_W96 @6033 :96@CG out analysis_results/mn_trp.dat]
+	@6033 (1 atoms) to :96@CG (1 atoms), imaged.
+  29: [distance Mn1_W274 @6033 :274@CG out analysis_results/mn_trp.dat]
+	@6033 (1 atoms) to :274@CG (1 atoms), imaged.
+  30: [distance Mn2_W96 @6034 :96@CG out analysis_results/mn_trp.dat]
+	@6034 (1 atoms) to :96@CG (1 atoms), imaged.
+  31: [distance Mn2_W274 @6034 :274@CG out analysis_results/mn_trp.dat]
+	@6034 (1 atoms) to :274@CG (1 atoms), imaged.
+  32: [dihedral TRP_orient :96@CD2 :96@CG :274@CG :274@CD2 out analysis_results/trp_orient.dat]
+	 [:96@CD2](1) [:96@CG](1) [:274@CG](1) [:274@CD2](1)
+  33: [dihedral W96_chi1 :96@N :96@CA :96@CB :96@CG out analysis_results/trp_chi.dat]
+	 [:96@N](1) [:96@CA](1) [:96@CB](1) [:96@CG](1)
+  34: [dihedral W274_chi1 :274@N :274@CA :274@CB :274@CG out analysis_results/trp_chi.dat]
+	 [:274@N](1) [:274@CA](1) [:274@CB](1) [:274@CG](1)
+  35: [radgyr RoG :1-385@CA out analysis_results/radgyr.dat]
+	:1-385@CA (382 atoms).
+  36: [hbond ALL_hb :1-385 out analysis_results/protein_hbonds.dat avgout analysis_results/hbond_avg.dat]
+	Acceptor-only atoms: 544
+	Donor/acceptor sites: 559
+	Donor-only sites: 0
+	669 solute hydrogens.
+	Estimated max potential memory usage: 40.135 MB
+----- prod.nc (1-1000, 1) -----
+ 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% Complete.
+
+Read 1000 frames and processed 1000 frames.
+TIME: Avg. throughput= 48.7990 frames / second.
+
+ACTION OUTPUT:
+    ATOMICFLUCT: Calculating fluctuations for 1000 sets.
+    ATOMICFLUCT: Calculating fluctuations for 1000 sets.
+    ATOMICFLUCT: Calculating fluctuations for 1000 sets.
+    HBOND: Actual memory usage is 1.680 kB
+	12 solute-solute hydrogen bonds.
+TIME:	DSSP total 0.0187 s
+TIME:		Calc Hbonds 0.0062 s ( 33.19%)
+TIME:		Assignment  0.0123 s ( 65.98%)
+    HBOND: Actual memory usage is 149.264 kB
+	1165 solute-solute hydrogen bonds.
+TIME: Analyses took 0.0000 seconds.
+
+DATASETS (70 total):
+	RMSD_bb "RMSD_bb" (double, rms), size is 1000 (8.000 kB)
+	RMSD_ca "RMSD_ca" (double, rms), size is 1000 (8.000 kB)
+	RMSF_ca "RMSF_ca" (X-Y mesh), size is 382 (6.112 kB)
+	BFACTORS "BFACTORS" (X-Y mesh), size is 382 (6.112 kB)
+	Mn1_His95 "Mn1_His95" (double, distance), size is 1000 (8.000 kB)
+	Mn1_His97 "Mn1_His97" (double, distance), size is 1000 (8.000 kB)
+	Mn1_His140 "Mn1_His140" (double, distance), size is 1000 (8.000 kB)
+	Mn1_Glu101 "Mn1_Glu101" (double, distance), size is 1000 (8.000 kB)
+	Mn1_Ox_OZ "Mn1_Ox_OZ" (double, distance), size is 1000 (8.000 kB)
+	Mn1_Ox_OY "Mn1_Ox_OY" (double, distance), size is 1000 (8.000 kB)
+	Mn1_Ox_OX "Mn1_Ox_OX" (double, distance), size is 1000 (8.000 kB)
+	Mn2_His273 "Mn2_His273" (double, distance), size is 1000 (8.000 kB)
+	Mn2_Glu280 "Mn2_Glu280" (double, distance), size is 1000 (8.000 kB)
+	Mn_Mn "Mn_Mn" (double, distance), size is 1000 (8.000 kB)
+	LID_RMSD "LID_RMSD" (double, rms), size is 1000 (8.000 kB)
+	LID_RMSF "LID_RMSF" (X-Y mesh), size is 7 (0.112 kB)
+	Glu162_CD_Mn1 "Glu162_CD_Mn1" (double, distance), size is 1000 (8.000 kB)
+	Glu162_OE1_Mn1 "Glu162_OE1_Mn1" (double, distance), size is 1000 (8.000 kB)
+	Glu162_OE2_Mn1 "Glu162_OE2_Mn1" (double, distance), size is 1000 (8.000 kB)
+	LID_hb[UU] "LID_hb[UU]" (integer), size is 1000 (4.000 kB)
+	LID_SS[None] "LID_SS[None]" (float), size is 1000 (4.000 kB)
+	LID_SS[Extended] "LID_SS[Extended]" (float), size is 1000 (4.000 kB)
+	LID_SS[Bridge] "LID_SS[Bridge]" (float), size is 1000 (4.000 kB)
+	LID_SS[3-10] "LID_SS[3-10]" (float), size is 1000 (4.000 kB)
+	LID_SS[Alpha] "LID_SS[Alpha]" (float), size is 1000 (4.000 kB)
+	LID_SS[Pi] "LID_SS[Pi]" (float), size is 1000 (4.000 kB)
+	LID_SS[Turn] "LID_SS[Turn]" (float), size is 1000 (4.000 kB)
+	LID_SS[Bend] "LID_SS[Bend]" (float), size is 1000 (4.000 kB)
+	LID_SASA "LID_SASA" (double), size is 1000 (8.000 kB)
+	Mn1_water[lower] "Mn1_water[lower]" (integer), size is 1000 (4.000 kB)
+	Mn1_water[upper] "Mn1_water[upper]" (integer), size is 1000 (4.000 kB)
+	TRP_stack "TRP_stack" (double, distance), size is 1000 (8.000 kB)
+	Mn1_W96 "Mn1_W96" (double, distance), size is 1000 (8.000 kB)
+	Mn1_W274 "Mn1_W274" (double, distance), size is 1000 (8.000 kB)
+	Mn2_W96 "Mn2_W96" (double, distance), size is 1000 (8.000 kB)
+	Mn2_W274 "Mn2_W274" (double, distance), size is 1000 (8.000 kB)
+	TRP_orient "TRP_orient" (double, torsion), size is 1000 (8.000 kB)
+	W96_chi1 "W96_chi1" (double, torsion), size is 1000 (8.000 kB)
+	W274_chi1 "W274_chi1" (double, torsion), size is 1000 (8.000 kB)
+	RoG "RoG" (double), size is 1000 (8.000 kB)
+	RoG[Max] "RoG[Max]" (double), size is 1000 (8.000 kB)
+	ALL_hb[UU] "ALL_hb[UU]" (integer), size is 1000 (4.000 kB)
+	PHI_LID[phi]:160 "phi:160" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PHI_LID[phi]:161 "phi:161" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PHI_LID[phi]:162 "phi:162" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PHI_LID[phi]:163 "phi:163" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PHI_LID[phi]:164 "phi:164" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PHI_LID[phi]:165 "phi:165" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PHI_LID[phi]:166 "phi:166" (double, torsion(phi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:160 "psi:160" (double, torsion(psi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:161 "psi:161" (double, torsion(psi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:162 "psi:162" (double, torsion(psi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:163 "psi:163" (double, torsion(psi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:164 "psi:164" (double, torsion(psi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:165 "psi:165" (double, torsion(psi)), size is 1000 (8.000 kB)
+	PSI_LID[psi]:166 "psi:166" (double, torsion(psi)), size is 1000 (8.000 kB)
+	LID_SS[res]:160 "PHE:160" (integer), size is 1000 (4.000 kB)
+	LID_SS[res]:161 "SER:161" (integer), size is 1000 (4.000 kB)
+	LID_SS[res]:162 "GLH:162" (integer), size is 1000 (4.000 kB)
+	LID_SS[res]:163 "ASN:163" (integer), size is 1000 (4.000 kB)
+	LID_SS[res]:164 "SER:164" (integer), size is 1000 (4.000 kB)
+	LID_SS[res]:165 "THR:165" (integer), size is 1000 (4.000 kB)
+	LID_SS[res]:166 "PHE:166" (integer), size is 1000 (4.000 kB)
+	LID_SS[avgss]:1 "Extended" (double), size is 7 (0.056 kB)
+	LID_SS[avgss]:2 "Bridge" (double), size is 7 (0.056 kB)
+	LID_SS[avgss]:3 "3-10" (double), size is 7 (0.056 kB)
+	LID_SS[avgss]:4 "Alpha" (double), size is 7 (0.056 kB)
+	LID_SS[avgss]:5 "Pi" (double), size is 7 (0.056 kB)
+	LID_SS[avgss]:6 "Turn" (double), size is 7 (0.056 kB)
+	LID_SS[avgss]:7 "Bend" (double), size is 7 (0.056 kB)
+    Total data set memory usage is at least 416.728 kB
+
+DATAFILES (26 total):
+  rmsd_backbone.dat (Standard Data File):  RMSD_bb
+  rmsd_ca.dat (Standard Data File):  RMSD_ca
+  rmsf_ca.dat (Standard Data File):  RMSF_ca
+  bfactors.dat (Standard Data File):  BFACTORS
+  mn1_coordination.dat (Standard Data File):  Mn1_His95 Mn1_His97 Mn1_His140 Mn1_Glu101
+  mn1_oxalate.dat (Standard Data File):  Mn1_Ox_OZ Mn1_Ox_OY Mn1_Ox_OX
+  mn2_coordination.dat (Standard Data File):  Mn2_His273 Mn2_Glu280
+  mn_mn_distance.dat (Standard Data File):  Mn_Mn
+  lid_rmsd.dat (Standard Data File):  LID_RMSD
+  lid_rmsf.dat (Standard Data File):  LID_RMSF
+  glu162_mn_distance.dat (Standard Data File):  Glu162_CD_Mn1 Glu162_OE1_Mn1 Glu162_OE2_Mn1
+  lid_phi.dat (Standard Data File):  phi:160 phi:161 phi:162 phi:163 phi:164 phi:165 phi:166
+  lid_psi.dat (Standard Data File):  psi:160 psi:161 psi:162 psi:163 psi:164 psi:165 psi:166
+  lid_hbonds.dat (Standard Data File):  LID_hb[UU]
+  lid_secstruct.dat (Standard Data File):  PHE:160 SER:161 GLH:162 ASN:163 SER:164 THR:165 PHE:166
+  lid_ss_summary.dat (Standard Data File):  Extended Bridge 3-10 Alpha Pi Turn Bend
+  lid_sasa.dat (Standard Data File):  LID_SASA
+  mn1_watershell.dat (Standard Data File):  Mn1_water[lower] Mn1_water[upper]
+  trp_stack.dat (Standard Data File):  TRP_stack
+  mn_trp.dat (Standard Data File):  Mn1_W96 Mn1_W274 Mn2_W96 Mn2_W274
+  trp_orient.dat (Standard Data File):  TRP_orient
+  trp_chi.dat (Standard Data File):  W96_chi1 W274_chi1
+  radgyr.dat (Standard Data File):  RoG RoG[Max]
+  protein_hbonds.dat (Standard Data File):  ALL_hb[UU]
+  lid_hbond_avg.dat (Avg. solute-solute HBonds)
+  hbond_avg.dat (Avg. solute-solute HBonds)
+
+RUN TIMING:
+TIME:		Init               : 0.0000 s (  0.00%)
+TIME:		Trajectory Process : 20.4922 s ( 99.59%)
+TIME:		Action Post        : 0.0053 s (  0.03%)
+TIME:		Analysis           : 0.0000 s (  0.00%)
+TIME:		Data File Write    : 0.0793 s (  0.39%)
+TIME:		Other              : 0.0004 s (  0.00%)
+TIME:	Run Total 20.5773 s
+---------- RUN END ---------------------------------------------------
+TIME: Total execution time: 20.7383 seconds.
+--------------------------------------------------------------------------------
+To cite CPPTRAJ use:
+Daniel R. Roe and Thomas E. Cheatham, III, "PTRAJ and CPPTRAJ: Software for
+  Processing and Analysis of Molecular Dynamics Trajectory Data". J. Chem.
+  Theory Comput., 2013, 9 (7), pp 3084-3095.
+
+
+=== Running PCA Analysis ===
+
+CPPTRAJ: Trajectory Analysis. V6.18.1 (AmberTools)
+    ___  ___  ___  ___
+     | \/ | \/ | \/ | 
+    _|_/\_|_/\_|_/\_|_
+
+| Date/time: 01/10/26 19:10:40
+| Available memory: 637.367 GB
+
+	Reading '5vg3_solv.prmtop' as Amber Topology
+	Radius Set: modified Bondi radii (mbondi)
+Warning: 1 molecules have non-contiguous segments of atoms.
+	       1        2 segments: 1-6033 (6033)  6035-6041 (7) 
+Warning: The 'fixatomorder' command can be used to reorder the topology and any
+Warning:  associated coordinates.
+INPUT: Reading input from 'cpptraj_ins/pca_analysis.in'
+  [parm 5vg3_solv.prmtop]
+Warning: Topology '5vg3_solv.prmtop' already present.
+Warning:   To load the same topology file multiple times use tags,
+Warning:   e.g. `parm <file> [tag]`.
+  [trajin prod.nc]
+	Reading 'prod.nc' as Amber NetCDF
+  [strip :WAT,Cl-,Na+]
+    STRIP: Stripping atoms in mask [:WAT,Cl-,Na+]
+  [rms first @CA]
+    RMSD: (@CA), reference is first frame (@CA).
+	Best-fit RMSD will be calculated, coords will be rotated and translated.
+  [matrix covar name FULL_COV @CA out analysis_results/full_covar.dat]
+    MATRIX: Calculating covariance matrix, output is by atom.
+	Printing to file analysis_results/full_covar.dat
+	Matrix data set is 'FULL_COV'
+	Start: 1  Stop: Final frame
+	Mask1 is '@CA'
+  [diagmatrix FULL_COV name FULL_EVEC out analysis_results/full_evecs.dat vecs 20]
+	Changed DataFile 'full_evecs.dat' type to Evecs file for set FULL_EVEC
+    DIAGMATRIX: Diagonalizing matrix FULL_COV and writing modes to analysis_results/full_evecs.dat
+	Calculating 20 eigenvectors.
+	Storing modes with name: FULL_EVEC
+  [projection FULL_PROJ modes FULL_EVEC @CA out analysis_results/full_proj.dat beg 1 end 10]
+Warning: Set 'FULL_COV' contains no data.
+Warning: File 'full_covar.dat' has no sets containing data.
+Warning: Set 'FULL_EVEC' contains no data.
+Warning: File 'full_evecs.dat' has no sets containing data.
+TIME: Total execution time: 0.0844 seconds.
+
+
+=== Analysis Complete ===
+Output files:
+total 1.2M
+-rw-r--r-- 1 john.aitken ax 8.3K Jan 10 19:10 bfactors.dat
+-rw-r--r-- 1 john.aitken ax  52K Jan 10 19:10 glu162_mn_distance.dat
+-rw-r--r-- 1 john.aitken ax 110K Jan 10 19:10 hbond_avg.dat
+-rw-r--r-- 1 john.aitken ax 1.3K Jan 10 19:10 lid_hbond_avg.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 lid_hbonds.dat
+-rw-r--r-- 1 john.aitken ax  98K Jan 10 19:10 lid_phi.dat
+-rw-r--r-- 1 john.aitken ax  98K Jan 10 19:10 lid_psi.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 lid_rmsd.dat
+-rw-r--r-- 1 john.aitken ax  176 Jan 10 19:10 lid_rmsf.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 lid_sasa.dat
+-rw-r--r-- 1 john.aitken ax  98K Jan 10 19:10 lid_secstruct.dat
+-rw-r--r-- 1 john.aitken ax  800 Jan 10 19:10 lid_ss_summary.dat
+-rw-r--r-- 1 john.aitken ax  60K Jan 10 19:10 mn1_coordination.dat
+-rw-r--r-- 1 john.aitken ax  47K Jan 10 19:10 mn1_oxalate.dat
+-rw-r--r-- 1 john.aitken ax  43K Jan 10 19:10 mn1_watershell.dat
+-rw-r--r-- 1 john.aitken ax  35K Jan 10 19:10 mn2_coordination.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 mn_mn_distance.dat
+-rw-r--r-- 1 john.aitken ax  60K Jan 10 19:10 mn_trp.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 protein_hbonds.dat
+-rw-r--r-- 1 john.aitken ax  35K Jan 10 19:10 radgyr.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 rmsd_backbone.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 rmsd_ca.dat
+-rw-r--r-- 1 john.aitken ax 8.3K Jan 10 19:10 rmsf_ca.dat
+-rw-r--r-- 1 john.aitken ax  35K Jan 10 19:10 trp_chi.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 trp_orient.dat
+-rw-r--r-- 1 john.aitken ax  22K Jan 10 19:10 trp_stack.dat
+
+=== Quick Summary ===
+RMSD range:
+  Min: 1.28 A, Max: 2.64 A
+Glu162-Mn1 distance (open/closed indicator):
+  Average: 11.54 A
+Mn-Mn distance:
+  Average: 25.22 A
+
+Finished: Sat Jan 10 07:10:40 PM EST 2026

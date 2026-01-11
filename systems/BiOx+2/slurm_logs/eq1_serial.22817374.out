@@ -1,0 +1,11 @@
+cwd: /home/john.aitken/oxdc-md-fall25/systems/BiOx+2
+Started: Fri Jan  9 04:50:25 AM EST 2026
+AMBERHOME=/apps/gcc/14.2.0/openmpi/5.0.7/amber/25
+=== Resuming eq1 from checkpoint (SERIAL) ===
+
+eq1 complete: eq1_final.cpu.rst7
+=== Running eq2 (SERIAL) ===
+
+eq2 complete: eq2.cpu.rst7
+=== All equilibration done ===
+Finished: Sat Jan 10 12:28:25 AM EST 2026
