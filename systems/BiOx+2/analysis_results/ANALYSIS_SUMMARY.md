@@ -146,38 +146,41 @@ The W96-W274 distance of ~39 A indicates these residues are within the same mono
 
 ---
 
-## Verification Tasks for Claude Web/iOS
+## Verification Tasks - COMPLETED
 
-Please verify the following by examining the raw data files:
+All verification tasks have been completed (January 2026). See `PRODUCTION_ANALYSIS_REPORT.md` for full details.
 
-### Task 1: RMSD Convergence
-- [ ] Plot rmsd_ca.dat time series
-- [ ] Check if RMSD plateaus (indicates equilibration)
-- [ ] Identify any sudden jumps (structural events)
+### Task 1: RMSD Convergence - VERIFIED
+- [x] Plot rmsd_ca.dat time series - **Figure: prod_rmsd.png**
+- [x] Check if RMSD plateaus (indicates equilibration) - **YES, plateaus at ~2.0 A**
+- [x] Identify any sudden jumps (structural events) - **NONE detected**
 
-### Task 2: Mn1 Coordination Stability
-- [ ] Plot all 4 ligand distances from mn1_coordination.dat
-- [ ] Check for any transient dissociation events (>3 A)
-- [ ] Calculate standard deviations
+### Task 2: Mn1 Coordination Stability - VERIFIED
+- [x] Plot all 4 ligand distances from mn1_coordination.dat - **Figure: prod_mn1_coordination.png**
+- [x] Check for any transient dissociation events (>3 A) - **ZERO dissociation events**
+- [x] Calculate standard deviations - **All < 0.12 A**
 
-### Task 3: Glu162-Mn1 Distribution
-- [ ] Create histogram of glu162_mn_distance.dat
-- [ ] Check if distribution is unimodal (single state) or bimodal (two states)
-- [ ] Compare to expected open/closed thresholds
+### Task 3: Glu162-Mn1 Distribution - VERIFIED (KEY FINDING)
+- [x] Create histogram of glu162_mn_distance.dat - **Figure: prod_lid_dynamics.png**
+- [x] Check if distribution is unimodal (single state) or bimodal (two states) - **UNIMODAL (p=0.94)**
+- [x] Compare to expected open/closed thresholds - **100% OPEN (>8 A), 0% closed (<4 A)**
 
-### Task 4: Oxalate Binding Mode
-- [ ] Plot all 3 Mn-oxalate distances from mn1_oxalate.dat
-- [ ] Verify OY stays distant throughout
-- [ ] Investigate any transitions
+### Task 4: Oxalate Binding Mode - VERIFIED
+- [x] Plot all 3 Mn-oxalate distances from mn1_oxalate.dat - **Figure: prod_oxalate_binding.png**
+- [x] Verify OY stays distant throughout - **YES, OY = 4.05 A consistently**
+- [x] Investigate any transitions - **NO transitions; 91.5% bidentate throughout**
 
-### Task 5: Cross-Correlation
-- [ ] Check if lid RMSD correlates with Glu162-Mn distance
-- [ ] Check if RMSD correlates with radius of gyration
+### Task 5: Cross-Correlation - VERIFIED
+- [x] Check if lid RMSD correlates with Glu162-Mn distance - **r = +0.39 (moderate)**
+- [x] Check if RMSD correlates with radius of gyration - **r = +0.08 (weak)**
 
-### Task 6: Statistical Analysis
-- [ ] Calculate means and standard deviations for all key metrics
-- [ ] Perform block averaging (divide into 5 blocks) to assess convergence
-- [ ] Report 95% confidence intervals
+### Task 6: Statistical Analysis - VERIFIED
+- [x] Calculate means and standard deviations for all key metrics - **Complete**
+- [x] Perform block averaging (divide into 5 blocks) to assess convergence - **CONVERGED (SEM < 10%)**
+- [x] Report 95% confidence intervals - **In block averaging results**
+
+**Analysis Script:** `analysis_scripts/analyze_production.py`
+**Generated Figures:** `analysis_results/figures/prod_*.png`
 
 ---
 
