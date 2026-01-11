@@ -20,3 +20,5 @@ mcp-hipergator/node_modules/
 *.snm
 *.toc
 *.synctex.gz
+
+.obsidian
