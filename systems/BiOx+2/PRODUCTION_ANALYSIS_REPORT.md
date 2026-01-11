@@ -142,17 +142,20 @@ The persistent bidentate binding suggests:
 
 **THE LID NEVER CLOSES during the 10 ns simulation.**
 
-### 4.4 Literature Context
+### 4.4 Literature Context (Corrected Three-State Model)
 
-From crystallographic studies (Just et al., 2004; Saylor et al., 2008):
+From crystallographic studies, OxDC exhibits **three distinct lid states**:
 
-| Conformation | Glu162-Mn Distance | Source |
-|--------------|-------------------|--------|
-| Closed (5VG3) | ~2.4 Å | PDB crystal structure |
-| Open (1J58) | ~12 Å | Apo structure |
-| **Our simulation** | **~11.5 Å** | **10 ns MD** |
+| State | PDB | Glu162-Mn Distance | Description |
+|-------|-----|-------------------|-------------|
+| Open-loop | 1J58 | ~15-16 Å | SENS loop swung away |
+| Closed, Glu162-in | 1UW8 | ~4.6-5.1 Å | Glu162 H-bonds Mn-water |
+| Closed-backbone, Glu162-out | 5VG3 | ~10-12 Å | Loop closed, sidechain displaced |
+| **Our simulation** | **BiOx+2** | **~11.5 Å** | **5VG3-like state** |
 
-**Key observation:** Despite starting from the closed crystal structure (5VG3), the lid opened during equilibration and remained open throughout production.
+**Key observation:** Our simulation maintains the 5VG3-like "closed-backbone / Glu162-out" state. This is NOT the "open-loop" state (1J58, ~15-16 Å). The Glu162 sidechain is displaced from the Mn, likely due to bidentate oxalate binding.
+
+**Note:** Previous versions of this report incorrectly stated 5VG3 = ~2.4 Å. This was based on a misunderstanding of the nomenclature. Glu162 is NOT a first-shell Mn ligand.
 
 ### 4.5 Mechanistic Implications
 

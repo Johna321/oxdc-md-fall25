@@ -84,17 +84,20 @@
 
 ### 3. Lid Dynamics (Primary Scientific Question)
 
-**Glu162-Mn1 Distance (open/closed indicator):**
+**Glu162-Mn1 Distance (lid state indicator):**
 
 | Atom | Average Distance (A) | Interpretation |
 |------|---------------------|----------------|
-| CD | 11.54 | OPEN |
-| OE1 | 11.73 | OPEN |
-| OE2 | 12.28 | OPEN |
+| CD | 11.54 | Closed-backbone / Glu162-out |
+| OE1 | 11.73 | Closed-backbone / Glu162-out |
+| OE2 | 12.28 | Closed-backbone / Glu162-out |
 
-**Threshold:** <4 A = closed, >6 A = open
+**Three-State Model (Literature):**
+- Open-loop (1J58): ~15-16 A (SENS loop swung away)
+- Closed, Glu162-in (1UW8): ~4.6-5.1 A (Glu162 H-bonds Mn-water)
+- Closed-backbone, Glu162-out (5VG3): ~10-12 A (our state)
 
-**Key Finding:** The lid remains in the OPEN conformation throughout the entire 10 ns simulation, even with substrate bound!
+**Key Finding:** The lid remains in the 5VG3-like "closed-backbone / Glu162-out" conformation. This is distinct from the "open-loop" state (1J58). Glu162 sidechain is displaced, likely due to bidentate oxalate binding.
 
 **Lid RMSF (per residue):**
 

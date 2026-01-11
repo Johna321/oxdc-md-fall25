@@ -62,7 +62,9 @@ From [Saylor et al., 2008 (PMC2275070)](https://pmc.ncbi.nlm.nih.gov/articles/PM
 
 Key insights:
 - Lid = residues 161-165 (we use 160-166 for buffer)
-- "Closed" brings Glu162 close to Mn for proton transfer
+- Three states exist: open-loop (1J58, ~15-16 Å), closed/Glu162-in (1UW8, ~4.6-5.1 Å), closed-backbone/Glu162-out (5VG3, ~10-12 Å)
+- "Glu162-in closed" brings Glu162 close to Mn-bound water for proton transfer
+- Our simulation shows 5VG3-like state (closed-backbone/Glu162-out)
 - Lid mutations affect catalytic activity
 
 ### Mutagenesis Evidence

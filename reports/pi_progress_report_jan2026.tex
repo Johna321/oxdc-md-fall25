@@ -39,7 +39,7 @@ Department of Chemistry, University of Florida\\
 \maketitle
 
 \begin{abstract}
-This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dynamics simulation project during the winter break period. The primary accomplishment is the completion and rigorous analysis of a 10 ns production trajectory for the BiOx+2 system (bidentate oxalate with Mn(II)). \textbf{Key finding:} The active site lid remains fully open throughout the simulation (Glu162-Mn = 11.5~\AA, 100\% open fraction), suggesting that lid closure may be controlled by Mn oxidation state or require longer timescales to observe. Comprehensive analysis including block averaging, correlation analysis, and literature cross-referencing confirms simulation convergence and validates the MCPB.py force field parameterization.
+This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dynamics simulation project during the winter break period. The primary accomplishment is the completion and rigorous analysis of a 10 ns production trajectory for the BiOx+2 system (bidentate oxalate with Mn(II)). \textbf{Key finding:} The active site lid remains in the ``closed-backbone / Glu162-out'' state throughout the simulation (Glu162-Mn = 11.5~\AA), matching the 5VG3 crystal structure. This is distinct from the ``open-loop'' state (1J58, $\sim$15-16~\AA) and the ``Glu162-in closed'' state (1UW8, $\sim$4.6-5.1~\AA). Bidentate oxalate binding likely prevents Glu162 from adopting the catalytically active Glu162-in pose. Comprehensive analysis including block averaging, correlation analysis, and literature cross-referencing confirms simulation convergence and validates the MCPB.py force field parameterization.
 \end{abstract}
 
 \tableofcontents
@@ -64,7 +64,7 @@ This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dy
         \item Structural stability (RMSD = 1.98 $\pm$ 0.24~\AA)
         \item Mn1 coordination integrity (0 dissociation events)
         \item Oxalate binding mode (asymmetric bidentate, 91.5\%)
-        \item \textbf{Lid dynamics: 100\% open throughout 10 ns}
+        \item \textbf{Lid dynamics: 5VG3-like state throughout 10 ns}
     \end{itemize}
 
     \item \textbf{Statistical validation}
@@ -87,9 +87,9 @@ This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dy
 \begin{center}
 \fbox{\parbox{0.9\textwidth}{
 \centering
-\textbf{The active site lid remains FULLY OPEN throughout the 10 ns simulation}\\
+\textbf{The active site lid remains in the 5VG3-like ``closed-backbone / Glu162-out'' state}\\
 \vspace{0.5em}
-Glu162-Mn = 11.5 $\pm$ 0.5~\AA~$|$~Open fraction: 100\%~$|$~Lid closure events: 0
+Glu162-Mn = 11.5 $\pm$ 0.5~\AA~$|$~Consistent with 5VG3 ($\sim$10-12~\AA)~$|$~Not 1UW8 Glu162-in ($\sim$4.6~\AA)
 }}
 \end{center}
 
@@ -251,23 +251,26 @@ Distribution & Unimodal (p = 0.94) \\
 \label{fig:lid}
 \end{figure}
 
-\subsubsection{Comparison to Crystal Structures}
+\subsubsection{Comparison to Crystal Structures (Three-State Model)}
+
+Literature establishes \textbf{three distinct lid states}:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{lrl}
+\begin{tabular}{llrl}
 \toprule
-\textbf{Structure} & \textbf{Glu162-Mn (\AA)} & \textbf{State} \\
+\textbf{State} & \textbf{PDB} & \textbf{Glu162-Mn (\AA)} & \textbf{Description} \\
 \midrule
-5VG3 (closed, substrate-bound) & $\sim$2.4 & Closed \\
-1J58 (apo, open) & $\sim$12 & Open \\
-\textbf{Our simulation (BiOx+2)} & \textbf{11.5} & \textbf{Open} \\
+Open-loop & 1J58 & $\sim$15-16 & SENS loop swung away \\
+Closed, Glu162-in & 1UW8 & $\sim$4.6-5.1 & Glu162 H-bonds Mn-water \\
+Closed-backbone, Glu162-out & 5VG3 & $\sim$10-12 & Loop closed, sidechain out \\
+\textbf{Our simulation} & \textbf{BiOx+2} & \textbf{11.5} & \textbf{5VG3-like} \\
 \bottomrule
 \end{tabular}
 \caption{Glu162-Mn distance comparison with crystallographic data.}
 \end{table}
 
-Despite starting from the closed crystal structure (5VG3), the lid opened during equilibration and remained open throughout production. The simulation Glu162-Mn distance matches the apo/open crystal structure (1J58).
+\textbf{Corrected interpretation:} Our simulation maintains the 5VG3-like ``closed-backbone / Glu162-out'' state. This is \textbf{not} the open-loop state (1J58, $\sim$15-16~\AA). The Glu162 sidechain is displaced from Mn, likely due to bidentate oxalate binding sterically forcing Glu162 out.
 
 \subsubsection{Mechanistic Implications}
 
