@@ -159,6 +159,77 @@ Consider: Scaling down k values by 50% for problematic systems
 
 ---
 
+---
+
+## Production Run Results: BiOx+2 474 ns Trajectory
+
+### Simulation Details
+
+| Parameter | Value |
+|-----------|-------|
+| **Total simulation time** | 474 ns |
+| **Trajectory size** | 33 GB |
+| **Frames analyzed** | 46,383 |
+| **Performance** | 462.7 ns/day (B200 GPU) |
+| **Location** | `/blue/ax/john.aitken/oxdc-md-fall25/systems/BiOx+2/` |
+
+### Structural Stability
+
+| Metric | Mean | Std Dev | Interpretation |
+|--------|------|---------|----------------|
+| **Backbone RMSD** | 4.70 Å | 1.84 Å | High - driven by flexible N/C termini |
+| **Active Site RMSD** | 1.77 Å | 0.42 Å | **Stable** - Mn coordination maintained |
+| **Radius of Gyration** | 24.02 Å | 0.35 Å | **Very stable** - protein stays compact |
+
+**Key finding:** The active site (Mn + coordinating residues) is significantly more stable than the overall backbone, validating the MCPB.py parameterization for the catalytic center.
+
+### Per-Residue Flexibility (RMSF)
+
+| Region | Residues | RMSF Range | Notes |
+|--------|----------|------------|-------|
+| N-terminus | 1-20 | 10-22 Å | Very flexible, drives high backbone RMSD |
+| Core | 25-360 | 4-8 Å | Stable |
+| C-terminus | 370-382 | 4-7 Å | Moderately flexible |
+
+### Mn Coordination Analysis
+
+**Bidentate oxalate binding maintained throughout 474 ns:**
+
+| Ligand | Distance (Å) | Std Dev (Å) | Crystal Structure |
+|--------|-------------|-------------|-------------------|
+| **Oxalate OZ** | 2.087 | 0.069 | ~2.1 Å |
+| **Oxalate OX** | 2.348 | 0.105 | ~2.4 Å |
+| **His HD1 (NE2)** | 2.421 | 0.118 | 2.24 Å |
+| **His HD2 (NE2)** | 2.272 | 0.092 | 2.44 Å |
+| **His HD3 (NE2)** | 2.222 | 0.090 | 2.22 Å |
+| **Glu GU1 (OE1)** | 2.060 | 0.085 | 2.04 Å |
+
+**Key findings:**
+1. Asymmetric bidentate oxalate coordination preserved (OZ shorter than OX)
+2. All Mn-ligand distances show low fluctuations (σ < 0.12 Å)
+3. Coordination geometry consistent with crystallographic data
+4. No dissociation events observed over 474 ns
+
+### Data Files
+
+Results stored in `analysis/results/biox2_474ns/`:
+- `rmsd_backbone.dat` - Backbone RMSD time series
+- `rmsd_activesite.dat` - Active site RMSD time series
+- `rmsf_ca.dat` - Per-residue Cα RMSF
+- `rog.dat` - Radius of gyration time series
+- `dist_mn_oxalate.dat` - Mn-oxalate distances
+- `dist_mn_his.dat` - Mn-histidine distances
+- `dist_mn_glu.dat` - Mn-glutamate distances
+- `secstruct_summary.dat` - Secondary structure summary
+
+### cpptraj Scripts
+
+Analysis scripts in `analysis/cpptraj/`:
+- `biox2_474ns_analysis.cpptraj` - General structural analysis
+- `biox2_mn_distances.cpptraj` - Mn coordination distance analysis
+
+---
+
 ## Conclusions
 
 The stability of BiOx+2 is not due to restraint mask configuration but rather to:

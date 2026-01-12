@@ -1,0 +1,38 @@
+# Quick analysis of BiOx+2 474ns production trajectory
+# Load topology and trajectory
+parm ../5vg3_solv.prmtop
+trajin ../prod_500ns.nc
+
+# Strip water and ions for faster analysis
+strip :WAT,Na+,Cl-
+
+# 1. Backbone RMSD (reference = first frame)
+rms backbone_rmsd @CA,C,N first out rmsd_backbone.dat mass
+
+# 2. Active site RMSD (Mn + coordinating residues)
+# MN is residue 1383, coordinating His: 195, 197, 140; Glu: 101; Oxalate: 1385
+rms activesite_rmsd :195,197,140,101,1383,1385&!@H= first out rmsd_activesite.dat mass
+
+# 3. Mn-Oxalate distances (bidentate coordination)
+# MN index 6032, OX1 OZ index 6036, OX1 OX index 6038
+distance mn_oz :1383@MN :1385@OZ out dist_mn_oz.dat
+distance mn_ox :1383@MN :1385@OX out dist_mn_ox.dat
+
+# 4. Mn-His distances (3 coordinating His)
+distance mn_hd1 :1383@MN :195@NE2 out dist_mn_his.dat
+distance mn_hd2 :1383@MN :197@NE2 out dist_mn_his.dat
+distance mn_hd3 :1383@MN :140@NE2 out dist_mn_his.dat
+
+# 5. Mn-Glu distance
+distance mn_glu :1383@MN :101@OE1 out dist_mn_glu.dat
+
+# 6. Per-residue RMSF (Ca atoms)
+atomicfluct rmsf_ca @CA out rmsf_ca.dat byres
+
+# 7. Radius of gyration
+radgyr rog :1-382 out rog.dat mass
+
+# 8. Secondary structure over time (sample every 100 frames for speed)
+secstruct ss out secstruct.gnu sumout secstruct_summary.dat
+
+run

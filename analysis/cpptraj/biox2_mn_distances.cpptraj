@@ -1,0 +1,19 @@
+# Mn-ligand distance analysis for BiOx+2
+# Using residue names to avoid numbering issues
+parm ../5vg3_solv.prmtop
+trajin ../prod_500ns.nc
+
+# Mn-Oxalate bidentate coordination
+# MN1 is the Mn residue, OX1 is oxalate
+distance mn_oz :MN1@MN :OX1@OZ out dist_mn_oxalate.dat
+distance mn_ox :MN1@MN :OX1@OX out dist_mn_oxalate.dat
+
+# Mn-His coordination (3 coordinating histidines: HD1, HD2, HD3)
+distance mn_hd1 :MN1@MN :HD1@NE2 out dist_mn_his.dat
+distance mn_hd2 :MN1@MN :HD2@NE2 out dist_mn_his.dat  
+distance mn_hd3 :MN1@MN :HD3@NE2 out dist_mn_his.dat
+
+# Mn-Glu coordination (GU1 is the coordinating glutamate)
+distance mn_gu1 :MN1@MN :GU1@OE1 out dist_mn_glu.dat
+
+run
