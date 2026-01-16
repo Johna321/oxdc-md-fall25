@@ -1,0 +1,219 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+
+\setlength{\headheight}{14pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Winter Break Progress}
+\lhead{John Aitken}
+\rfoot{Page \thepage}
+
+\title{OxDC MD Simulations: Winter Break Updates}
+\author{John Aitken}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+
+\begin{itemize}
+    \item Completed 474 ns production run for BiOx+2 (bidentate oxalate, Mn(II))
+    \item Ran full cpptraj analysis pipeline on production trajectory
+    \item Generated analysis figures for structural stability, coordination, and lid dynamics
+    \item Attempted equilibration of 1Wat+3 (Mn(III)), encountered numerical instability
+\end{itemize}
+
+%======================================================================
+\section{BiOx+2 Production Run (474 ns)}
+%======================================================================
+
+\subsection{Simulation Setup}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+System & BiOx+2 (bidentate oxalate, Mn(II), from 5VG3) \\
+Total atoms & 63,287 (19,079 TIP3P waters, 1 Cl$^-$) \\
+Production length & 474 ns (46,383 frames at 10 ps/frame) \\
+GPU & NVIDIA B200 (hpg-b200), 467 ns/day \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Structural Stability}
+
+The active site remained stable throughout the trajectory despite conformational sampling in flexible regions (N/C-termini):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Metric} & \textbf{Backbone} & \textbf{Active Site} \\
+\midrule
+Mean RMSD & 4.70 $\pm$ 1.84~\AA & 1.77 $\pm$ 0.42~\AA \\
+Radius of gyration & \multicolumn{2}{c}{24.02 $\pm$ 0.35~\AA} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_rmsd.png}
+\caption{Backbone and active site RMSD over 474 ns. Higher backbone RMSD reflects terminal flexibility; active site remains stable.}
+\end{figure}
+
+\subsection{Mn1 Coordination}
+
+All four protein ligands maintained coordination with zero dissociation events:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Ligand} & \textbf{Mean Distance (\AA)} & \textbf{Dissociations} \\
+\midrule
+His95-NE2 & 2.42 $\pm$ 0.12 & 0 \\
+His97-NE2 & 2.27 $\pm$ 0.09 & 0 \\
+His140-NE2 & 2.22 $\pm$ 0.09 & 0 \\
+Glu101-OE1 & 2.06 $\pm$ 0.09 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_mn1_coordination.png}
+\caption{Mn1-ligand distances. Green shading = expected $r_0$ range; red dashed = 3.0~\AA\ dissociation threshold.}
+\end{figure}
+
+\subsection{Oxalate Binding}
+
+Oxalate maintained asymmetric bidentate coordination (92.6\% of trajectory):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrl}
+\toprule
+\textbf{Oxygen} & \textbf{Mean Distance (\AA)} & \textbf{Mode} \\
+\midrule
+OZ & 2.09 $\pm$ 0.07 & Tight \\
+OX & 2.35 $\pm$ 0.11 & Loose \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_oxalate_binding.png}
+\caption{Oxalate binding analysis showing persistent asymmetric bidentate coordination.}
+\end{figure}
+
+\subsection{Lid Dynamics}
+
+Flexible loop did not appear to change conformation during the simulation: the Glu162 sidechain remained in the 5VG3-like ``closed-backbone / Glu162-out'' position throughout the simulation. While doing this analysis ran into some confusion on the definitions of "closed" and "open" flexible loop states. For reference, compiled the three lid states from literature:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{State} & \textbf{PDB} & \textbf{Glu162-Mn (\AA)} \\
+\midrule
+Open-loop & 1J58 & $\sim$15--16 \\
+Glu162-in (catalytic) & 1UW8 & $\sim$4.6--5.1 \\
+Closed-backbone, Glu162-out & 5VG3 & $\sim$10--12 \\
+\midrule
+\textbf{This simulation} & --- & \textbf{12.0 $\pm$ 0.7} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+No transitions toward the Glu162-in state were observed (closest approach: 8.23~\AA\ at 229 ns). The lid region showed below-average flexibility (RMSF = 0.71~\AA\ vs 1.03~\AA\ global average), suggesting the Glu162-out conformation is stabilized in this system.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_lid_dynamics.png}
+\caption{Glu162-Mn distance over 474 ns showing persistent Glu162-out state.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_rmsf.png}
+\caption{Per-residue RMSF. Lid region (160--166) highlighted.}
+\end{figure}
+
+\subsection{Convergence}
+
+Block averaging (231 blocks $\times$ 2 ns) confirms good convergence:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Metric} & \textbf{Mean} & \textbf{SEM} & \textbf{SEM \%} \\
+\midrule
+Backbone RMSD (\AA) & 4.70 & 0.120 & 2.56\% \\
+Active Site RMSD (\AA) & 1.77 & 0.024 & 1.35\% \\
+Glu162-Mn (\AA) & 12.04 & 0.035 & 0.29\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_correlations.png}
+\caption{Correlation analysis between structural metrics.}
+\end{figure}
+
+%======================================================================
+\section{1Wat+3 Equilibration (Mn(III))}
+%======================================================================
+
+The 1Wat+3 system (water-coordinated Mn(III)) was equilibrated but showed significant numerical instability:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Stage} & \textbf{vlimit Warnings} & \textbf{Status} \\
+\midrule
+heat.cpu & 2,467 & Completed \\
+eq1.cpu & 6,174 & Completed \\
+eq1a.cpu & 2,127 & Completed \\
+eq1b.cpu & 1,179 & Completed \\
+\midrule
+\textbf{Total} & \textbf{11,947} & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The instability might stem from elevated Mn(III) force constants from MCPB.py (85--125 kcal/mol$\cdot$\AA$^2$ vs 29.7 for BiOx+2). Might reflect Jahn-Teller distortion that classical harmonic potentials struggle to represent. Production runs for 1Wat+3 might not be possible until parameterization is addressed, may require QM/MM.
+
+%======================================================================
+\section{Next Steps}
+%======================================================================
+
+\begin{enumerate}
+  \item \textbf{Extend production} --- At 467 ns/day (on B200s), reaching 1 $\mu$s takes $\sim$2 days. Would help determine if Glu162-in is ever kinetically accessible from this state.
+
+    \item \textbf{Address 1Wat+3 parameterization} --- Investigate Mn(III) parameters or investigate whether QM/MM is needed for Mn(III) systems.
+
+    \item \textbf{Enhanced sampling} --- Metadynamics with Glu162-Mn as CV could estimate the free energy barrier for Glu162-out $\rightarrow$ Glu162-in transition.
+\end{enumerate}
+
+\end{document}

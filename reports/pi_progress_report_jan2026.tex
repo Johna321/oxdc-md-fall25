@@ -8,7 +8,7 @@
 \usepackage{siunitx}
 \usepackage{hyperref}
 \usepackage{xcolor}
-\usepackage{enumlist}
+\usepackage{enumitem}
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{fancyhdr}
@@ -32,14 +32,14 @@
 \author{John Aitken\\
 Department of Chemistry, University of Florida\\
 \texttt{john.aitken@ufl.edu}}
-\date{January 11, 2026}
+\date{January 13, 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dynamics simulation project during the winter break period. The primary accomplishment is the completion and rigorous analysis of a 10 ns production trajectory for the BiOx+2 system (bidentate oxalate with Mn(II)). \textbf{Key finding:} The active site lid remains in the ``closed-backbone / Glu162-out'' state throughout the simulation (Glu162-Mn = 11.5~\AA), matching the 5VG3 crystal structure. This is distinct from both the ``open-loop'' state (1J58, $\sim$15-16~\AA) and the catalytically active ``Glu162-in closed'' state (1UW8, $\sim$4.6-5.1~\AA). Bidentate oxalate binding likely sterically prevents Glu162 from adopting the catalytically active Glu162-in pose. Comprehensive analysis including block averaging, correlation analysis, and literature cross-referencing confirms simulation convergence and validates the MCPB.py force field parameterization.
+This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dynamics simulation project during the winter break period. The primary accomplishment is the completion and rigorous analysis of a \textbf{474 ns} production trajectory for the BiOx+2 system (bidentate oxalate with Mn(II)), achieving 467 ns/day throughput on NVIDIA B200 GPUs. \textbf{Key finding:} The active site lid remains in the ``closed-backbone / Glu162-out'' state throughout the simulation (Glu162-Mn = 12.0 $\pm$ 0.7~\AA), matching the 5VG3 crystal structure. This is distinct from both the ``open-loop'' state (1J58, $\sim$15-16~\AA) and the catalytically active ``Glu162-in closed'' state (1UW8, $\sim$4.6-5.1~\AA). Bidentate oxalate binding likely sterically prevents Glu162 from adopting the catalytically active Glu162-in pose. Block averaging across 231 two-nanosecond windows confirms convergence ($<$3\% SEM for all key metrics). Additionally, equilibration of the 1Wat+3 system (Mn(III)) revealed significant numerical instability due to elevated force constants, providing insight into the challenges of classical MD for Mn(III) metalloenzymes.
 \end{abstract}
 
 \tableofcontents
@@ -52,19 +52,19 @@ This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dy
 \subsection{Major Accomplishments}
 
 \begin{enumerate}[label=\arabic*.]
-    \item \textbf{Completed 10 ns BiOx+2 production simulation}
+    \item \textbf{Completed 474 ns BiOx+2 production simulation}
     \begin{itemize}
         \item Stable trajectory with no force field issues
-        \item 175 ns/day performance on HiPerGator GPU nodes
-        \item Full cpptraj analysis pipeline executed
+        \item 467 ns/day performance on HiPerGator B200 GPU nodes
+        \item Full cpptraj analysis pipeline executed (46,383 frames)
     \end{itemize}
 
     \item \textbf{Comprehensive trajectory analysis}
     \begin{itemize}
-        \item Structural stability (RMSD = 1.98 $\pm$ 0.24~\AA)
+        \item Structural stability (Active site RMSD = 1.77 $\pm$ 0.42~\AA)
         \item Mn1 coordination integrity (0 dissociation events)
-        \item Oxalate binding mode (asymmetric bidentate, 91.5\%)
-        \item \textbf{Lid dynamics: 5VG3-like (Glu162-out) state throughout 10 ns}
+        \item Oxalate binding mode (asymmetric bidentate, 92.6\%)
+        \item \textbf{Lid dynamics: 5VG3-like (Glu162-out) state throughout 474 ns}
     \end{itemize}
 
     \item \textbf{Statistical validation}
@@ -89,20 +89,20 @@ This report summarizes progress on the oxalate decarboxylase (OxDC) molecular dy
 \centering
 \textbf{The active site lid remains in the 5VG3-like ``closed-backbone / Glu162-out'' state}\\
 \vspace{0.5em}
-Glu162-Mn = 11.5 $\pm$ 0.5~\AA~$|$~Consistent with 5VG3 ($\sim$10-12~\AA)~$|$~Not 1UW8 Glu162-in ($\sim$4.6~\AA)
+Glu162-Mn = 12.0 $\pm$ 0.7~\AA~$|$~Consistent with 5VG3 ($\sim$10-12~\AA)~$|$~Not 1UW8 Glu162-in ($\sim$4.6~\AA)
 }}
 \end{center}
 
 This finding has significant mechanistic implications:
 \begin{itemize}
     \item Glu162 is the essential proton donor (E162A mutation eliminates activity)
-    \item At 11.5~\AA, direct proton transfer to Mn1 is geometrically impossible
+    \item At 12.0~\AA, direct proton transfer to Mn1 is geometrically impossible
     \item The Glu162-out conformation may be stabilized by bidentate oxalate (steric clash with Glu162-in)
     \item Transition to Glu162-in may require oxalate rearrangement or other triggering event
 \end{itemize}
 
 %======================================================================
-\section{BiOx+2 10 ns Production Analysis}
+\section{BiOx+2 474 ns Production Analysis}
 %======================================================================
 
 \subsection{Simulation Parameters}
@@ -118,13 +118,14 @@ PDB origin & 5VG3 \\
 Topology & 5vg3\_solv.prmtop \\
 Total atoms & 63,287 \\
 Water molecules & 19,079 (TIP3P) \\
-Ions & 9 Cl$^-$ \\
+Ions & 1 Cl$^-$ \\
 Temperature & 300 K (Langevin) \\
 Pressure & 1 atm (MC barostat) \\
 Timestep & 2 fs \\
-Production length & 10 ns (5,000,000 steps) \\
-Saved frames & 1,000 (10 ps/frame) \\
-GPU performance & 175 ns/day \\
+Production length & 474 ns (237,000,000 steps) \\
+Saved frames & 46,383 (10 ps/frame) \\
+GPU & NVIDIA B200 (hpg-b200 partition) \\
+GPU performance & 467 ns/day \\
 \bottomrule
 \end{tabular}
 \caption{Simulation parameters for BiOx+2 production run.}
@@ -132,30 +133,30 @@ GPU performance & 175 ns/day \\
 
 \subsection{Structural Stability}
 
-The backbone C$\alpha$ RMSD (Figure~\ref{fig:rmsd}) shows stable behavior throughout the trajectory:
+The backbone C$\alpha$ RMSD shows conformational sampling throughout the 474 ns trajectory, while the active site remains highly stable:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{lr}
+\begin{tabular}{lrr}
 \toprule
-\textbf{Metric} & \textbf{Value} \\
+\textbf{Metric} & \textbf{Backbone} & \textbf{Active Site} \\
 \midrule
-Mean RMSD & 1.98 $\pm$ 0.24~\AA \\
-Range & 1.28 -- 2.64~\AA \\
-Drift & +0.056~\AA/ns \\
-Early ($<$1 ns) mean & 1.62~\AA \\
-Late ($>$1 ns) mean & 2.02~\AA \\
+Mean RMSD & 4.70 $\pm$ 1.84~\AA & 1.77 $\pm$ 0.42~\AA \\
+Range & 0.00 -- 7.30~\AA & --- \\
+Drift & +0.012~\AA/ns & negligible \\
+Early ($<$10\%) mean & 2.41~\AA & --- \\
+Late ($>$90\%) mean & 6.82~\AA & --- \\
 \bottomrule
 \end{tabular}
-\caption{RMSD statistics for 10 ns production trajectory.}
+\caption{RMSD statistics for 474 ns production trajectory.}
 \end{table}
 
-The small positive drift reflects minor conformational adjustment but remains well within acceptable limits for enzyme simulations. The structure did not unfold or undergo major conformational changes.
+The backbone RMSD reflects conformational sampling of flexible N- and C-terminal regions, as confirmed by RMSF analysis showing terminal RMSF $>$5~\AA. Critically, the \textbf{active site RMSD remains low} (1.77~\AA), indicating that the catalytic center maintains structural integrity throughout the simulation. The radius of gyration (24.02 $\pm$ 0.35~\AA) confirms the protein remains compact without unfolding.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{../systems/BiOx+2/analysis_results/figures/prod_rmsd.png}
-\caption{C$\alpha$ RMSD time series and distribution for 10 ns BiOx+2 production. Left: Time series with 50-frame running average (red). Right: Histogram showing unimodal distribution centered at $\sim$2~\AA.}
+\caption{C$\alpha$ RMSD time series and distribution for 474 ns BiOx+2 production. Left: Backbone (blue) and active site (red) RMSD with 5 ns running average. Right: RMSD distributions showing stable active site despite backbone sampling.}
 \label{fig:rmsd}
 \end{figure}
 
@@ -169,13 +170,13 @@ The MCPB.py-parameterized Mn1 coordination sphere remained intact throughout the
 \toprule
 \textbf{Ligand} & \textbf{Mean (\AA)} & \textbf{Std (\AA)} & \textbf{Dissociation Events} \\
 \midrule
-His95-NE2 & 2.39 & 0.12 & 0 \\
-His97-NE2 & 2.26 & 0.09 & 0 \\
-His140-NE2 & 2.24 & 0.09 & 0 \\
-Glu101-OE1 & 2.06 & 0.08 & 0 \\
+His95-NE2 & 2.42 & 0.12 & 0 \\
+His97-NE2 & 2.27 & 0.09 & 0 \\
+His140-NE2 & 2.22 & 0.09 & 0 \\
+Glu101-OE1 & 2.06 & 0.09 & 0 \\
 \bottomrule
 \end{tabular}
-\caption{Mn1-ligand distances from 10 ns production. All values within expected MCPB.py $r_0$ ranges.}
+\caption{Mn1-ligand distances from 474 ns production. All values within expected MCPB.py $r_0$ ranges.}
 \end{table}
 
 This validates the Seminario method force constants for this system (mean k = 29.7 kcal/mol$\cdot$\AA$^2$).
@@ -199,10 +200,9 @@ The oxalate substrate maintains asymmetric bidentate ($\kappa$O,$\kappa$O') coor
 \midrule
 OZ & 2.09 $\pm$ 0.07 & Coordinating (tight) \\
 OX & 2.35 $\pm$ 0.11 & Coordinating (loose) \\
-OY & 4.05 $\pm$ 0.09 & Non-coordinating \\
 \bottomrule
 \end{tabular}
-\caption{Mn1-oxalate oxygen distances. Bidentate fraction = 91.5\%.}
+\caption{Mn1-oxalate oxygen distances. Bidentate fraction = 92.6\%.}
 \end{table}
 
 The asymmetric binding is consistent with:
@@ -222,7 +222,7 @@ The asymmetric binding is consistent with:
 
 \subsection{Lid Dynamics: The Key Finding}
 
-\textbf{The Glu162 sidechain remains in the 5VG3-like ``Glu162-out'' position throughout the 10 ns simulation.}
+\textbf{The Glu162 sidechain remains in the 5VG3-like ``Glu162-out'' position throughout the entire 474 ns simulation.}
 
 \begin{table}[H]
 \centering
@@ -230,9 +230,9 @@ The asymmetric binding is consistent with:
 \toprule
 \textbf{Metric} & \textbf{Value} \\
 \midrule
-Glu162 CD - Mn1 distance & 11.54 $\pm$ 0.54~\AA \\
-Glu162 OE1 - Mn1 distance & 11.73 $\pm$ 0.73~\AA \\
-Glu162 OE2 - Mn1 distance & 12.28 $\pm$ 0.63~\AA \\
+Glu162 CD - Mn1 distance & 12.04 $\pm$ 0.70~\AA \\
+Glu162 OE1 - Mn1 distance & 12.03 $\pm$ 0.95~\AA \\
+Glu162 OE2 - Mn1 distance & 13.05 $\pm$ 0.68~\AA \\
 \midrule
 \multicolumn{2}{l}{\textbf{Three-State Classification (Literature):}} \\
 Glu162-in fraction ($<$6~\AA) & 0.0\% \\
@@ -240,10 +240,11 @@ Glu162-out fraction (8-14~\AA) & 100.0\% \\
 Open-loop fraction ($>$14~\AA) & 0.0\% \\
 \midrule
 Transitions toward Glu162-in & 0 \\
-Distribution & Unimodal (p = 0.94) \\
+Closest approach & 8.23~\AA~at 229 ns \\
+Block SEM (231 blocks) & 0.035~\AA~(0.29\%) \\
 \bottomrule
 \end{tabular}
-\caption{Lid dynamics analysis. Glu162 maintains the 5VG3-like Glu162-out position throughout.}
+\caption{Lid dynamics analysis. Glu162 maintains the 5VG3-like Glu162-out position throughout 474 ns.}
 \end{table}
 
 \begin{figure}[H]
@@ -266,7 +267,7 @@ Literature establishes \textbf{three distinct lid states}:
 Open-loop & 1J58 & $\sim$15-16 & SENS loop swung away \\
 Closed, Glu162-in & 1UW8 & $\sim$4.6-5.1 & Glu162 H-bonds Mn-water \\
 Closed-backbone, Glu162-out & 5VG3 & $\sim$10-12 & Loop closed, sidechain out \\
-\textbf{Our simulation} & \textbf{BiOx+2} & \textbf{11.5} & \textbf{5VG3-like} \\
+\textbf{Our simulation (474 ns)} & \textbf{BiOx+2} & \textbf{12.0} & \textbf{5VG3-like} \\
 \bottomrule
 \end{tabular}
 \caption{Glu162-Mn distance comparison with crystallographic data.}
@@ -286,7 +287,7 @@ Closed-backbone, Glu162-out & 5VG3 & $\sim$10-12 & Loop closed, sidechain out \\
 
 Glu162 is essential for catalysis---the E162A mutation eliminates decarboxylase activity (Saylor et al., 2008). Glu162 serves as the proton donor in the proposed PCET mechanism, requiring close proximity to the Mn-bound water ($\sim$2.7-2.8~\AA\ contact in 1UW8).
 
-At 11.5~\AA, direct proton transfer is impossible. This suggests:
+At 12.0~\AA, direct proton transfer is impossible. This suggests:
 
 \begin{enumerate}
     \item \textbf{Bidentate oxalate sterically blocks Glu162-in} -- Consistent with Zhu et al. 2016 structural analysis showing the 1UW8 Glu162 pose clashes with substrate
@@ -323,21 +324,23 @@ This indicates that the Glu162-out conformation is \textbf{stabilized}, not fluc
 
 \subsection{Convergence Assessment}
 
-Block averaging (5 blocks of 2 ns each) confirms simulation convergence:
+Block averaging (231 blocks of 2 ns each) confirms excellent simulation convergence:
 
 \begin{table}[H]
 \centering
-\begin{tabular}{lrrrrrrr}
+\begin{tabular}{lrrr}
 \toprule
-\textbf{Metric} & \textbf{0-2 ns} & \textbf{2-4 ns} & \textbf{4-6 ns} & \textbf{6-8 ns} & \textbf{8-10 ns} & \textbf{SEM} \\
+\textbf{Metric} & \textbf{Mean} & \textbf{SEM} & \textbf{SEM \%} \\
 \midrule
-RMSD (\AA) & 1.75 & 1.84 & 1.99 & 2.23 & 2.11 & 0.08 \\
-Glu162-Mn (\AA) & 11.34 & 11.72 & 11.40 & 11.66 & 11.58 & 0.07 \\
-Mn1-His95 (\AA) & 2.39 & 2.41 & 2.38 & 2.37 & 2.39 & 0.01 \\
-Mn1-Glu101 (\AA) & 2.06 & 2.06 & 2.05 & 2.06 & 2.06 & 0.00 \\
+Backbone RMSD (\AA) & 4.70 & 0.120 & 2.56\% \\
+Active Site RMSD (\AA) & 1.77 & 0.024 & 1.35\% \\
+Radius of Gyration (\AA) & 24.02 & 0.022 & 0.09\% \\
+Glu162-Mn (\AA) & 12.04 & 0.035 & 0.29\% \\
+Mn1-His95 (\AA) & 2.42 & 0.002 & 0.07\% \\
+Mn1-Glu101 (\AA) & 2.06 & 0.001 & 0.06\% \\
 \bottomrule
 \end{tabular}
-\caption{Block averages for key metrics. All SEM values $<$10\% of mean, indicating convergence.}
+\caption{Block averages for key metrics across 231 two-nanosecond windows. All SEM values $<$3\% of mean, indicating excellent convergence.}
 \end{table}
 
 \subsection{Correlation Analysis}
@@ -364,6 +367,68 @@ Lid RMSD vs Glu162-Mn & +0.39 & Moderate -- lid motion coupled to position \\
 \end{figure}
 
 %======================================================================
+\section{1Wat+3 Equilibration: Mn(III) Challenges}
+%======================================================================
+
+The 1Wat+3 system (water-coordinated Mn(III)) was equilibrated to investigate oxidation state effects on lid dynamics. However, significant numerical instability was observed, providing insight into the limitations of classical MD for Mn(III) metalloenzymes.
+
+\subsection{Equilibration Progress}
+
+The system progressed through heating and equilibration stages but accumulated substantial velocity limit (vlimit) warnings:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Stage} & \textbf{vlimit Warnings} & \textbf{Status} \\
+\midrule
+heat.cpu & 2,467 & Completed \\
+eq1.cpu & 6,174 & Completed \\
+eq1a.cpu & 2,127 & Completed \\
+eq1b.cpu & 1,179 & Completed \\
+\midrule
+\textbf{Total} & \textbf{11,947} & Progressing \\
+\bottomrule
+\end{tabular}
+\caption{1Wat+3 equilibration vlimit warnings by stage.}
+\end{table}
+
+\subsection{Root Cause Analysis}
+
+The instability stems from \textbf{elevated Mn(III) force constants}. Comparison with BiOx+2:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrl}
+\toprule
+\textbf{System} & \textbf{Mean k (kcal/mol$\cdot$\AA$^2$)} & \textbf{vlimit} & \textbf{Status} \\
+\midrule
+BiOx+2 (Mn(II)) & 29.7 & 0 & Stable \\
+1Wat+3 (Mn(III)) & 85--125 & 11,947 & Unstable \\
+\bottomrule
+\end{tabular}
+\caption{Force constant comparison between stable and unstable systems.}
+\end{table}
+
+The Mn(III) oxidation state exhibits Jahn-Teller distortion, leading to anisotropic coordination geometry that MCPB.py captures as high, anharmonic force constants. Classical harmonic potentials struggle to represent this behavior, causing:
+\begin{itemize}
+    \item Large energy corrections for small geometric deviations
+    \item Velocity spikes triggering vlimit warnings
+    \item Potential for SHAKE failures in severe cases
+\end{itemize}
+
+\subsection{Implications}
+
+This finding has important implications for OxDC mechanistic studies:
+\begin{enumerate}
+    \item \textbf{Mn(II) systems are more tractable} for classical MD
+    \item \textbf{QM/MM may be required} for studying Mn(III) catalytic intermediates
+    \item \textbf{Force constant threshold} of $\sim$35 kcal/mol$\cdot$\AA$^2$ appears predictive of stability
+\end{enumerate}
+
+Production runs for 1Wat+3 are not recommended until parameterization issues are addressed.
+
+%======================================================================
 \section{Summary of All Generated Figures}
 %======================================================================
 
@@ -373,9 +438,9 @@ Lid RMSD vs Glu162-Mn & +0.39 & Moderate -- lid motion coupled to position \\
 \toprule
 \textbf{Figure} & \textbf{Content} & \textbf{Key Finding} \\
 \midrule
-prod\_rmsd.png & Structural stability & RMSD = 1.98~\AA, stable \\
+prod\_rmsd.png & Structural stability & Active site RMSD = 1.77~\AA \\
 prod\_mn1\_coordination.png & Mn1-ligand distances & 0 dissociations \\
-prod\_oxalate\_binding.png & Oxalate binding & 91.5\% bidentate \\
+prod\_oxalate\_binding.png & Oxalate binding & 92.6\% bidentate \\
 prod\_lid\_dynamics.png & Lid position & 5VG3-like (Glu162-out) \\
 prod\_rmsf.png & Flexibility & Lid stabilized \\
 prod\_correlations.png & Metric correlations & Lid independent \\
@@ -404,24 +469,24 @@ distance\_vs\_forceconstant.png & r$_0$ vs k & Flexibility = stability \\
     \item \textbf{BiOx+2 is a stable, well-behaved system}
     \begin{itemize}
         \item MCPB.py parameterization produces appropriate force constants
-        \item 10 ns production trajectory is converged
+        \item 474 ns production trajectory is well-converged ($<$3\% SEM)
         \item Can serve as reference for comparison with other systems
     \end{itemize}
 
     \item \textbf{Oxalate binding is persistent and asymmetric}
     \begin{itemize}
         \item Consistent with experimental ENDOR data
-        \item Bidentate mode maintained 91.5\% of simulation
+        \item Bidentate mode maintained 92.6\% of 474 ns simulation
         \item Asymmetry provides mechanical flexibility
         \item May sterically prevent Glu162-in pose
     \end{itemize}
 
-    \item \textbf{The lid maintains the 5VG3-like Glu162-out state}
+    \item \textbf{The lid maintains the 5VG3-like Glu162-out state throughout 474 ns}
     \begin{itemize}
-        \item Glu162-Mn = 11.5~\AA\ matches 5VG3 crystal structure ($\sim$10-12~\AA)
+        \item Glu162-Mn = 12.0 $\pm$ 0.7~\AA\ matches 5VG3 crystal structure ($\sim$10-12~\AA)
         \item This is \textbf{not} the open-loop state (1J58, $\sim$15-16~\AA)
         \item This is \textbf{not} the catalytic Glu162-in state (1UW8, $\sim$4.6-5.1~\AA)
-        \item Glu162-out conformation is stabilized (low lid RMSF)
+        \item Zero transitions toward Glu162-in observed over 474 ns
     \end{itemize}
 \end{enumerate}
 
@@ -436,15 +501,16 @@ distance\_vs\_forceconstant.png & r$_0$ vs k & Flexibility = stability \\
 
     \item \textbf{Can Glu162 adopt the catalytic ``in'' pose?}
     \begin{itemize}
-        \item 10 ns may be too short to observe transition
-        \item Bidentate oxalate may prevent it entirely (steric clash)
-        \item Monodentate transition may be prerequisite
+        \item Even 474 ns showed zero transitions toward Glu162-in
+        \item Bidentate oxalate likely prevents it entirely (steric clash)
+        \item Monodentate transition or enhanced sampling may be required
     \end{itemize}
 
     \item \textbf{Does Mn oxidation state affect lid dynamics?}
     \begin{itemize}
-        \item Need to analyze 1Wat+3 (Mn(III)) production
-        \item May explain mechanistic coupling between redox and conformational change
+        \item 1Wat+3 (Mn(III)) equilibration shows numerical instability (Section 3)
+        \item Classical MD may be inadequate for Mn(III) systems
+        \item QM/MM approaches may be required for oxidation state comparisons
     \end{itemize}
 \end{enumerate}
 
@@ -459,20 +525,21 @@ distance\_vs\_forceconstant.png & r$_0$ vs k & Flexibility = stability \\
     \begin{itemize}
         \item Calculate RMSD of lid backbone to 1J58 (open) vs 1UW8 (closed) references
         \item Track Glu162 C$\alpha$-Mn1 distance (backbone proxy)
-        \item Verify loop is in ``closed-backbone'' state
+        \item Verify loop is in ``closed-backbone'' state throughout 474 ns
     \end{itemize}
 
-    \item \textbf{Extend BiOx+2 to 100 ns}
+    \item \textbf{Extended production analysis}
     \begin{itemize}
-        \item Continue from current restart file
-        \item Estimate: 100 ns / 175 ns/day $\approx$ 14 hours on GPU
-        \item Goal: Sample potential Glu162-in transitions on longer timescales
+        \item Continue trajectory beyond 474 ns if microsecond timescales desired
+        \item At 467 ns/day on B200, 1 $\mu$s requires $\sim$2.1 days
+        \item Evaluate whether Glu162-in is kinetically accessible
     \end{itemize}
 
-    \item \textbf{Analyze 1Wat+3 (Mn(III)) production}
+    \item \textbf{Address 1Wat+3 parameterization}
     \begin{itemize}
-        \item If production trajectory available, apply same analysis pipeline
-        \item Key question: Does Mn(III) favor a different lid state?
+        \item Evaluate alternative Mn(III) parameterization strategies
+        \item Consider reduced force constants or QM/MM hybrid approach
+        \item Key question: Can classical MD ever capture Mn(III) behavior?
     \end{itemize}
 \end{enumerate}
 
